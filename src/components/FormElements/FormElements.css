@@ -1,0 +1,14 @@
+.input-box { position: relative; max-width: 400px; margin: 20px auto; }
+
+.input-box label { position: absolute; font-size: 14px; top: 50%; left: 20px; transform: translateY(-50%); color: #999; cursor: pointer; transition: all .3s ease; }
+.input-box textarea + label { transform: translateY(0); top: 25px; }
+.input-box label.active,
+.input-box input:focus + label,
+.input-box textarea:focus + label { font-size: 10px; top: 30%; }
+.input-box textarea:focus + label { top: 10px; }
+
+.input-box input,
+.input-box textarea { line-height: 1; width: 100%; border-radius: 10px; border: none; background: #F7F7F7; outline: none; padding: 25px 20px 15px; cursor: pointer; font-size: 14px; transition: all .3s ease; }
+.input-box textarea { line-height: 23px; }
+.input-box input:focus,
+.input-box textarea:focus { background: #F1F1F1; cursor: unset; }
