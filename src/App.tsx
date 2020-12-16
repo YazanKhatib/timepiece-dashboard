@@ -19,6 +19,9 @@ export default function () {
             placeholder="Bio"
             rows={5}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setTextarea(e.currentTarget.value) } } />
+        
+        <div className="text-center"><button className="button bg-gold color-white round" style={{ width: 200 }}>Login</button></div>
         </>
+
     )
 }

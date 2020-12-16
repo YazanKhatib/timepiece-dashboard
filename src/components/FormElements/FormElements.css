@@ -5,7 +5,8 @@
 .input-box label.active,
 .input-box input:focus + label,
 .input-box textarea:focus + label { font-size: 10px; top: 30%; }
-.input-box textarea:focus + label { top: 10px; }
+.input-box textarea:focus + label,
+.input-box textarea + label.active { top: 10px; }
 
 .input-box input,
 .input-box textarea { line-height: 1; width: 100%; border-radius: 10px; border: none; background: #F7F7F7; outline: none; padding: 25px 20px 15px; cursor: pointer; font-size: 14px; transition: all .3s ease; }
