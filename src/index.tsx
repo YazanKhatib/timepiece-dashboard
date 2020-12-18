@@ -2,6 +2,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// Redux
+import { Provider } from "react-redux";
+import store from './services/store'
+
+
 // Stylesheet
 import './assets/css/icons.css'
 import './assets/css/global.css'
@@ -18,8 +23,10 @@ setTranslations({en, ar})
 setDefaultLanguage('en')
 
 ReactDOM.render(
-  <React.StrictMode>
-      <App />
-  </React.StrictMode>,
+    <Provider store={store}>
+        <React.StrictMode>
+        <App />
+        </React.StrictMode>
+    </Provider>,
   document.getElementById('root')
 );
