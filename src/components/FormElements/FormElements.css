@@ -13,3 +13,22 @@
 .input-box textarea { line-height: 23px; }
 .input-box input:focus,
 .input-box textarea:focus { background: #F1F1F1; cursor: unset; }
+
+.checkbox { position: relative; max-width: 400px; margin: 20px auto; }
+.checkbox input { display: none; }
+.checkbox i { padding-right: 5px; position: relative; top: 1.8px; cursor: pointer; }
+.checkbox label { cursor: pointer; }
+.checkbox input ~ div { opacity: .2; display: inline-block; transition: all .3s ease; cursor: pointer; font-size: 14px; }
+.checkbox input:checked ~ div { opacity: 1; animation: scale .4s ease-in-out; }
+
+@keyframes scale {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

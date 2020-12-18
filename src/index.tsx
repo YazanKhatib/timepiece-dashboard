@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // Stylesheet
+import './assets/css/icons.css'
 import './assets/css/global.css'
 
 // Translation Hook

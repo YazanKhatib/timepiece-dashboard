@@ -28,3 +28,21 @@ export const Textarea = (props: any) => {
         </div>
     )
 }
+
+export const Checkbox = (props: any) => {
+
+    let field: object = (({ onChange, disabled }) => ({ onChange, disabled }))(props);
+    let inputLabel: string = props.label;
+    let id = uid('input')
+
+    return(
+        <div className="checkbox">
+            <input { ...field } type="checkbox" id={id} />
+            <div>
+                <i className="icon-checkmark" />
+                { inputLabel ? <label className={props.value ? "active" : ''} htmlFor={id}>{inputLabel}</label> : '' }
+            </div>
+        </div>
+    )
+
+}

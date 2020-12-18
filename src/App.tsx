@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { InputField, Textarea } from "./components/FormElements/FormElements";
+import { Checkbox, InputField, Textarea } from "./components/FormElements/FormElements";
 
 
 export default function () {
@@ -19,6 +19,8 @@ export default function () {
             placeholder="Bio"
             rows={5}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setTextarea(e.currentTarget.value) } } />
+
+        <Checkbox label="Remember me" />
         
         <div className="text-center"><button className="button bg-gold color-white round" style={{ width: 200 }}>Login</button></div>
         </>
