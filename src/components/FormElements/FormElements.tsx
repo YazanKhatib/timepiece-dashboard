@@ -10,7 +10,7 @@ export const InputField = (props: any) => {
     return(
         <div className="input-box">
             <input { ...field } id={id} />
-            { inputLabel ? <label className={props.value ? "active" : ''} htmlFor={id}>{props.placeholder}</label> : '' }
+            { inputLabel ? <label className={props.value ? "active" : ''} htmlFor={id}>{inputLabel}</label> : '' }
         </div>
     )
 
@@ -24,7 +24,7 @@ export const Textarea = (props: any) => {
     return(
         <div className="input-box">
             <textarea { ...field } id={id} />
-            { inputLabel ? <label className={props.value ? "active" : ''} htmlFor={id}>{props.placeholder}</label> : '' }
+            { inputLabel ? <label className={props.value ? "active" : ''} htmlFor={id}>{inputLabel}</label> : '' }
         </div>
     )
 }
