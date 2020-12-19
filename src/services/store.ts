@@ -1,17 +1,11 @@
-import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 
-const testSlice = createSlice({
-    name: 'test',
-    initialState: 0,
-    reducers: {
-        changeValue: ( state, {payload}: PayloadAction<{ n: number }> ) => state + payload.n
-    }
-})
-
-export { testSlice }
+// Slices
+import { authSlice, loginSlice } from "../containers/LoginForm/LoginFormReducer";
 
 const reducer = {
-    test: testSlice.reducer
+    login: loginSlice.reducer,
+    auth: authSlice.reducer
 }
 
 export default configureStore({

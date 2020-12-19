@@ -1,1 +1,9 @@
-{}
+{
+    
+    "username": "Username",
+    "password": "Password",
+    "remember_me": "Remember Me",
+    "login": "Login",
+    "required_error": "Please fill in this field"
+
+}

@@ -16,7 +16,7 @@ import { setTranslations, setDefaultLanguage } from 'react-multi-lang'
 import en from './laguages/en.json'
 import ar from './laguages/ar.json'
 import { InputField } from './components/FormElements/FormElements';
-import App from './App';
+import Login from './pages/Login/Login';
 
 // Setting up translations
 setTranslations({en, ar})
@@ -25,7 +25,7 @@ setDefaultLanguage('en')
 ReactDOM.render(
     <Provider store={store}>
         <React.StrictMode>
-        <App />
+        <Login />
         </React.StrictMode>
     </Provider>,
   document.getElementById('root')
