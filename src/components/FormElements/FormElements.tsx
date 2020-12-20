@@ -65,16 +65,17 @@ export const LightDarkModeSwitcher = (props: any) => {
     const changeMode = (e: React.ChangeEvent<HTMLInputElement>) => {
         if(e.target.checked) {
             document.body.classList.add('dark')
+            localStorage.setItem("theme", 'dark')
         }
         else {
-            setLanguage('en')
             document.body.classList.remove('dark')
+            localStorage.setItem("theme", 'light')
         }
     }
 
     return (
         <label style={{ display: 'inline-block', cursor: 'pointer' }}>
-            <input className='toggle-checkbox' type='checkbox' onChange={changeMode}></input>
+            <input className='toggle-checkbox' type='checkbox' onChange={changeMode} defaultChecked={ localStorage.getItem("theme") ? localStorage.getItem("theme") === 'dark' : false }></input>
             <div className='toggle-slot'>
                 <div className='sun-icon-wrapper'>
                     <Icon icon={sunIcon} className="sun-icon" />
@@ -95,16 +96,18 @@ export const LanguageSwitcher = (props: any) => {
         if(e.target.checked) {
             setLanguage('ar')
             document.body.classList.add('rtl')
+            localStorage.setItem("lang", "ar")
         }
         else {
             setLanguage('en')
             document.body.classList.remove('rtl')
+            localStorage.setItem("lang", "en")
         }
     }
 
     return (
         <label style={{ display: 'inline-block', cursor: 'pointer' }} className="language-toggle">
-            <input className='toggle-checkbox' type='checkbox' onChange={changeLang}></input>
+            <input className='toggle-checkbox' type='checkbox' onChange={changeLang} defaultChecked={ localStorage.getItem("lang") ? localStorage.getItem("lang") === 'ar' : false }></input>
             <div className='toggle-slot'>
                 <div className="ar">عربي</div>
                 <div className='toggle-button'></div>

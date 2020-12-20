@@ -15,17 +15,18 @@ import './assets/css/global.css'
 import { setTranslations, setDefaultLanguage } from 'react-multi-lang'
 import en from './laguages/en.json'
 import ar from './laguages/ar.json'
-import { InputField } from './components/FormElements/FormElements';
-import Login from './pages/Login/Login';
+
+// Routes
+import AppRoutes from './routes/AppRoutes';
 
 // Setting up translations
 setTranslations({en, ar})
-setDefaultLanguage('en')
+setDefaultLanguage(localStorage.getItem("lang") ? String( localStorage.getItem("lang") ) : 'en')
 
 ReactDOM.render(
     <Provider store={store}>
         <React.StrictMode>
-        <Login />
+        <AppRoutes />
         </React.StrictMode>
     </Provider>,
   document.getElementById('root')
