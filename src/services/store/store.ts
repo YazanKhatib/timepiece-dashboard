@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 // Slices
-import { authSlice, loginSlice } from "../containers/LoginForm/LoginFormReducer";
+import { authSlice, loginSlice } from "../../containers/LoginForm/LoginFormReducer";
 
 const reducer = {
     login: loginSlice.reducer,

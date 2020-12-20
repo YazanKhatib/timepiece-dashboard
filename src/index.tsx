@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 // Redux
 import { Provider } from "react-redux";
-import store from './services/store'
+import store from './services/store/store'
 
 
 // Stylesheet
@@ -17,7 +17,7 @@ import en from './laguages/en.json'
 import ar from './laguages/ar.json'
 
 // Routes
-import AppRoutes from './routes/AppRoutes';
+import AppRoutes from './services/routes/AppRoutes';
 
 // Setting up translations
 setTranslations({en, ar})

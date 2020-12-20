@@ -5,7 +5,7 @@ import sunIcon from '@iconify-icons/feather/sun';
 import moonIcon from '@iconify-icons/feather/moon';
 
 // Helpers
-import { uid } from '../../hoc/helpers';
+import { uid } from '../../services/hoc/helpers';
 
 // Stylesheet
 import './FormElements.css'
@@ -51,8 +51,7 @@ export const Checkbox = (props: any) => {
         <div className="checkbox">
             <input {...field} type="checkbox" id={id} />
             <div>
-                <i className="icon-checkmark" />
-                {inputLabel ? <label className={props.value ? "active" : ''} htmlFor={id}>{inputLabel}</label> : ''}
+                {inputLabel ? <label className={props.value ? "active" : ''} htmlFor={id}><i className="icon-checkmark" />{inputLabel}</label> : ''}
             </div>
         </div>
     )
