@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import ScrollToTop from './ScrollToTop'
 import Login from '../../pages/Login/Login'
+import Dashboard from '../../pages/Dashboard/Dashboard'
 
 class AppRoutes extends Component {
 
@@ -18,7 +19,7 @@ class AppRoutes extends Component {
         return(
             <Router basename="/">
                 <ScrollToTop>
-                    { true ?
+                    { false ?
                     
                     // Auth pages
                     <Switch>
@@ -28,7 +29,8 @@ class AppRoutes extends Component {
 
                     // Dashboard pages
                     <Switch>
-                        
+                        <Route path="/:section" component={Dashboard} />
+                        <Route path="/" component={Dashboard} />
                     </Switch> }
                 </ScrollToTop>
             </Router>

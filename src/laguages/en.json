@@ -4,6 +4,12 @@
     "password": "Password",
     "remember_me": "Remember Me",
     "login": "Login",
-    "required_error": "Please fill in this field"
+    "required_error": "Please fill in this field",
+
+    "analytics": "Analytics",
+    "dealers": "Dealers",
+    "watches": "Watches",
+    "users": "Users",
+    "notifications": "Notifications"
 
 }

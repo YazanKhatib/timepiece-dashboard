@@ -4,6 +4,12 @@
     "password": "كلمة المرور",
     "remember_me": "تذكرني",
     "login": "تسجيل الدخول",
-    "required_error": "يرجى ملىء الحقل التالي"
+    "required_error": "يرجى ملىء الحقل التالي",
+
+    "analytics": "الاحصائيات",
+    "dealers": "التجار",
+    "watches": "الساعات",
+    "users": "المستخدمين",
+    "notifications": "الإشعارات"
 
 }

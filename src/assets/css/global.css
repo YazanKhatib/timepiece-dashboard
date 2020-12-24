@@ -1,6 +1,6 @@
 /* Main elements */
 body { margin: 0; overflow-x: hidden; transition: all .3s ease; }
-body.dark { background: #202835; }
+/* body.dark { background: #202835; } */
 * { box-sizing: border-box; direction: ltr; font-family: "Raleway"; }
 .rtl * { font-family: "Neo sans arabic"; direction: rtl; }
 img { max-width: 100%; height: auto; }
