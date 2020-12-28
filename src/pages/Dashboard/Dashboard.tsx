@@ -3,6 +3,7 @@ import { useTranslation } from 'react-multi-lang'
 
 // Components
 import { SideNav, TopNav } from '../../components/Nav/Nav'
+import Analytics from '../../containers/Analytics/Analytics'
 
 // Stylesheet
 import './Dashboard.css'
@@ -43,7 +44,7 @@ export default (props: any) => {
         let section = props.match.params.section ? props.match.params.section.toLowerCase() : ""
         switch (section) {
             case "analytics":
-                return(<>Analytics!</>)
+                return(<Analytics />)
             case "dealers":
                 return(<>Dealers!</>)
             case "watches":

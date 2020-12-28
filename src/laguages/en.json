@@ -10,6 +10,37 @@
     "dealers": "Dealers",
     "watches": "Watches",
     "users": "Users",
-    "notifications": "Notifications"
+    "notifications": "Notifications",
+    "growth": "Growth",
+    "growth_rate": "Growth rate",
+    "items_by_time": "Items by time",
+    "this_week": "this week",
+
+    "sa": "Sa",
+    "su": "Su",
+    "mo": "Mo",
+    "tu": "Tu",
+    "we": "We",
+    "th": "Th",
+    "fr": "Fr",
+
+    "jan": "Jan",
+    "feb": "Feb",
+    "mar": "Mar",
+    "apr": "Apr",
+    "may": "May",
+    "jun": "Jun",
+    "jul": "Jul",
+    "aug": "Aug",
+    "sep": "Sep",
+    "oct": "Oct",
+    "nov": "Nov",
+    "dec": "Dec",
+
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "all_the_time": "All the time"
 
 }

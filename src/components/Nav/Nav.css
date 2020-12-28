@@ -1,4 +1,4 @@
-.side-nav { background: #CAAF75; width: 120px; text-align: center; border-radius: 15px; padding: 10px 0; overflow: hidden; position: fixed; top: 50%; transform: translateY(-50%); left: 20px; }
+.side-nav { background: #CAAF75; width: 120px; text-align: center; border-radius: 25px; padding: 10px 0; overflow: hidden; position: fixed; top: 50%; transform: translateY(-50%); left: 20px; }
 .rtl .side-nav { right: 20px; left: auto; }
 .side-nav .active-box { position: absolute; width: 100%; height: 100px; background: #E4CA91; top: 0; opacity: .5; transition: top 600ms cubic-bezier(.26,2,.46,.71) }
 .side-nav ul { list-style: none; padding: 0; margin: 0; }
@@ -10,14 +10,16 @@
 .side-nav ul li i { display: block; font-size: 25px; margin-bottom: 5px; }
 
 
-.top-nav { padding: 10px 50px 10px 0; box-shadow: 0 0 5px rgba(0, 0, 0, .1); }
-.rtl .top-nav { padding-left: 50px!important; }
+.top-nav { padding: 10px 70px 10px 0; box-shadow: 0 0 5px rgba(0, 0, 0, .1); }
+.rtl .top-nav { padding-left: 70px!important; }
 .top-nav .logo { width: 130px; height: auto; }
 .top-nav .actions { float: right; }
 .rtl .top-nav .actions { float: left; }
 .top-nav .actions .switchers { display: inline-block; line-height: 74px; direction: ltr; }
 .top-nav .actions .switchers * { direction: ltr; }
-.top-nav .icon-logout { width: 32px; height: 32px; line-height: 35px; position: relative; top: 11px; text-align: center; background: #FFF; box-shadow: 1px 1px 5px rgba(0, 0, 0, .2); border-radius: 50%; font-size: 13px; cursor: pointer; color: #333; float: right; margin-left: 10px; transition: transform .3s ease; }
-.rtl .top-nav .icon-logout { float: left; margin-left: 0; margin-right: 10px; }
+.top-nav .icon-logout { width: 32px; height: 32px; line-height: 35px; position: relative; top: 11px; text-align: center; background: #FFF; box-shadow: 1px 1px 5px rgba(0, 0, 0, .2); border-radius: 50%; font-size: 13px; cursor: pointer; color: #333; float: right; margin-left: 10px; overflow: hidden; transition: transform .3s ease; }
+.rtl .top-nav .icon-logout { float: left; margin-left: 0; margin-right: 10px; position: relative; }
 .top-nav .icon-logout::before { position: relative; left: 1px; }
+.top-nav .icon-logout::after { content: ''; position: absolute; width: 50px; height: 15px; background: #CAAF75; opacity: .3; left: -25px; top: -10px; transform: rotate(-45deg); transition: all .2s ease; }
+.top-nav .icon-logout:hover::after { left: 5px; top: 30px; }
 .top-nav .icon-logout:hover { transform: scale(1.1); }
