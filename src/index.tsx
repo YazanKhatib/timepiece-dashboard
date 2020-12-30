@@ -10,13 +10,13 @@ import store from './services/store/store'
 import { CookiesProvider } from 'react-cookie';
 
 // Stylesheet
-import './assets/css/icons.css'
-import './assets/css/global.css'
+import './assets/css/icons.css';
+import './assets/css/global.css';
 
 // Translation Hook
-import { setTranslations, setDefaultLanguage } from 'react-multi-lang'
-import en from './laguages/en.json'
-import ar from './laguages/ar.json'
+import { setTranslations, setDefaultLanguage } from 'react-multi-lang';
+import en from './laguages/en.json';
+import ar from './laguages/ar.json';
 
 // Routes
 import AppRoutes from './services/routes/AppRoutes';

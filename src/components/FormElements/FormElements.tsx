@@ -1,6 +1,6 @@
 // Libraries
 import ReactTooltip from 'react-tooltip';
-import { Icon } from "@iconify/react";
+import { Icon } from '@iconify/react';
 import sunIcon from '@iconify-icons/feather/sun';
 import moonIcon from '@iconify-icons/feather/moon';
 
@@ -8,10 +8,11 @@ import moonIcon from '@iconify-icons/feather/moon';
 import { uid } from '../../services/hoc/helpers';
 
 // Stylesheet
-import './FormElements.css'
+import './FormElements.css';
 import { setLanguage } from 'react-multi-lang';
 
 export const InputField = (props: any) => {
+
 
     let field: object = (({ type, onChange, defaultValue, disabled, max, min, value }) => ({ type, onChange, defaultValue, disabled, max, min, value }))(props);
     let inputLabel: string = props.placeholder ? props.placeholder : props.label ? props.label : '';
@@ -29,17 +30,39 @@ export const InputField = (props: any) => {
 }
 
 export const Textarea = (props: any) => {
-    let field: object = (({ onChange, defaultValue, disabled, value, rows }) => ({ onChange, defaultValue, disabled, value, rows }))(props);
-    let inputLabel: string = props.placeholder ? props.placeholder : props.label ? props.label : '';
-    let id = uid('input')
+  const field: object = (({
+    onChange,
+    defaultValue,
+    disabled,
+    value,
+    rows,
+  }) => ({
+    onChange,
+    defaultValue,
+    disabled,
+    value,
+    rows,
+  }))(props);
+  const inputLabel: string = props.placeholder
+    ? props.placeholder
+    : props.label
+    ? props.label
+    : '';
+  const id = uid('input');
 
-    return (
-        <div className="input-box">
-            <textarea {...field} id={id} />
-            { inputLabel ? <label className={props.value ? "active" : ''} htmlFor={id}>{inputLabel}</label> : ''}
-        </div>
-    )
-}
+  return (
+    <div className="input-box">
+      <textarea {...field} id={id} />
+      {inputLabel ? (
+        <label className={props.value ? 'active' : ''} htmlFor={id}>
+          {inputLabel}
+        </label>
+      ) : (
+        ''
+      )}
+    </div>
+  );
+};
 
 export const Checkbox = (props: any) => {
 
@@ -58,61 +81,72 @@ export const Checkbox = (props: any) => {
 
 }
 
-
 export const LightDarkModeSwitcher = (props: any) => {
-
-    const changeMode = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if(e.target.checked) {
-            document.body.classList.add('dark')
-            localStorage.setItem("theme", 'dark')
-        }
-        else {
-            document.body.classList.remove('dark')
-            localStorage.setItem("theme", 'light')
-        }
+  const changeMode = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) {
+      document.body.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.body.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
     }
+  };
 
-    return (
-        <label style={{ display: 'inline-block', cursor: 'pointer' }}>
-            <input className='toggle-checkbox' type='checkbox' onChange={changeMode} defaultChecked={ localStorage.getItem("theme") ? localStorage.getItem("theme") === 'dark' : false }></input>
-            <div className='toggle-slot'>
-                <div className='sun-icon-wrapper'>
-                    <Icon icon={sunIcon} className="sun-icon" />
-                </div>
-                <div className='toggle-button'></div>
-                <div className='moon-icon-wrapper'>
-                    <Icon icon={moonIcon} className="moon-icon" />
-                </div>
-            </div>
-        </label>
-    )
-
-}
-
+  return (
+    <label style={{ display: 'inline-block', cursor: 'pointer' }}>
+      <input
+        className="toggle-checkbox"
+        type="checkbox"
+        onChange={changeMode}
+        defaultChecked={
+          localStorage.getItem('theme')
+            ? localStorage.getItem('theme') === 'dark'
+            : false
+        }></input>
+      <div className="toggle-slot">
+        <div className="sun-icon-wrapper">
+          <Icon icon={sunIcon} className="sun-icon" />
+        </div>
+        <div className="toggle-button"></div>
+        <div className="moon-icon-wrapper">
+          <Icon icon={moonIcon} className="moon-icon" />
+        </div>
+      </div>
+    </label>
+  );
+};
 
 export const LanguageSwitcher = (props: any) => {
-    const changeLang = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if(e.target.checked) {
-            setLanguage('ar')
-            document.body.classList.add('rtl')
-            localStorage.setItem("lang", "ar")
-        }
-        else {
-            setLanguage('en')
-            document.body.classList.remove('rtl')
-            localStorage.setItem("lang", "en")
-        }
+  const changeLang = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) {
+      setLanguage('ar');
+      document.body.classList.add('rtl');
+      localStorage.setItem('lang', 'ar');
+    } else {
+      setLanguage('en');
+      document.body.classList.remove('rtl');
+      localStorage.setItem('lang', 'en');
     }
+  };
 
-    return (
-        <label style={{ display: 'inline-block', cursor: 'pointer' }} className="language-toggle">
-            <input className='toggle-checkbox' type='checkbox' onChange={changeLang} defaultChecked={ localStorage.getItem("lang") ? localStorage.getItem("lang") === 'ar' : false }></input>
-            <div className='toggle-slot'>
-                <div className="ar">عربي</div>
-                <div className='toggle-button'></div>
-                <div className="en">En</div>
-            </div>
-        </label>
-    )
-
-}
+  return (
+    <label
+      style={{ display: 'inline-block', cursor: 'pointer' }}
+      className="language-toggle">
+      <input
+        className="toggle-checkbox"
+        type="checkbox"
+        onChange={changeLang}
+        defaultChecked={
+          localStorage.getItem('lang')
+            ? localStorage.getItem('lang') === 'ar'
+            : false
+        }></input>
+      <div className="toggle-slot">
+        <div className="ar">عربي</div>
+        <div className="toggle-button"></div>
+        <div className="en">En</div>
+      </div>
+    </label>
+  );
+};
