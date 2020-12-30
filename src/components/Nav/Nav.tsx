@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, Redirect, useLocation } from 'react-router-dom'
 
 // Stylesheet
 import './Nav.css'
@@ -7,6 +7,7 @@ import './Nav.css'
 // Assets
 import Logo from '../../assets/images/logo/primary.svg'
 import { LanguageSwitcher, LightDarkModeSwitcher } from '../FormElements/FormElements'
+import { useCookies } from 'react-cookie'
 
 interface NavProps {
     list: {
@@ -53,6 +54,17 @@ export const SideNav = (props: NavProps) => {
 
 export const TopNav = () => {
 
+    // React hooks
+    const [redirect, setRedirect] = useState<boolean>(false);
+
+    // Cookies hooks
+    const [_, __, removeCookie] = useCookies(['userinfo']);
+
+    const logout = () => {
+        setRedirect(true)
+        removeCookie("userinfo")
+    }
+
     return (
         <nav className="top-nav">
             <img src={Logo} className="logo" />
@@ -65,9 +77,11 @@ export const TopNav = () => {
                     <LanguageSwitcher />
                 </div>
 
-                <i className="icon-logout" />
+                <i className="icon-logout" onClick={logout} />
 
             </div>
+
+            { redirect ? <Redirect to='/'/> : '' }
 
         </nav>
     )

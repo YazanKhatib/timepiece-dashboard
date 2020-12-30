@@ -69,6 +69,7 @@ export default function () {
                 setTimeout(() => {
                     let expires: Date = rememberMe ? addToDate( new Date(), "years", 1 ) : addToDate( new Date(), "hours", 1 );
                     setCookie("userinfo", response.data.data, { expires: expires })
+                    dispatch( loginSlice.actions.init() )
                 }, 1500);
 
             } else {
