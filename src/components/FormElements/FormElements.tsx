@@ -19,7 +19,7 @@ export const InputField = (props: any) => {
 
     return (
         <div className="input-box">
-            <input {...field} id={id} />
+            <input {...field} autoComplete="" id={id} />
             { inputLabel ? <label className={props.value ? "active" : ''} htmlFor={id}>{inputLabel}</label> : ''}
             {props.error ? <i className="icon-error" data-tip={props.error}></i> : ''}
             {props.error ? <ReactTooltip place="left" type="error" effect="solid" delayHide={500} /> : ''}
@@ -43,7 +43,7 @@ export const Textarea = (props: any) => {
 
 export const Checkbox = (props: any) => {
 
-    let field: object = (({ onChange, disabled }) => ({ onChange, disabled }))(props);
+    let field: object = (({ onChange, disabled, checked }) => ({ onChange, disabled, checked }))(props);
     let inputLabel: string = props.label;
     let id = uid('input')
 

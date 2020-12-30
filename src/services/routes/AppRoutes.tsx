@@ -4,11 +4,12 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import ScrollToTop from './ScrollToTop'
 import Login from '../../pages/Login/Login'
 import Dashboard from '../../pages/Dashboard/Dashboard'
+import { withCookies } from "react-cookie";
 
-class AppRoutes extends Component {
+class AppRoutes extends Component<{cookies: any}> {
 
-    constructor() {
-        super({})
+    constructor(props: any) {
+        super(props)
         if(localStorage.getItem("lang"))
             document.body.classList.add(localStorage.getItem("lang") == 'ar' ? 'rtl' : 'ltr')
         if(localStorage.getItem("theme"))
@@ -19,7 +20,7 @@ class AppRoutes extends Component {
         return(
             <Router basename="/">
                 <ScrollToTop>
-                    { false ?
+                    { !this.props.cookies.get("userinfo") ?
                     
                     // Auth pages
                     <Switch>
@@ -38,4 +39,4 @@ class AppRoutes extends Component {
     }
 }
 
-export default AppRoutes
+export default withCookies(AppRoutes)

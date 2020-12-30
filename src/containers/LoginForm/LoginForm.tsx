@@ -1,54 +1,83 @@
 import React, { useState } from "react";
-import { useTranslation } from "react-multi-lang";
-import { useDispatch, useSelector } from 'react-redux'
 
+// Translation
+import { useTranslation } from "react-multi-lang";
+
+// Cookies
+import { useCookies } from "react-cookie";
+
+// Redux
+import { useDispatch, useSelector } from 'react-redux'
 import { loginSlice, loginState } from "./LoginFormReducer";
 
+// Compoentns
 import { Checkbox, InputField } from "../../components/FormElements/FormElements";
 import { RippleLoader, SuccessMark } from "../../components/Loader/Loader";
 
+// Stylesheet
 import './LoginForm.css'
 
+// Services
+import API from '../../services/api/api'
+import { addToDate } from "../../services/hoc/helpers";
 
 export default function () {
 
-    // Tranlsation
+    // Translation
     const t = useTranslation()
 
     // Redux
     const dispatch = useDispatch()
     const loginState = useSelector( ( state: { login: loginState } ) => state.login )
 
+    // Hooks
     const [username, setUsername] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
     const [usernameError, setUsernameError] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
     const [passwordError, setPasswordError] = useState<string>("");
+    const [rememberMe, setRememberMe] = useState<boolean>(false);
     const [showSucessMark, setShowSuccessMark] = useState<boolean>(false)
+
+    // Cookies hooks
+    const [_, setCookie] = useCookies(['userinfo']);
+
+    // API
+    const ENDPOINTS = new API()
 
     const login = () => {
         
-        let isReadyToSubmit: boolean = true
-        
         if(!username) {
             setUsernameError(t("required_error"))
-            isReadyToSubmit = false
+            return
         }
         
         if(!password) {
             setPasswordError(t("required_error"))
-            isReadyToSubmit = false
+            return
         }
-        
-        if(!isReadyToSubmit) return
 
         dispatch( loginSlice.actions.load({}) )
 
-        setTimeout(() => {
-            dispatch( loginSlice.actions.success({}) )
-            setTimeout(() => {
+        ENDPOINTS.auth().login({ username, password })
+        .then((response: any) => {
+            
+            if(response.data.data) {
+
+                dispatch( loginSlice.actions.success({}) )
                 setShowSuccessMark(true)
-            }, 200);
-        }, 2000);
+                setTimeout(() => {
+                    let expires: Date = rememberMe ? addToDate( new Date(), "years", 1 ) : addToDate( new Date(), "hours", 1 );
+                    setCookie("userinfo", response.data.data, { expires: expires })
+                }, 1500);
+
+            } else {
+                dispatch( loginSlice.actions.error(true) )
+            }
+
+        })
+        .catch((error: any) => {
+            dispatch( loginSlice.actions.error(true) )
+        })
 
     }
 
@@ -66,6 +95,7 @@ export default function () {
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         setUsername(e.currentTarget.value);
                         setUsernameError("")
+                        if( loginState.isError ) dispatch( loginSlice.actions.error(false) )
                     } } />
 
                 <InputField
@@ -77,9 +107,14 @@ export default function () {
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         setPassword(e.currentTarget.value);
                         setPasswordError("")
+                        if( loginState.isError ) dispatch( loginSlice.actions.error(false) )
                     } } />
                 
-                <Checkbox label={t('remember_me')} disabled={loginState.isLoading || loginState.isSuccess} />
+                <Checkbox
+                    label={t('remember_me')}
+                    disabled={loginState.isLoading || loginState.isSuccess}
+                    checked={rememberMe}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRememberMe(e.target.checked)} />
                 
                 <div className="text-center"><button className={ "button bg-gold color-white round" + (loginState.isSuccess ? " scale" : '') } style={{ width: loginState.isLoading ? 50 : 200 }} onClick={login}>{ loginState.isLoading ? <RippleLoader /> : t('login') }</button></div>
 
