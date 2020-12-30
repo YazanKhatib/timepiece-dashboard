@@ -13,6 +13,7 @@ import { loginSlice, loginState } from "./LoginFormReducer";
 // Compoentns
 import { Checkbox, InputField } from "../../components/FormElements/FormElements";
 import { RippleLoader, SuccessMark } from "../../components/Loader/Loader";
+import { StaticAlert } from "../../components/Alerts/Alerts";
 
 // Stylesheet
 import './LoginForm.css'
@@ -56,14 +57,14 @@ export default function () {
             return
         }
 
-        dispatch( loginSlice.actions.load({}) )
+        dispatch( loginSlice.actions.load() )
 
         ENDPOINTS.auth().login({ username, password })
         .then((response: any) => {
             
             if(response.data.data) {
 
-                dispatch( loginSlice.actions.success({}) )
+                dispatch( loginSlice.actions.success() )
                 setShowSuccessMark(true)
                 setTimeout(() => {
                     let expires: Date = rememberMe ? addToDate( new Date(), "years", 1 ) : addToDate( new Date(), "hours", 1 );
@@ -86,6 +87,10 @@ export default function () {
             
             <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => e.preventDefault()}>
                 
+                {
+                    loginState.isError ? <StaticAlert show={true} type={"error"}>{t("login_error")}</StaticAlert> : ""
+                }
+
                 <InputField
                     value={username}
                     type="text"

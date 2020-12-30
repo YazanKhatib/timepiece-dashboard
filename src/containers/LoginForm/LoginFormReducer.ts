@@ -18,15 +18,15 @@ export const loginSlice = createSlice({
     name: 'login',
     initialState: initialLoginState,
     reducers: {
-        load: ( state, {payload}: PayloadAction<{}> ) => {
+        load: ( state ) => {
             state.isLoading = true
         },
-        success: ( state, {payload}: PayloadAction<{}> ) => {
+        success: ( state ) => {
             state.isSuccess = true
         },
-        error: ( state, {payload}: PayloadAction<{}> ) => {
+        error: ( state, {payload}: PayloadAction<boolean> ) => {
             state.isLoading = false
-            state.isError = true
+            state.isError = payload
         },
     }
 })
