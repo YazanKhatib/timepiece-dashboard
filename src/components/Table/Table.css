@@ -1,0 +1,11 @@
+.dashboard-table { background: #F7F7F7; border-radius: 20px; padding: 10px 30px; margin-top: 20px; }
+.dashboard-table table { width: 100%; text-align: left; border-collapse: unset; border-spacing: 0; position: relative; }
+.dashboard-table table thead tr { line-height: 20px; min-height: 50px; }
+.dashboard-table table thead th { color: #AAA; font-weight: normal; font-size: 13px; border-bottom: 1px solid #EEE; padding: 15px 10px; }
+.dashboard-table table tbody tr { border: none; cursor: pointer; position: relative; transform: translate(0); transition: all .3s ease; }
+.dashboard-table table tbody tr::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 60px; pointer-events: none; background: #FFF; border-radius: 10px; opacity: 0; transform: scaleX(1.02); transition: all .3s ease; }
+.dashboard-table table tbody tr.active { transform: translateX(10px); }
+.dashboard-table table tbody tr:hover::after,
+.dashboard-table table tbody tr.active::after { opacity: 1; }
+.dashboard-table table tbody tr td { border: none; padding: 20px 10px; border-color: #FFF; line-height: 20px; min-height: 60px; font-size: 12px; border-bottom: 1px solid #EEE; position: relative; z-index: 1; }
+.dashboard-table table tbody tr:last-of-type td { border: none; }

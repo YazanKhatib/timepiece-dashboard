@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 
 import ScrollToTop from './ScrollToTop'
 import Login from '../../pages/Login/Login'
@@ -25,7 +25,7 @@ class AppRoutes extends Component<{cookies: any}> {
                     // Auth pages
                     <Switch>
                         <Route exact path="/" component={Login} />
-                        <Route path="/" component={() => <>404</>} />
+                        <Route path="/" component={() => <Redirect to="/" />} />
                     </Switch> :
 
                     // Dashboard pages
