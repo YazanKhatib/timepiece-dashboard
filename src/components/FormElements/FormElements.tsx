@@ -59,6 +59,21 @@ export const Checkbox = (props: any) => {
 }
 
 
+export const SimpleCheckbox = (props: any) => {
+    
+    let field: object = (({ onChange, onClick, disabled, checked, className }) => ({ onChange, onClick, disabled, checked, className }))(props);
+    let id = uid('input')
+
+    return(
+        <div className="simple-checkbox">
+            <input type="checkbox" id={id} {...field} />
+            <label htmlFor={id} ><i className="icon-checkmark" /></label>
+        </div>
+    )
+
+}
+
+
 export const LightDarkModeSwitcher = (props: any) => {
 
     const changeMode = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,11 +1,28 @@
-.dashboard-table { background: #F7F7F7; border-radius: 20px; padding: 10px 30px; margin-top: 20px; }
-.dashboard-table table { width: 100%; text-align: left; border-collapse: unset; border-spacing: 0; position: relative; }
-.dashboard-table table thead tr { line-height: 20px; min-height: 50px; }
-.dashboard-table table thead th { color: #AAA; font-weight: normal; font-size: 13px; border-bottom: 1px solid #EEE; padding: 15px 10px; }
-.dashboard-table table tbody tr { border: none; cursor: pointer; position: relative; transform: translate(0); transition: all .3s ease; }
-.dashboard-table table tbody tr::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 60px; pointer-events: none; background: #FFF; border-radius: 10px; opacity: 0; transform: scaleX(1.02); transition: all .3s ease; }
+.dashboard-table { padding-right: 30px; }
+.rtl .dashboard-table { padding-left: 30px; padding-right: 0; }
+.dashboard-table table { width: 100%; text-align: left; border-collapse: unset; border-spacing: 0 10px; position: relative; }
+.rtl .dashboard-table table { text-align: right; }
+
+/* Head */
+.dashboard-table table thead tr { line-height: 30px; min-height: 50px; }
+.dashboard-table table thead tr th { font-weight: medium; font-size: 13px; padding: 0 20px; color: #777; }
+.dark .dashboard-table table thead tr th { color: #495161; }
+
+
+/* Body */
+.dashboard-table table tbody tr { line-height: 60px; position: relative; transform: translateX(0); cursor: pointer; transition: all .3s ease; }
 .dashboard-table table tbody tr.active { transform: translateX(10px); }
+.rtl .dashboard-table table tbody tr.active { transform: translateX(-10px); }
+.dashboard-table table tbody tr::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; background: #FAFAFA; border-radius: 5px; transition: all .3s ease; }
+.dark .dashboard-table table tbody tr::after { background: #222730; }
 .dashboard-table table tbody tr:hover::after,
-.dashboard-table table tbody tr.active::after { opacity: 1; }
-.dashboard-table table tbody tr td { border: none; padding: 20px 10px; border-color: #FFF; line-height: 20px; min-height: 60px; font-size: 12px; border-bottom: 1px solid #EEE; position: relative; z-index: 1; }
-.dashboard-table table tbody tr:last-of-type td { border: none; }
+.dashboard-table table tbody tr.active::after { background: #F5F5F5; }
+.dark .dashboard-table table tbody tr:hover::after,
+.dark .dashboard-table table tbody tr.active::after { background: #292f3a; }
+.dashboard-table table tbody tr td { position: relative; z-index: 1; font-size: 13px; padding: 0 20px; }
+.dark .dashboard-table table tbody tr td { color: #DDD; }
+.dashboard-table table tbody tr td:first-of-type label { top: 5px; transform: scale(.8); }
+.dashboard-table table tbody tr td:first-of-type label,
+.dashboard-table table tbody tr td input.select-row { pointer-events: none; }
+.dashboard-table table tbody tr td .show-on-hover { opacity: 0; visibility: hidden; transition: all .3s ease; }
+.dashboard-table table tbody tr:hover td .show-on-hover { opacity: 1; visibility: visible; }

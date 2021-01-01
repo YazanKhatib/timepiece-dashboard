@@ -48,6 +48,14 @@
     }
 }
 
+.simple-checkbox { display: inline-block; }
+.simple-checkbox input { display: none; }
+.simple-checkbox label { display: inline-block; position: relative; width: 20px; height: 20px; background: #FFF; border: 1px solid #DDD; border-radius: 3px; transition: all .3s ease; }
+.dark .simple-checkbox label { background: #343b49; border-color: #3a4252; }
+.simple-checkbox label i { position: absolute; top: 50%; left: 50%; transform: translate( -50%, -50% ) scale(0); font-size: 9px; margin-top: 1.5px; color: #FFF; transition: transform 500ms cubic-bezier(.26,2,.46,.71); }
+.simple-checkbox input:checked ~ label { background: #CAAF75; border-color: #CAAF75; }
+.simple-checkbox input:checked ~ label i { transform: translate( -50%, -50% ) scale(1.1); }
+
 
 /* Light/Dark Switcher */
 .toggle-checkbox {

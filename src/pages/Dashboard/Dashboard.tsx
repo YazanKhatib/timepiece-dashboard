@@ -1,5 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-multi-lang'
+import Modal from '../../components/Modal/Modal'
 
 // Components
 import { SideNav, TopNav } from '../../components/Nav/Nav'
@@ -48,7 +49,33 @@ export default (props: any) => {
             case "analytics":
                 return(<Analytics />)
             case "dealers":
-                return("Dealers!")
+                return(
+                    <DashboardTable
+                        header={[ "Basic info", "Company", "Lead score", "phone", "Tags", "Created at" ]}
+                        body={
+                            [
+                                {
+                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags", "2021-1-1 12:00" ]
+                                },
+                                {
+                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags", "2021-1-1 12:00" ]
+                                },
+                                {
+                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags", "2021-1-1 12:00" ]
+                                },
+                                {
+                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags", "2021-1-1 12:00" ]
+                                },
+                                {
+                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags", "2021-1-1 12:00" ]
+                                },
+                                {
+                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags", "2021-1-1 12:00" ]
+                                }
+                            ]
+                        }
+                    />
+                )
             case "watches":
                 return(<>Watches!</>)
             case "users":

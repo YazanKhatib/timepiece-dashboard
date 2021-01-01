@@ -1,29 +1,29 @@
 import React from 'react'
+import { SimpleCheckbox } from '../FormElements/FormElements'
 
 import './Table.css'
 
 interface DashboardTableProps {
     header: string[], // Table header data
-    body: [ // Rows
-        { 
+    body: { 
             id?: string, // Row id
             data: string[] // Cells
-        }
-    ],
+        }[], // Rows
     onSelect?: Function // Fire this function when the user selects a raw
 }
 
 export const DashboardTable = (props: DashboardTableProps) => {
 
-    const selectRow = (e: React.MouseEvent<HTMLTableRowElement>, id: string) => {
+    const selectRow = (e: React.MouseEvent<HTMLTableRowElement>, id?: string) => {
         // Toggle active class
-        if (e.currentTarget.classList.contains("active"))
-            e.currentTarget.classList.remove("active")
-        else
-            e.currentTarget.classList.add("active")
+        e.currentTarget.classList.toggle("active")
+
+        // Toggle checkbox
+        let checkbox: HTMLInputElement | null = e.currentTarget.querySelector("input[type='checkbox']")
+        checkbox?.click()
 
         // Fire select function
-        if( props.onSelect )
+        if( props.onSelect && id )
             props.onSelect(id)
     }
 
@@ -32,6 +32,7 @@ export const DashboardTable = (props: DashboardTableProps) => {
             <table>
                 <thead>
                     <tr>
+                        <th></th>
                         {props.header.map((item, index) => (
                             <th key={index}>{item}</th>
                         ))}
@@ -39,9 +40,8 @@ export const DashboardTable = (props: DashboardTableProps) => {
                 </thead>
                 <tbody>
                     {props.body.map((tr, tr_index) => (
-                        <tr key={tr_index} onClick={(e: React.MouseEvent<HTMLTableRowElement>) => {
-                            if(tr.id) selectRow(e, tr.id)
-                        } }>
+                        <tr key={tr_index} onClick={(e: React.MouseEvent<HTMLTableRowElement>) => selectRow(e, tr.id) }>
+                            <td width="50"><SimpleCheckbox className="select-row" onClick={(e: React.MouseEvent<HTMLTableDataCellElement>) => e.stopPropagation()} /></td>
                             { tr.data.map((td, td_index) => (
                                 <td key={tr_index + "_" + td_index}>{td}</td>
                             )) }
