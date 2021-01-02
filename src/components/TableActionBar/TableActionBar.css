@@ -1,0 +1,22 @@
+.action-bar { margin-bottom: 70px; padding-right: 30px; }
+
+.action-bar h2 { float: left; color: #444; font-size: 28px; font-weight: normal; margin: 0; padding: 0; line-height: 45px; margin-right: 30px; }
+
+/* Search */
+.action-bar .search { float: left; position: relative; }
+.action-bar .search input { width: 200px; line-height: 45px; border-radius: 50px; border: 1px solid #DDD; padding: 0 20px; outline: none; cursor: pointer; transition: all .6s cubic-bezier(.26,2,.46,.71); }
+.action-bar .search input:focus { width: 300px; background: #F9F9F9; cursor: text; }
+.action-bar .search i { position: absolute; top: 50%; transform: translateY( -50% ); right: 20px; color: #999; margin-top: 1px; pointer-events: none; }
+
+/* Actions */
+.action-bar .actions { float: right; }
+.action-bar .actions .filter,
+.action-bar .actions .delete { background: #F1F1F1; border-radius: 5px; font-size: 13px; width: 40px; height: 40px; line-height: 28px; border: none; color: #FF6B6B; cursor: pointer; outline: none; margin-right: 10px; transition: all .3s ease; }
+.action-bar .actions .filter { color: #0984E3; width: auto; padding: 0 20px; }
+.action-bar .actions .filter i { position: relative; top: 1.5px; margin-right: 3px; }
+.action-bar .actions .filter:hover,
+.action-bar .actions .delete:hover { background: #E9E9E9; }
+.action-bar .actions .add { height: 40px; border: none; background: #CAAF75; color: #FFF; border-radius: 5px; padding: 0 20px; cursor: pointer; position: relative; overflow: hidden; outline: none; }
+.action-bar .actions .add i { font-size: 12px; position: relative; top: 1px; margin-right: 3px; }
+.action-bar .actions .add::before { content: ""; position: absolute; width: 150%; height: 10px; opacity: .3; background: #FFF; left: -100px; top: -20px; transform: rotate(-45deg); transition: all .3s ease; }
+.action-bar .actions .add:hover::before { left: 100px; top: 20px; }

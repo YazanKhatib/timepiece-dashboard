@@ -5,6 +5,7 @@ import Modal from '../../components/Modal/Modal'
 // Components
 import { SideNav, TopNav } from '../../components/Nav/Nav'
 import { DashboardTable } from '../../components/Table/Table'
+import TableActionBar from '../../components/TableActionBar/TableActionBar'
 import Analytics from '../../containers/Analytics/Analytics'
 
 // Stylesheet
@@ -50,12 +51,19 @@ export default (props: any) => {
                 return(<Analytics />)
             case "dealers":
                 return(
+                    <>
+                    <TableActionBar title={t("dealers")} add={() => {alert("Add clicked!")}} addText={"Add to dealers"} showDelete={true} />
                     <DashboardTable
-                        header={[ "Basic info", "Company", "Lead score", "phone", "Tags", "Created at" ]}
+                        header={[ "Basic info", "Company", "Lead score", "phone", "Tags", "Status", "" ]}
                         body={
                             [
                                 {
-                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags", "2021-1-1 12:00" ]
+                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags", "2021-1-1 12:00", 
+                                <div className="show-on-hover">
+                                    <i className="icon-edit" />
+                                    <i className="icon-delete" />
+                                </div>
+                                ]
                                 },
                                 {
                                     data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags", "2021-1-1 12:00" ]
@@ -74,7 +82,8 @@ export default (props: any) => {
                                 }
                             ]
                         }
-                    />
+                        />
+                        </>
                 )
             case "watches":
                 return(<>Watches!</>)

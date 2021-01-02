@@ -7,7 +7,7 @@ interface DashboardTableProps {
     header: string[], // Table header data
     body: { 
             id?: string, // Row id
-            data: string[] // Cells
+            data: (string | React.ReactNode)[] // Cells
         }[], // Rows
     onSelect?: Function // Fire this function when the user selects a raw
 }
@@ -34,7 +34,7 @@ export const DashboardTable = (props: DashboardTableProps) => {
                     <tr>
                         <th></th>
                         {props.header.map((item, index) => (
-                            <th key={index}>{item}</th>
+                            <th style={item ? {} : {width: "150px"}} key={index}>{item}</th>
                         ))}
                     </tr>
                 </thead>
