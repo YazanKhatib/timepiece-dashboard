@@ -5,10 +5,9 @@ import './Table.css'
 
 interface DashboardTableProps {
     header: string[], // Table header data
-    body: { 
-            id?: string, // Row id
-            data: (string | React.ReactNode)[] // Cells
-        }[], // Rows
+    body: {
+            [key: string]: { [key: string]: any } // Cells
+    }, // Rows
     onSelect?: Function // Fire this function when the user selects a raw
 }
 
@@ -39,14 +38,14 @@ export const DashboardTable = (props: DashboardTableProps) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.body.map((tr, tr_index) => (
-                        <tr key={tr_index} style={{ zIndex: props.body.length - tr_index }} onClick={(e: React.MouseEvent<HTMLTableRowElement>) => selectRow(e, tr.id) }>
+                    { Object.keys(props.body).map( ( id, tr_index ) => (
+                        <tr key={id} style={{ zIndex: Object.keys(props.body).length - tr_index }} onClick={(e: React.MouseEvent<HTMLTableRowElement>) => selectRow(e, id) }>
                             <td width="50"><SimpleCheckbox className="select-row" onClick={(e: React.MouseEvent<HTMLTableDataCellElement>) => e.stopPropagation()} /></td>
-                            { tr.data.map((td, td_index) => (
-                                <td key={tr_index + "_" + td_index}>{td}</td>
-                            )) }
+                            { Object.keys(props.body[id]).map( ( key, td_index ) => (
+                                <td key={tr_index + "_" + td_index}>{props.body[id][key]}</td>
+                            ) ) }
                         </tr>
-                    ))}
+                    ) ) }
                 </tbody>
             </table>
         </div>

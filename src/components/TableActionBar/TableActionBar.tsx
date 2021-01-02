@@ -27,7 +27,7 @@ export default (props: ActionBarProps) => {
             <div className="actions">
                 { props.showDelete ? <button className="delete"><i className="icon-delete"></i></button> : "" }
                 { props.showFilter === false ?  "" : <button className="filter"><i className="icon-filter-2"></i> {t("filter")}</button> }
-                { props.add ? <button className="add"><i className="icon-plus"></i> {props.addText}</button> : "" }
+                { props.add ? <button className="add" onClick={() => { if(props.add) props.add() }}><i className="icon-plus"></i> {props.addText}</button> : "" }
             </div>
         </div>
     )

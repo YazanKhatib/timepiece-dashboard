@@ -6,6 +6,10 @@ export const RippleLoader = () => {
     )
 }
 
+export const EllipsisLoader = () => (
+    <div className="lds-ellipsis"><div /><div /><div /><div /></div>
+)
+
 export const SuccessMark = () => {
     return (
         <div className="success-checkmark">

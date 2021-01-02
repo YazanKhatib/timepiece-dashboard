@@ -31,36 +31,3 @@ export const loginSlice = createSlice({
         },
     }
 })
-
-
-
-// Auth state
-export interface authState {
-    username: string,
-    email: string,
-    avatar: string,
-    token: string,
-    isLoggedIn: boolean
-}
-
-const initialAuthState: authState = {
-    username: '',
-    email: '',
-    avatar: '',
-    token: '',
-    isLoggedIn: false
-}
-
-// Auth slice
-export const authSlice = createSlice({
-    name: 'auth',
-    initialState: initialAuthState,
-    reducers: {
-        set: ( state, {payload}: PayloadAction<{ username: string, email: string, avatar: string, token: string, isLoggedIn: boolean }> ) => {
-            state = payload
-        },
-        logout: ( state, action ) => {
-            state = initialAuthState
-        }
-    }
-})

@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 // Slices
-import { authSlice, loginSlice } from "../../containers/LoginForm/LoginFormReducer";
+import { loginSlice } from "../../containers/LoginForm/LoginFormSlice";
+import { dealersSlice } from '../../containers/Dealers/DealersSlice'
+
 
 const reducer = {
     login: loginSlice.reducer,
-    auth: authSlice.reducer
+    dealers: dealersSlice.reducer
 }
 
 export default configureStore({

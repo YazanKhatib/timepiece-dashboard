@@ -1,13 +1,10 @@
 import React from 'react'
 import { useTranslation } from 'react-multi-lang'
-import { SelectField } from '../../components/FormElements/FormElements'
-import Modal from '../../components/Modal/Modal'
 
 // Components
 import { SideNav, TopNav } from '../../components/Nav/Nav'
-import { DashboardTable } from '../../components/Table/Table'
-import TableActionBar from '../../components/TableActionBar/TableActionBar'
 import Analytics from '../../containers/Analytics/Analytics'
+import Dealers from '../../containers/Dealers/Dealers'
 
 // Stylesheet
 import './Dashboard.css'
@@ -51,96 +48,7 @@ export default (props: any) => {
             case "analytics":
                 return(<Analytics />)
             case "dealers":
-                return(
-                    <>
-                    <TableActionBar title={t("dealers")} add={() => {alert("Add clicked!")}} addText={"Add to dealers"} showDelete={true} />
-                    <DashboardTable
-                        header={[ "Basic info", "Company", "Lead score", "phone", "Tags", "Status", "" ]}
-                        body={
-                            [
-                                {
-                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags",
-                                    <div onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
-                                    <SelectField options={[
-                                        { value: "approved", label: "Approved" },
-                                        { value: "suspended", label: "Suspended" }
-                                    ]} /></div>,
-                                    <div className="show-on-hover">
-                                        <i className="icon-edit" />
-                                        <i className="icon-delete" />
-                                    </div>
-                                ]
-                                },
-                                {
-                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags",
-                                    <div onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
-                                    <SelectField options={[
-                                        { value: "approved", label: "Approved" },
-                                        { value: "suspended", label: "Suspended" }
-                                    ]} /></div>,
-                                    <div className="show-on-hover">
-                                        <i className="icon-edit" />
-                                        <i className="icon-delete" />
-                                    </div>
-                                ]
-                                },
-                                {
-                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags",
-                                    <div onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
-                                    <SelectField options={[
-                                        { value: "approved", label: "Approved" },
-                                        { value: "suspended", label: "Suspended" }
-                                    ]} /></div>,
-                                    <div className="show-on-hover">
-                                        <i className="icon-edit" />
-                                        <i className="icon-delete" />
-                                    </div>
-                                ]
-                                },
-                                {
-                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags",
-                                    <div onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
-                                    <SelectField options={[
-                                        { value: "approved", label: "Approved" },
-                                        { value: "suspended", label: "Suspended" }
-                                    ]} /></div>,
-                                    <div className="show-on-hover">
-                                        <i className="icon-edit" />
-                                        <i className="icon-delete" />
-                                    </div>
-                                ]
-                                },
-                                {
-                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags",
-                                    <div onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
-                                    <SelectField options={[
-                                        { value: "approved", label: "Approved" },
-                                        { value: "suspended", label: "Suspended" }
-                                    ]} /></div>,
-                                    <div className="show-on-hover">
-                                        <i className="icon-edit" />
-                                        <i className="icon-delete" />
-                                    </div>
-                                ]
-                                },
-                                {
-                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags",
-                                    <div onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
-                                    <SelectField options={[
-                                        { value: "approved", label: "Approved" },
-                                        { value: "suspended", label: "Suspended" }
-                                    ]} /></div>,
-                                    <div className="show-on-hover">
-                                        <i className="icon-edit" />
-                                        <i className="icon-delete" />
-                                    </div>
-                                ]
-                                }
-                            ]
-                        }
-                        />
-                        </>
-                )
+                return(<Dealers />)
             case "watches":
                 return(<>Watches!</>)
             case "users":

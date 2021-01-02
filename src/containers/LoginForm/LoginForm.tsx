@@ -8,7 +8,7 @@ import { useCookies } from "react-cookie";
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { loginSlice, loginState } from "./LoginFormReducer";
+import { loginSlice, loginState } from "./LoginFormSlice";
 
 // Compoentns
 import { Checkbox, InputField } from "../../components/FormElements/FormElements";

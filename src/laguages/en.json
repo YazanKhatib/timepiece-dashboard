@@ -20,6 +20,15 @@
     "search": "Search...",
     "filter": "Filter",
 
+    "add_to_dealers": "Add to dealers",
+    "name": "Name",
+    "email": "Email",
+    "confirmed": "Confirmed",
+    "pending": "Pending",
+    "status": "Status",
+    "blocked": "Blocked",
+    "approved": "Approved",
+
     "sa": "Sa",
     "su": "Su",
     "mo": "Mo",
