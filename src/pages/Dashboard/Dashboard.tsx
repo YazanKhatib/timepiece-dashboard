@@ -1,5 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-multi-lang'
+import { SelectField } from '../../components/FormElements/FormElements'
 import Modal from '../../components/Modal/Modal'
 
 // Components
@@ -58,27 +59,82 @@ export default (props: any) => {
                         body={
                             [
                                 {
-                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags", "2021-1-1 12:00", 
-                                <div className="show-on-hover">
-                                    <i className="icon-edit" />
-                                    <i className="icon-delete" />
-                                </div>
+                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags",
+                                    <div onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
+                                    <SelectField options={[
+                                        { value: "approved", label: "Approved" },
+                                        { value: "suspended", label: "Suspended" }
+                                    ]} /></div>,
+                                    <div className="show-on-hover">
+                                        <i className="icon-edit" />
+                                        <i className="icon-delete" />
+                                    </div>
                                 ]
                                 },
                                 {
-                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags", "2021-1-1 12:00" ]
+                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags",
+                                    <div onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
+                                    <SelectField options={[
+                                        { value: "approved", label: "Approved" },
+                                        { value: "suspended", label: "Suspended" }
+                                    ]} /></div>,
+                                    <div className="show-on-hover">
+                                        <i className="icon-edit" />
+                                        <i className="icon-delete" />
+                                    </div>
+                                ]
                                 },
                                 {
-                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags", "2021-1-1 12:00" ]
+                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags",
+                                    <div onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
+                                    <SelectField options={[
+                                        { value: "approved", label: "Approved" },
+                                        { value: "suspended", label: "Suspended" }
+                                    ]} /></div>,
+                                    <div className="show-on-hover">
+                                        <i className="icon-edit" />
+                                        <i className="icon-delete" />
+                                    </div>
+                                ]
                                 },
                                 {
-                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags", "2021-1-1 12:00" ]
+                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags",
+                                    <div onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
+                                    <SelectField options={[
+                                        { value: "approved", label: "Approved" },
+                                        { value: "suspended", label: "Suspended" }
+                                    ]} /></div>,
+                                    <div className="show-on-hover">
+                                        <i className="icon-edit" />
+                                        <i className="icon-delete" />
+                                    </div>
+                                ]
                                 },
                                 {
-                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags", "2021-1-1 12:00" ]
+                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags",
+                                    <div onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
+                                    <SelectField options={[
+                                        { value: "approved", label: "Approved" },
+                                        { value: "suspended", label: "Suspended" }
+                                    ]} /></div>,
+                                    <div className="show-on-hover">
+                                        <i className="icon-edit" />
+                                        <i className="icon-delete" />
+                                    </div>
+                                ]
                                 },
                                 {
-                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags", "2021-1-1 12:00" ]
+                                    data: [ "Majd Shamma", "Jaiasoft", "09.0", "09123456789", "Test tags",
+                                    <div onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
+                                    <SelectField options={[
+                                        { value: "approved", label: "Approved" },
+                                        { value: "suspended", label: "Suspended" }
+                                    ]} /></div>,
+                                    <div className="show-on-hover">
+                                        <i className="icon-edit" />
+                                        <i className="icon-delete" />
+                                    </div>
+                                ]
                                 }
                             ]
                         }

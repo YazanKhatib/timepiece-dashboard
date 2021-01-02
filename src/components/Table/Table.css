@@ -28,5 +28,6 @@
 .dashboard-table table tbody tr:hover td .show-on-hover { opacity: 1; visibility: visible; }
 
 .dashboard-table table tbody tr td .show-on-hover i { margin: 0 5px; width: 30px; height: 30px; line-height: 32px; text-align: center; background: #FFF; border-radius: 3px; display: inline-block; }
+.dark .dashboard-table table tbody tr td .show-on-hover i { background: #343b49; }
 .dashboard-table table tbody tr td .show-on-hover i.icon-edit { color: #0984E3; }
 .dashboard-table table tbody tr td .show-on-hover i.icon-delete { color: #FF6B6B; }

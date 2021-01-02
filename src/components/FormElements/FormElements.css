@@ -197,3 +197,30 @@
   }
   .dark .language-toggle .en,
   .dark .language-toggle .ar { color: #FFF }
+
+
+/* Select Field */
+.react-select .react-select__control { border-radius: 3px; cursor: pointer; }
+.react-select .react-select__control,
+.react-select .react-select__control:hover,
+.react-select .react-select__control--is-focused,
+.react-select .react-select__control--menu-is-open  { line-height: 25px; border: 1px solid #EEE; box-shadow: none; }
+.dark .react-select .react-select__control { background: #343b49; opacity: .7; }
+.dark .react-select .react-select__control,
+.dark .react-select .react-select__control:hover,
+.dark .react-select .react-select__control--is-focused,
+.dark .react-select .react-select__control--menu-is-open { border-color: #434b5c; }
+.dark .react-select .react-select__control .react-select__single-value { color: #FFF; }
+.dark .react-select .react-select__control .react-select__indicator { color: #FFF; }
+.dark .react-select .react-select__control:not(.react-select__control--menu-is-open) .react-select__indicator,
+.dark .react-select .react-select__control .react-select__placeholder { color: #58637c; }
+.dark .react-select .react-select__control:not(.react-select__control--menu-is-open) .react-select__indicator-separator { background: #58637c; }
+
+.react-select .react-select__menu { line-height: 30px; margin: 0; border: none; box-shadow: 0 0 5px rgba(0, 0, 0, .05); border-radius: 0; }
+.dark .react-select .react-select__menu { background: #434b5c; }
+.react-select .react-select__menu-list { padding: 10px; }
+.react-select .react-select__menu-list .react-select__option { border-radius: 3px; cursor: pointer; background: transparent!important; transition: all .3s ease; }
+.react-select .react-select__menu-list .react-select__option--is-focused { background: #fffaf0!important; }
+.dark .react-select .react-select__menu-list .react-select__option--is-focused { background: #64708b!important; }
+.dark .react-select .react-select__menu-list .react-select__option--is-selected,
+.react-select .react-select__menu-list .react-select__option--is-selected { background: #CAAF75!important; }

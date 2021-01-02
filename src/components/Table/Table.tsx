@@ -40,7 +40,7 @@ export const DashboardTable = (props: DashboardTableProps) => {
                 </thead>
                 <tbody>
                     {props.body.map((tr, tr_index) => (
-                        <tr key={tr_index} onClick={(e: React.MouseEvent<HTMLTableRowElement>) => selectRow(e, tr.id) }>
+                        <tr key={tr_index} style={{ zIndex: props.body.length - tr_index }} onClick={(e: React.MouseEvent<HTMLTableRowElement>) => selectRow(e, tr.id) }>
                             <td width="50"><SimpleCheckbox className="select-row" onClick={(e: React.MouseEvent<HTMLTableDataCellElement>) => e.stopPropagation()} /></td>
                             { tr.data.map((td, td_index) => (
                                 <td key={tr_index + "_" + td_index}>{td}</td>

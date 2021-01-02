@@ -3,6 +3,7 @@ import ReactTooltip from 'react-tooltip';
 import { Icon } from "@iconify/react";
 import sunIcon from '@iconify-icons/feather/sun';
 import moonIcon from '@iconify-icons/feather/moon';
+import Select from 'react-select'
 
 // Helpers
 import { uid } from '../../services/hoc/helpers';
@@ -128,6 +129,15 @@ export const LanguageSwitcher = (props: any) => {
                 <div className="en">En</div>
             </div>
         </label>
+    )
+
+}
+
+
+export const SelectField = (props: any) => {
+
+    return(
+        <Select {...props} className="react-select" classNamePrefix="react-select"  />
     )
 
 }
