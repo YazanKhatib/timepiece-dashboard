@@ -1,35 +1,36 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 // Dealers state
-export interface user {
-    username: string,
-    name: string,
-    email: React.ReactNode,
-    phone: string,
-    actions: React.ReactNode
+export interface watch {
+    description: React.ReactNode,
+    model: string,
+    condition: string,
+    price: number,
+    actions: React.ReactNode,
+    status: React.ReactNode
 }
 
-export interface usersState {
+export interface watchesState {
     isLoaded: boolean, // First load
     isLoading: boolean, // On filtering laoder
     isFetching: boolean,
-    users: {
-        [id: string]: user
+    watches: {
+        [id: string]: watch
     }
 
 }
 
-const initialUsersState: usersState = {
+const initialWatchsState: watchesState = {
     isLoaded: false,
     isLoading: false,
     isFetching: false,
-    users: {}
+    watches: {}
 }
 
-// Dealers slice
-export const usersSlice = createSlice({
-    name: 'users',
-    initialState: initialUsersState,
+// Watchs slice
+export const watchesSlice = createSlice({
+    name: 'watches',
+    initialState: initialWatchsState,
     reducers: {
         setIsLoaded: ( state, {payload}: PayloadAction<boolean> ) => {
             state.isLoaded = payload
@@ -40,8 +41,8 @@ export const usersSlice = createSlice({
         setIsFetching: ( state, {payload}: PayloadAction<boolean> ) => {
             state.isFetching = payload
         },
-        addUsers: ( state, {payload}: PayloadAction<{ [id: string]: user }> ) => {
-            state.users = { ...state.users, ...payload }
+        addWatchs: ( state, {payload}: PayloadAction<{ [id: string]: watch }> ) => {
+            state.watches = { ...state.watches, ...payload }
         }
     }
 })

@@ -4,12 +4,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import { loginSlice } from "../../containers/LoginForm/LoginFormSlice";
 import { dealersSlice } from '../../containers/Dealers/DealersSlice';
 import { usersSlice } from '../../containers/Users/UsersSlice';
+import { watchesSlice } from '../../containers/Watches/WatchesSlice';
 
 
 const reducer = {
     login: loginSlice.reducer,
     dealers: dealersSlice.reducer,
     users: usersSlice.reducer,
+    watches: watchesSlice.reducer
 }
 
 export default configureStore({

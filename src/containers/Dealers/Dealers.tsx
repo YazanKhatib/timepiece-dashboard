@@ -63,9 +63,9 @@ export default () => {
             })
 
             dispatch( dealersSlice.actions.addDealers(dealers) )
-            dispatch( dealersSlice.actions.setIsLoading(true) )
+            dispatch( dealersSlice.actions.setIsLoading(false) )
             dispatch( dealersSlice.actions.setIsLoaded(true) )
-            dispatch( dealersSlice.actions.setIsFetching(true) )
+            dispatch( dealersSlice.actions.setIsFetching(false) )
         })
 
     }

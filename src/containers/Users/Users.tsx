@@ -26,13 +26,6 @@ export default () => {
     // API
     const ENDPOINTS = new API()
 
-    // Status options
-    const status_options = [
-        { value: "approved", label: t("approved") },
-        { value: "pending", label: t("pending") },
-        { value: "blocked", label: t("blocked") }
-    ]
-
     // Search
     const search = () => {}
 
@@ -52,9 +45,7 @@ export default () => {
                     username: item.username,
                     name: ( !item.first_name && !item.last_name ) ? "N/A" : item.first_name + " " + item.last_name,
                     email: <>{item.email} { item.confirmed ? <span style={{ color: "#2ecc71" }}>( {t("confirmed")} )</span> : <span style={{ color: "#e67e22" }}>( {t("pending")} )</span> }</>,
-                    status: <div onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
-                                <SelectField defaultValue={{ value: "approved", label: t("approved") }} options={status_options} />
-                            </div>,
+                    phone: item.phone,
                     actions: <div className="show-on-hover">
                                 <i className="icon-edit" onClick={(e: React.MouseEvent<HTMLLIElement>) => { e.stopPropagation(); alert("Edit " + item.id) }} />
                                 <i className="icon-delete" />
@@ -63,9 +54,9 @@ export default () => {
             })
 
             dispatch( usersSlice.actions.addUsers(users) )
-            dispatch( usersSlice.actions.setIsLoading(true) )
+            dispatch( usersSlice.actions.setIsLoading(false) )
             dispatch( usersSlice.actions.setIsLoaded(true) )
-            dispatch( usersSlice.actions.setIsFetching(true) )
+            dispatch( usersSlice.actions.setIsFetching(false) )
         })
 
     }
@@ -86,7 +77,7 @@ export default () => {
                     />
                 
                 <DashboardTable
-                    header={[ t("username"), t("name"), t("email"), t("status"), "" ]}
+                    header={[ t("username"), t("name"), t("email"), t("phone"), "" ]}
                     body={state.users}
                     />
             </> : <div className="center"><EllipsisLoader /></div> }

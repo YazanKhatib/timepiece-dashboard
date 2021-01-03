@@ -6,6 +6,7 @@ import { SideNav, TopNav } from '../../components/Nav/Nav'
 import Analytics from '../../containers/Analytics/Analytics'
 import Dealers from '../../containers/Dealers/Dealers'
 import Users from '../../containers/Users/Users'
+import Watches from '../../containers/Watches/Watches'
 
 // Stylesheet
 import './Dashboard.css'
@@ -51,7 +52,7 @@ export default (props: any) => {
             case "dealers":
                 return(<Dealers />)
             case "watches":
-                return(<>Watches!</>)
+                return(<Watches />)
             case "users":
                 return(<Users />)
             case "notifications":

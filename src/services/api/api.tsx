@@ -84,10 +84,47 @@ class API {
                                     first_name,
                                     last_name,
                                     email,
+                                    phone,
                                     confirmed
                                 }
                             }
                         }`
+            }
+        })
+
+        return endpoints
+    }
+
+
+    
+
+    
+    /**
+     * Users APIs
+     * @param {}
+     */
+    watches() {
+        var endpoints: { index: Function } = { index: Function };
+
+        endpoints.index = (data: pagination) => axios({
+            url: this.url,
+            method: 'post',
+            data: {
+                query: `query {
+                            getProducts(featured: false, limit: ${data.limit}, offset: ${data.offset}) {
+                                results {
+                                    id,
+                                    description,
+                                    model,
+                                    condition,
+                                    confirmed,
+                                    price,
+                                }
+                            }
+                        }`
+            },
+            headers: {
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTYwOTY5MjEzMCwiZXhwIjoxNjA5NjkzOTMwfQ.D7Ie8qVUVBmI05qCfFfv32hnM_0g91cw8_A3-UdgisQ"
             }
         })
 

@@ -21,14 +21,23 @@
     "filter": "Filter",
 
     "add_to_dealers": "Add to dealers",
-    "add_to_users": "Add to users",
     "name": "Name",
     "email": "Email",
     "confirmed": "Confirmed",
     "pending": "Pending",
     "status": "Status",
+    "phone": "Phone",
     "blocked": "Blocked",
     "approved": "Approved",
+    
+    "add_to_users": "Add to users",
+    
+    "add_to_watches": "Add to watches",
+    "description": "Description",
+    "brand": "Brand",
+    "condition": "Condition",
+    "price": "Price",
+    "gender": "Gender",
 
     "sa": "Sa",
     "su": "Su",

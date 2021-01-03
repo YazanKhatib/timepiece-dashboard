@@ -21,14 +21,22 @@
     "filter": "تصفية النتائج",
 
     "add_to_dealers": "إضافة بائع",
-    "add_to_users": "إضافة مستخدم",
     "name": "الاسم",
     "email": "البريد الالكتروني",
     "confirmed": "مؤكد",
     "pending": "معلق",
     "status": "الحالة",
+    "phone": "رقم الهاتف",
     "blocked": "محظور",
     "approved": "مقبول",
+    
+    "add_to_users": "إضافة مستخدم",
+    
+    "add_to_watches": "إضافة ساعة",
+    "description": "الوصف",
+    "condition": "حالة الساعة",
+    "model": "النوع",
+    "price": "السعر",
 
     "sa": "سبت",
     "su": "أحد",
