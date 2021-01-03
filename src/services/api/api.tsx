@@ -36,6 +36,50 @@ class API {
 
 
     /**
+     * Analytics APIs
+     * @param {}
+     */
+    analytics() {
+        var endpoints: { users: Function, dealers: Function, watches: Function } = { users: Function, dealers: Function, watches: Function };
+
+        endpoints.users = () => axios({
+            url: this.url,
+            method: 'post',
+            data: {
+                query: `query {
+                            getUsers(dealer: false) { total }
+                        }`
+            }
+        })
+
+        endpoints.dealers = () => axios({
+            url: this.url,
+            method: 'post',
+            data: {
+                query: `query {
+                            getUsers(dealer: true) { total }
+                        }`
+            }
+        })
+
+        endpoints.watches = () => axios({
+            url: this.url,
+            method: 'post',
+            data: {
+                query: `query {
+                            getProducts(featured: false) { total }
+                        }`
+            },
+            headers: {
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTYwOTcwMDcwMSwiZXhwIjoxNjA5NzAyNTAxfQ.bF13bbAMgdguNRM0E0JOzMGs74rXcNiIL7g4uJpuGBg"
+            }
+        })
+
+        return endpoints
+    }
+
+
+    /**
      * Dealers APIs
      * @param {}
      */
@@ -95,12 +139,9 @@ class API {
         return endpoints
     }
 
-
-    
-
     
     /**
-     * Users APIs
+     * Watches APIs
      * @param {}
      */
     watches() {
@@ -124,7 +165,7 @@ class API {
                         }`
             },
             headers: {
-                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTYwOTY5MjEzMCwiZXhwIjoxNjA5NjkzOTMwfQ.D7Ie8qVUVBmI05qCfFfv32hnM_0g91cw8_A3-UdgisQ"
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTYwOTcwMDcwMSwiZXhwIjoxNjA5NzAyNTAxfQ.bF13bbAMgdguNRM0E0JOzMGs74rXcNiIL7g4uJpuGBg"
             }
         })
 

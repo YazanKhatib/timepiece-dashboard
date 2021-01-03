@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react'
 import { Line } from 'react-chartjs-2'
 
 import { StatisticsFilter, SupportedPeriods } from '../Filters/Filters'
+import { EllipsisLoader } from '../Loader/Loader'
 
 import './Statistics.css'
 
@@ -10,7 +11,8 @@ interface NumberBoxProps {
     value: number|string|React.ReactNode,
     showFilter?: boolean,
     filterPeriods?: SupportedPeriods[],
-    filterTrigger?: Function
+    filterTrigger?: Function,
+    isLoading: boolean
 }
 
 const defaultFilterPeriods = [
@@ -24,10 +26,14 @@ const defaultFilterPeriods = [
 export const NumberBox: FunctionComponent<NumberBoxProps> = (props: NumberBoxProps) => {
     return (
         <div className="number-box">
-            {props.showFilter ?
-            <StatisticsFilter trigger={props.filterTrigger} supportedTypes={props.filterPeriods} /> : ""}
-            <h2>{props.label}</h2>
-            <span>{props.value}</span>
+            { props.isLoading ?
+            <div className="center"><EllipsisLoader /></div> :
+            <>
+                {props.showFilter ?
+                <StatisticsFilter trigger={props.filterTrigger} supportedTypes={props.filterPeriods} /> : ""}
+                <h2>{props.label}</h2>
+                <span>{props.value}</span>
+            </> }
         </div>
     )
 }

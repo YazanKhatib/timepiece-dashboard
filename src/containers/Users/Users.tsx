@@ -12,7 +12,6 @@ import API from '../../services/api/api'
 import TableActionBar from '../../components/TableActionBar/TableActionBar'
 import { DashboardTable } from '../../components/Table/Table'
 import { EllipsisLoader } from '../../components/Loader/Loader'
-import { SelectField } from '../../components/FormElements/FormElements'
 
 export default () => {
 
