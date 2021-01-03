@@ -21,6 +21,7 @@
     "filter": "Filter",
 
     "add_to_dealers": "Add to dealers",
+    "add_to_users": "Add to users",
     "name": "Name",
     "email": "Email",
     "confirmed": "Confirmed",

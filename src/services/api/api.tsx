@@ -64,6 +64,36 @@ class API {
         return endpoints
     }
 
+    
+    /**
+     * Users APIs
+     * @param {}
+     */
+    users() {
+        var endpoints: { index: Function } = { index: Function };
+
+        endpoints.index = (data: pagination) => axios({
+            url: this.url,
+            method: 'post',
+            data: {
+                query: `query {
+                            getUsers(dealer: false, limit: ${data.limit}, offset: ${data.offset}) {
+                                results {
+                                    id,
+                                    username,
+                                    first_name,
+                                    last_name,
+                                    email,
+                                    confirmed
+                                }
+                            }
+                        }`
+            }
+        })
+
+        return endpoints
+    }
+
 }
 
 export default API

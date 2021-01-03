@@ -5,6 +5,7 @@ import { useTranslation } from 'react-multi-lang'
 import { SideNav, TopNav } from '../../components/Nav/Nav'
 import Analytics from '../../containers/Analytics/Analytics'
 import Dealers from '../../containers/Dealers/Dealers'
+import Users from '../../containers/Users/Users'
 
 // Stylesheet
 import './Dashboard.css'
@@ -52,7 +53,7 @@ export default (props: any) => {
             case "watches":
                 return(<>Watches!</>)
             case "users":
-                return(<>Users!</>)
+                return(<Users />)
             case "notifications":
                 return(<>Notifications!</>)
             default:
