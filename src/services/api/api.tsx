@@ -132,8 +132,11 @@ class API {
                                     first_name,
                                     last_name,
                                     email,
+                                    confirmed,
                                     phone,
-                                    confirmed
+                                    birth,
+                                    gender,
+                                    address
                                 }
                             }
                         }`
@@ -169,7 +172,7 @@ class API {
                         }`
             },
             headers: {
-                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTYwOTcwMDcwMSwiZXhwIjoxNjA5NzAyNTAxfQ.bF13bbAMgdguNRM0E0JOzMGs74rXcNiIL7g4uJpuGBg"
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTYwOTc4Mzg1NiwiZXhwIjoxNjA5Nzg1NjU2fQ.h9qg_uGgyc4CzolKig2OQpw23bW8BnsbBZptE62_E9Q"
             }
         })
 
