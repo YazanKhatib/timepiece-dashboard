@@ -1,36 +1,62 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// Dealers state
+// Models
 export interface watch {
-    description: React.ReactNode,
+    id: string,
+    name: string,
     model: string,
+    description: string,
     condition: string,
+    location: string,
+    featured: boolean,
+    confirmed: boolean,
+    delivery: string,
     price: number,
-    actions: React.ReactNode,
-    status: React.ReactNode
+    production_year: number,
+    case_material: string,
+    movement: string,
+    bracelet_material: string,
+    gender: string,
+    calibar: string,
+    base_calibar: string,
+    power_reserve: number,
+    jewels: number,
+    case_diameter: number,
+    water_resistance: number,
+    bezel_material: string,
+    crystal: string,
+    dial: string,
+    dial_numbers: string,
+    bracelet_color: string,
+    clasp: string,
+    clasp_material: string,
 }
 
+// Watches state
 export interface watchesState {
     isLoaded: boolean, // First load
     isLoading: boolean, // On filtering laoder
     isFetching: boolean,
-    watches: {
-        [id: string]: watch
-    }
-
+    watches: watch[],
+    detailsIsOpen: boolean,
+    loadingStatuses: string[],
+    activeWatch: string
 }
 
-const initialWatchsState: watchesState = {
+const initialUsersState: watchesState = {
     isLoaded: false,
     isLoading: false,
     isFetching: false,
-    watches: {}
+    watches: [],
+    detailsIsOpen: false,
+    loadingStatuses: [],
+    activeWatch: ""
 }
 
-// Watchs slice
+// Users slice
 export const watchesSlice = createSlice({
     name: 'watches',
-    initialState: initialWatchsState,
+    initialState: initialUsersState,
     reducers: {
         setIsLoaded: ( state, {payload}: PayloadAction<boolean> ) => {
             state.isLoaded = payload
@@ -41,8 +67,22 @@ export const watchesSlice = createSlice({
         setIsFetching: ( state, {payload}: PayloadAction<boolean> ) => {
             state.isFetching = payload
         },
-        addWatchs: ( state, {payload}: PayloadAction<{ [id: string]: watch }> ) => {
-            state.watches = { ...state.watches, ...payload }
-        }
+        addWatches: ( state, {payload}: PayloadAction<watch[]> ) => {
+            state.watches = [ ...state.watches, ...payload ]
+        },
+        setDetailsIsOpen: ( state, {payload}: PayloadAction<boolean> ) => {
+            state.detailsIsOpen = payload
+        },
+        addToLoadingStatuses: ( state, {payload}: PayloadAction<string> ) => {
+            state.loadingStatuses.push(payload)
+        },
+        removeFromLoadingStatuses: ( state, {payload}: PayloadAction<string> ) => {
+            let index = state.loadingStatuses.findIndex( status => status === payload )
+            if( index != -1 )
+                state.loadingStatuses.splice( index, 1 )
+        },
+        setActiveWatch: ( state, {payload}: PayloadAction<string> ) => {
+            state.activeWatch = payload
+        },
     }
 })

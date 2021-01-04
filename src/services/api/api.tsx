@@ -162,17 +162,40 @@ class API {
                             getProducts(featured: false, limit: ${data.limit}, offset: ${data.offset}) {
                                 results {
                                     id,
-                                    description,
+                                    name,
                                     model,
+                                    description,
                                     condition,
+                                    location,
+                                    featured,
                                     confirmed,
+                                    delivery,
                                     price,
+                                    production_year,
+                                    case_material,
+                                    movement,
+                                    bracelet_material,
+                                    gender,
+                                    brand_id,
+                                    calibar,
+                                    base_calibar,
+                                    power_reserve,
+                                    jewels,
+                                    case_diameter,
+                                    water_resistance,
+                                    bezel_material,
+                                    crystal,
+                                    dial,
+                                    dial_numbers,
+                                    bracelet_color,
+                                    clasp,
+                                    clasp_material
                                 }
                             }
                         }`
             },
             headers: {
-                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTYwOTc4Mzg1NiwiZXhwIjoxNjA5Nzg1NjU2fQ.h9qg_uGgyc4CzolKig2OQpw23bW8BnsbBZptE62_E9Q"
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTYwOTc5MDkxNiwiZXhwIjoxNjA5NzkyNzE2fQ.Q3Kv7IAvG4N_ff04S17oYm-fA85J055V_Kbetbh1wk0"
             }
         })
 

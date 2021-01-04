@@ -14,7 +14,7 @@ export interface user {
     address: string
 }
 
-// Dealers state
+// Users state
 export interface usersState {
     isLoaded: boolean, // First load
     isLoading: boolean, // On filtering laoder
