@@ -6,7 +6,7 @@ import './Table.css'
 interface DashboardTableProps {
     header: string[], // Table header data
     body: {
-            [key: string]: { [key: string]: any } // Cells
+        [key: string]: { [key: string]: any } // Cells
     }, // Rows
     onSelect?: Function // Fire this function when the user selects a raw
 }

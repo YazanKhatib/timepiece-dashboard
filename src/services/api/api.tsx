@@ -98,7 +98,11 @@ class API {
                                     first_name,
                                     last_name,
                                     email,
-                                    confirmed
+                                    confirmed,
+                                    phone,
+                                    birth,
+                                    gender,
+                                    address
                                 }
                             }
                         }`

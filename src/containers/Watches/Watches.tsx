@@ -25,13 +25,6 @@ export default () => {
         { value: "pending", label: t("pending") }
     ]
 
-    // Get default status value
-    const getDefaultStatusValue = (confirmed: boolean) => {
-        if (confirmed) return status_options[0];
-        else return status_options[1];
-    };
-
-
     // Redux
     const dispatch = useDispatch()
     const state = useSelector( ( state: { watches: watchesState } ) => state.watches )
@@ -41,6 +34,12 @@ export default () => {
 
     // Search
     const search = () => {}
+
+    // Get default status value
+    const getDefaultStatusValue = (confirmed: boolean) => {
+        if (confirmed) return status_options[0];
+        else return status_options[1];
+    };
 
     // Fetch Data
     const fetchData = () => {

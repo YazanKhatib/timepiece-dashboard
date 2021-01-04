@@ -49,7 +49,6 @@ export default () => {
                     phone: item.phone,
                     actions: <div className="show-on-hover">
                                 <i className="icon-info" onClick={(e: React.MouseEvent<HTMLLIElement>) => showDetails(e, item.id) } />
-                                <i className="icon-edit" onClick={(e: React.MouseEvent<HTMLLIElement>) => { e.stopPropagation(); alert("Edit " + item.id) }} />
                                 <i className="icon-delete" />
                             </div>
                 }
@@ -92,9 +91,7 @@ export default () => {
                 <TableActionBar
                     title={t("users")}
                     search={search}
-                    add={() => {}}
                     showFilter={false}
-                    addText={t("add_to_users")}
                     />
                 
                 <DashboardTable
