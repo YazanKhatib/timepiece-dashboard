@@ -1,6 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// Dealers state
+
+export interface detailedUser {
+    username: string,
+    name: string,
+    email: string,
+    phone: string,
+    birth: string,
+    gender: string,
+    address: string
+}
+
+
+// Users state
 export interface user {
     username: string,
     name: string,
@@ -15,7 +27,11 @@ export interface usersState {
     isFetching: boolean,
     users: {
         [id: string]: user
-    }
+    },
+    user: detailedUser,
+    detailsIsOpen: boolean,
+    isLoadingUser: boolean
+
 
 }
 
@@ -23,10 +39,22 @@ const initialUsersState: usersState = {
     isLoaded: false,
     isLoading: false,
     isFetching: false,
-    users: {}
+    users: {},
+    user: {
+        username: "",
+        name: "",
+        email: "",
+        phone: "",
+        birth: "",
+        gender: "",
+        address: ""
+    },
+    detailsIsOpen: false,
+    isLoadingUser: true
+
 }
 
-// Dealers slice
+// Users slice
 export const usersSlice = createSlice({
     name: 'users',
     initialState: initialUsersState,
@@ -42,6 +70,16 @@ export const usersSlice = createSlice({
         },
         addUsers: ( state, {payload}: PayloadAction<{ [id: string]: user }> ) => {
             state.users = { ...state.users, ...payload }
-        }
+        },
+        setUser: (state, {payload}: PayloadAction<detailedUser>) => {
+            state.user = payload
+        },
+        setIsLoadingUser: ( state, {payload}: PayloadAction<boolean> ) => {
+            state.isLoadingUser = payload
+        },
+        setDetailsIsOpen: ( state, {payload}: PayloadAction<boolean> ) => {
+            state.detailsIsOpen = payload
+        },
+
     }
 })
