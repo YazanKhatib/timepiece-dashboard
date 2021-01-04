@@ -19,7 +19,7 @@ const initialAnalyticsState: analyticsState = {
 
 // Analytics slice
 export const analyticsSlice = createSlice({
-    name: 'dealers',
+    name: 'analytics',
     initialState: initialAnalyticsState,
     reducers: {
         setDealers: ( state, {payload}: PayloadAction<number> ) => {

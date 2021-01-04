@@ -1,0 +1,8 @@
+.details-modal-title { margin: 0 0 30px; font-size: 24px; color: #333; }
+.details-table { width: 500px; max-width: 90vw; border-spacing: 0; border-collapse: unset; border-radius: 10px; overflow: hidden; box-shadow: 0 0 5px rgba(0, 0, 0, .08); }
+.details-table tr { line-height: 40px; }
+.details-table tr td { border-top: 1px solid #FAFAFA; font-size: 13px; line-height: 23px; padding: 10px 20px; text-align: left; }
+.details-table tr:first-of-type td { border-top: none; }
+.details-table tr td:first-of-type { background: #F9F9F9; font-weight: bold; color: #555; }
+.details-table tr td:last-of-type { background: #F9F9F9; color: #111; }
+.details-table tr td img { max-width: 100px; display: block; margin: 20px 0; }

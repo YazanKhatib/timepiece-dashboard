@@ -33,7 +33,7 @@ export const DashboardTable = (props: DashboardTableProps) => {
                     <tr>
                         <th></th>
                         {props.header.map((item, index) => (
-                            <th style={item ? {} : {width: "150px"}} key={index}>{item}</th>
+                            <th style={item ? {} : {width: "200px"}} key={index}>{item}</th>
                         ))}
                     </tr>
                 </thead>

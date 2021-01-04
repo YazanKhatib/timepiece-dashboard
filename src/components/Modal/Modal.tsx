@@ -17,6 +17,7 @@ export default (props: ModalProps) => {
         setOut(true);
         setTimeout(() => {
             props.toggle()
+            setOut(false);
         }, 300);
     }
 
