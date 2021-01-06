@@ -46,6 +46,7 @@
     "location": "Location",
     "delivery": "Delivery",
     "price": "Price",
+    "proposed_price": "Proposed Price",
     "production_year": "Production Year",
     "case_material": "Case Material",
     "movement": "Movement",
@@ -63,6 +64,8 @@
     "bracelet_color": "Bracelet Color",
     "clasp": "Clasp",
     "clasp_material": "Clasp Material",
+
+    "offers": "Offers",
 
     "sa": "Sa",
     "su": "Su",

@@ -7,6 +7,7 @@ import { usersSlice } from '../../containers/Users/UsersSlice';
 import { watchesSlice } from '../../containers/Watches/WatchesSlice';
 import { addWatcheSlice } from '../../containers/Watches/AddModal/AddWatchSlice';
 import { analyticsSlice } from "../../containers/Analytics/AnalyticsSlice";
+import { offersSlice } from "../../containers/Offers/OffersSclice";
 
 
 const reducer = {
@@ -15,7 +16,8 @@ const reducer = {
     dealers: dealersSlice.reducer,
     users: usersSlice.reducer,
     watches: watchesSlice.reducer,
-    add_watch: addWatcheSlice.reducer
+    add_watch: addWatcheSlice.reducer,
+    offers: offersSlice.reducer,
 }
 
 export default configureStore({

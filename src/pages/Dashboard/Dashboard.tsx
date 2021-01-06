@@ -7,6 +7,7 @@ import Analytics from '../../containers/Analytics/Analytics'
 import Dealers from '../../containers/Dealers/Dealers'
 import Users from '../../containers/Users/Users'
 import Watches from '../../containers/Watches/Watches'
+import Offers from '../../containers/Offers/Offers'
 
 // Stylesheet
 import './Dashboard.css'
@@ -37,6 +38,11 @@ export default (props: any) => {
             link: "/users"
         },
         {
+            icon: "icon-orders",
+            name: t("offers"),
+            link: "/offers"
+        },
+        {
             icon: "icon-notification-1",
             name: t("notifications"),
             link: "/notifications"
@@ -55,8 +61,10 @@ export default (props: any) => {
                 return(<Watches />)
             case "users":
                 return(<Users />)
+            case "offers":
+                return(<Offers />)
             case "notifications":
-                return(<>Notifications!</>)
+                return("notifications")
             default:
                 break;
 

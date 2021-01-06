@@ -45,6 +45,7 @@
     "location": "الموقع",
     "delivery": "التوصيل",
     "price": "السعر",
+    "proposed_price": "السعر المقترح",
     "production_year": "سنة الإنتاج",
     "case_material": "مادة الهيكل",
     "movement": "الحركة",
@@ -62,6 +63,8 @@
     "bracelet_color": "لون الكستك",
     "clasp": "القفل",
     "clasp_material": "نوع القفل",
+
+    "offers": "العروض",
 
     "sa": "سبت",
     "su": "أحد",

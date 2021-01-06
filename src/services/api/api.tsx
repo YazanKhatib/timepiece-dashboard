@@ -231,6 +231,69 @@ class API {
         return endpoints
     }
 
+    /**
+     * Offers APIs
+     * @param {}
+     */
+    offers() {
+        var endpoints: { index: Function } = { index: Function };
+
+        endpoints.index = (data: pagination) => axios({
+            url: this.url,
+            method: 'post',
+            data: {
+                query: `query {
+                         getOffers {
+                            id,
+                            username,
+                            first_name,
+                            last_name,
+                            email,
+                            phone,
+                            birth,
+                            gender,
+                            address,
+                            offers {
+                                    id,
+                                    name,
+                                    model,
+                                    description,
+                                    condition,
+                                    location,
+                                    featured,
+                                    confirmed,
+                                    delivery,
+                                    price,
+                                    proposed_price,
+                                    production_year,
+                                    case_material,
+                                    movement,
+                                    bracelet_material,
+                                    gender,
+                                    brand_id,
+                                    calibar,
+                                    base_calibar,
+                                    power_reserve,
+                                    jewels,
+                                    case_diameter,
+                                    water_resistance,
+                                    bezel_material,
+                                    crystal,
+                                    dial,
+                                    dial_numbers,
+                                    bracelet_color,
+                                    clasp,
+                                    clasp_material
+                        }
+                    }
+                }`
+            }
+        })
+
+        return endpoints
+    }
+
 }
+
 
 export default API

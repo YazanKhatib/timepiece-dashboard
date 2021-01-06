@@ -150,6 +150,21 @@ export default () => {
             production_year: activeWatch.production_year,
             case_material: activeWatch.case_material,
             movement: activeWatch.movement,
+            bracelet_material: activeWatch.bracelet_color,
+            gender: activeWatch.gender,
+            calibar: activeWatch.calibar,
+            base_calibar: activeWatch.base_calibar,
+            power_reserve: activeWatch.power_reserve,
+            jewels: activeWatch.jewels,
+            case_diameter: activeWatch.case_diameter,
+            water_resistance: activeWatch.water_resistance,
+            bezel_material: activeWatch.bezel_material,
+            crystal: activeWatch.crystal,
+            dial: activeWatch.dial,
+            dial_numbers: activeWatch.dial_numbers,
+            bracelet_color: activeWatch.bracelet_color,
+            clasp: activeWatch.clasp,
+            clasp_material: activeWatch.clasp_material,
         }
         return watch
     }
