@@ -1,5 +1,5 @@
 *:disabled { cursor: not-allowed!important; }
-.input-box { position: relative; max-width: 400px; margin: 20px auto; }
+.input-box { position: relative; max-width: 500px; margin: 10px auto; }
 
 .input-box label { position: absolute; font-size: 14px; top: 50%; left: 20px; transform: translateY(-50%); color: #999; cursor: pointer; user-select: none; transition: all .3s ease; }
 .rtl .input-box label { right: 20px; left: auto; }
@@ -21,6 +21,7 @@
 .dark .input-box label { color: #828da0 }
 
 .input-box .icon-error { position: absolute; top: 50%; transform: translateY(-50%); right: 20px; color: tomato; cursor: pointer; }
+.textarea-box .icon-error { top: 20px; transform: translateY(0); }
 .rtl .input-box .icon-error { left: 20px; right: auto; }
 .input-box .icon-error::before { background: #FFF; border-radius: 50%; }
 .input-box .type-error { background: tomato; }

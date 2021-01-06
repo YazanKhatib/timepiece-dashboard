@@ -17,6 +17,7 @@ import { DashboardTable } from '../../components/Table/Table'
 import { EllipsisLoader } from '../../components/Loader/Loader'
 import { SelectField } from '../../components/FormElements/FormElements'
 import DetailsModal from '../../components/DetailsModal/DetailsModal'
+import AddWatchModal from './AddModal/AddWatchModal'
 
 export default () => {
 
@@ -178,6 +179,8 @@ export default () => {
                     search={search}
                     showFilter={false}
                     showDelete={selectedIds.length > 0}
+                    add={() => dispatch( watchesSlice.actions.setOpenAddModal(true) )}
+                    addText={t("add_to_watches")}
                     />
                 
                 <DashboardTable
@@ -186,7 +189,10 @@ export default () => {
                     onSelect={toggleSelectedId}
                     />
                 
-                <DetailsModal isOpen={state.detailsIsOpen} toggle={() => dispatch( watchesSlice.actions.setDetailsIsOpen(false) )} data={getActiveWatch()} title={"Watch details"} />
+                <DetailsModal isOpen={state.detailsIsOpen} toggle={() => dispatch( watchesSlice.actions.setDetailsIsOpen(false) )} data={getActiveWatch()} title={t("watch_details")} />
+
+                <AddWatchModal />
+
             </> : <div className="center"><EllipsisLoader /></div> }
         </>
     )

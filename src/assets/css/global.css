@@ -15,6 +15,7 @@ img { max-width: 100%; height: auto; }
 .bg-gold { background-color: #CAAF75; }
 .color-white { color: #FFF; }
 .bg-white { background: #FFF; }
+.bg-gray { background: #F9F9F9; }
 
 /* Margin */
 .margin-5 { display: inline-block; margin: 0 2.5px; }

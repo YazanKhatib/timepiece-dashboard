@@ -155,7 +155,7 @@ export default () => {
                     onSelect={toggleSelectedId}
                     />
                 
-                <DetailsModal isOpen={state.detailsIsOpen} toggle={() => dispatch( usersSlice.actions.setDetailsIsOpen(false) )} data={getActiveUser()} title={"User details"} />
+                <DetailsModal isOpen={state.detailsIsOpen} toggle={() => dispatch( usersSlice.actions.setDetailsIsOpen(false) )} data={getActiveUser()} title={t("user_details")} />
             </> : <div className="center"><EllipsisLoader /></div> }
         </>
     )

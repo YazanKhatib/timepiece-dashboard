@@ -40,7 +40,7 @@ export default function () {
     const [showSucessMark, setShowSuccessMark] = useState<boolean>(false)
 
     // Cookies hooks
-    const [_, setCookie] = useCookies(['userinfo']);
+    const [_, setCookie] = useCookies();
 
     // API
     const ENDPOINTS = new API()
@@ -68,7 +68,8 @@ export default function () {
                 setShowSuccessMark(true)
                 setTimeout(() => {
                     let expires: Date = rememberMe ? addToDate( new Date(), "years", 1 ) : addToDate( new Date(), "hours", 1 );
-                    setCookie("userinfo", response.data.data, { expires: expires })
+                    setCookie("userinfo", response.data.data.loginAdmin.user, { expires: expires })
+                    setCookie("token", { accessToken: response.data.data.loginAdmin.accessToken, refreshToken: response.data.data.loginAdmin.refreshToken }, { expires: addToDate( new Date(), "minutes", 29 ) })
                     dispatch( loginSlice.actions.init() )
                 }, 1500);
 

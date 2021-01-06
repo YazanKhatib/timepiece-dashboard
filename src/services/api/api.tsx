@@ -26,7 +26,7 @@ class API {
             method: 'post',
             data: {
                 query: `mutation {
-                            loginAdmin(username: "${data.username}", password: "${data.password}") { id, username, email, token }
+                            loginAdmin(username: "${data.username}", password: "${data.password}") { user { id, username, email }, accessToken, refreshToken }
                         }`
             }
         })
@@ -69,9 +69,6 @@ class API {
                 query: `query {
                             getProducts(featured: false) { total }
                         }`
-            },
-            headers: {
-                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTYwOTcwMDcwMSwiZXhwIjoxNjA5NzAyNTAxfQ.bF13bbAMgdguNRM0E0JOzMGs74rXcNiIL7g4uJpuGBg"
             }
         })
 
@@ -91,7 +88,7 @@ class API {
             method: 'post',
             data: {
                 query: `query {
-                            getUsers(dealer: false, limit: ${data.limit}, offset: ${data.offset}) {
+                            getUsers(dealer: true, limit: ${data.limit}, offset: ${data.offset}) {
                                 results {
                                     id,
                                     username,
@@ -112,7 +109,7 @@ class API {
         return endpoints
     }
 
-    
+
     /**
      * Users APIs
      * @param {}
@@ -146,7 +143,7 @@ class API {
         return endpoints
     }
 
-    
+
     /**
      * Watches APIs
      * @param {}
@@ -193,9 +190,6 @@ class API {
                                 }
                             }
                         }`
-            },
-            headers: {
-                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTYwOTc5MDkxNiwiZXhwIjoxNjA5NzkyNzE2fQ.Q3Kv7IAvG4N_ff04S17oYm-fA85J055V_Kbetbh1wk0"
             }
         })
 

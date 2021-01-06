@@ -35,9 +35,11 @@ export const Textarea = (props: any) => {
     let id = uid('input')
 
     return (
-        <div className="input-box">
+        <div className="input-box textarea-box">
             <textarea {...field} id={id} />
             { inputLabel ? <label className={props.value ? "active" : ''} htmlFor={id}>{inputLabel}</label> : ''}
+            {props.error ? <i className="icon-error" data-tip={props.error}></i> : ''}
+            {props.error ? <ReactTooltip place="left" type="error" effect="solid" delayHide={500} /> : ''}
         </div>
     )
 }

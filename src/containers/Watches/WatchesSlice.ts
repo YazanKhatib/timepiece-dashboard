@@ -40,7 +40,8 @@ export interface watchesState {
     watches: watch[],
     detailsIsOpen: boolean,
     loadingStatuses: string[],
-    activeWatch: string
+    activeWatch: string,
+    openAddModal: boolean
 }
 
 const initialUsersState: watchesState = {
@@ -50,7 +51,8 @@ const initialUsersState: watchesState = {
     watches: [],
     detailsIsOpen: false,
     loadingStatuses: [],
-    activeWatch: ""
+    activeWatch: "",
+    openAddModal: false
 }
 
 // Users slice
@@ -83,6 +85,9 @@ export const watchesSlice = createSlice({
         },
         setActiveWatch: ( state, {payload}: PayloadAction<string> ) => {
             state.activeWatch = payload
+        },
+        setOpenAddModal: ( state, {payload}: PayloadAction<boolean> ) => {
+            state.openAddModal = payload
         },
     }
 })

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-multi-lang'
 import { EllipsisLoader } from '../Loader/Loader'
 import Modal from '../Modal/Modal'
 
@@ -14,8 +15,11 @@ interface DetailsModalProps {
     }
 }
 
-export default (props: DetailsModalProps) => (
-    <Modal open={props.isOpen} toggle={props.toggle}>
+
+export default (props: DetailsModalProps) => {
+    // Translation
+    const t = useTranslation()
+    return <Modal open={props.isOpen} toggle={props.toggle}>
         { props.isLoading ?
         <div className="center"><EllipsisLoader /></div> :
         <>
@@ -23,11 +27,11 @@ export default (props: DetailsModalProps) => (
         <table className="details-table">
             { Object.keys(props.data).map( (key, index) => (
                 <tr key={key}>
-                    <td>{key}</td>
+                    <td>{t(key)}</td>
                     <td>{props.data[key]}</td>
                 </tr>
             )) }
         </table>
         </> }
     </Modal>
-)
+}
