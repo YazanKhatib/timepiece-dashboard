@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { useCookies, withCookies } from 'react-cookie';
+import { addToDate } from '../hoc/helpers';
 
 interface pagination {
     offset: number,
@@ -11,6 +13,39 @@ class API {
 
     constructor() {
         this.url = "https://timepiecenodejs.herokuapp.com/graphql"
+
+        const [cookies, setCookie] = useCookies();
+
+        // Add Auth header
+        axios.interceptors.request.use(async (config) => {
+            if (cookies.userinfo && !config.headers.skipInterceptors) {
+                if (cookies.token)
+                    config.headers["Authorization"] = "Bearer " + cookies.token.accessToken;
+                else {
+                    // Rrefresh token
+                    await axios({
+                        url: this.url,
+                        method: 'post',
+                        data: {
+                            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                            // !!!!!!!!! Should be replaced with refreshToken query !!!!!!!!!
+                            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                            query: `mutation {
+                                            loginAdmin(username: "admin", password: "123456") { user { id, username, email }, accessToken, refreshToken }
+                                        }`
+                        },
+                        headers: {
+                            "skipInterceptors": true
+                        }
+                    }).then((response) => {
+                        setCookie("token", { accessToken: response.data.data.loginAdmin.accessToken, refreshToken: response.data.data.loginAdmin.refreshToken }, { expires: addToDate( new Date(), "minutes", 29 ) })
+                        config.headers["Authorization"] = "Bearer " + response.data.data.loginAdmin.accessToken;
+                    })
+                }
+            }
+            return (config);
+
+        })
     }
 
 
