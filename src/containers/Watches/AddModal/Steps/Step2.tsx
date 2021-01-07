@@ -65,12 +65,14 @@ export default () => {
                     <Col md={6}>
                         <InputField
                             label={t("case_diameter")}
+                            type="number"
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(addWatcheSlice.actions.set({ field: "case_diameter", value: e.target.value }))}
                             value={state.fields.case_diameter} />
                     </Col>
                     <Col md={6}>
                         <InputField
                             label={t("jewels")}
+                            type="number"
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(addWatcheSlice.actions.set({ field: "jewels", value: e.target.value }))}
                             value={state.fields.jewels} />
                     </Col>
@@ -95,7 +97,7 @@ export default () => {
                 }}
                 >Back</button>
                 <span className="margin-20"></span>
-                <button className="button round bg-gold color-white margin-top-30" style={{ padding: "0 80px" }}>Next</button>
+                <button className="button round bg-gold color-white margin-top-30" style={{ padding: "0 80px", marginBottom: 5 }}>Next</button>
 
             </form>
 

@@ -10,6 +10,7 @@ import Modal from '../../../components/Modal/Modal'
 import Step1 from './Steps/Step1'
 import Step2 from './Steps/Step2'
 import Step3 from './Steps/Step3'
+import { SuccessMark, WhiteboxLoader } from '../../../components/Loader/Loader'
 
 export default () => {
     
@@ -21,6 +22,9 @@ export default () => {
     return(
         <Modal open={watchesState.openAddModal} toggle={() => dispatch( watchesSlice.actions.setOpenAddModal(false) )}>
             
+            { addState.isLoading ? <WhiteboxLoader /> : "" }
+            { addState.isSuccess ? <SuccessMark /> : "" }
+
             {/* Steps */}
             <h2 className="text-center" style={{ margin: "0 0 20px" }}>
             {
@@ -29,6 +33,7 @@ export default () => {
                 "Advanced information"
             }
             </h2>
+
             {
                 addState.step === 1 ? <Step1 /> :
                 addState.step === 2 ? <Step2 /> :

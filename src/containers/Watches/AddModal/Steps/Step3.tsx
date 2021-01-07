@@ -9,6 +9,10 @@ import { useTranslation } from 'react-multi-lang'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { addWatcheSlice, addWatcheState } from '../AddWatchSlice'
+import { watch, watchesSlice } from '../../WatchesSlice'
+
+// API
+import API from '../../../../services/api/api'
 
 // Components
 import { InputField } from '../../../../components/FormElements/FormElements'
@@ -22,10 +26,61 @@ export default () => {
     const dispatch = useDispatch()
     const state = useSelector((state: { add_watch: addWatcheState }) => state.add_watch)
 
+    // API
+    const ENDPOINTS = new API()
+
     const submitWatch = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         
         // Submit
+        dispatch( addWatcheSlice.actions.setIsLoading(true) )
+
+        ENDPOINTS.watches().add(state.fields)
+        .then((response: any) => {
+            console.log(response)
+            dispatch( addWatcheSlice.actions.setIsLoading(false) )
+            dispatch( addWatcheSlice.actions.setIsSuccess(true) )
+
+            setTimeout(() => {
+                dispatch( addWatcheSlice.actions.setIsSuccess(false) )
+                dispatch( watchesSlice.actions.setOpenAddModal(false) )
+            }, 2000);
+
+            // Add to table
+            let watches: watch[] = [{
+                id: String(response.data.data.addProduct.id),
+                name: String(state.fields.brand ? state.fields.brand : "N/A"),
+                model: String(state.fields.model ? state.fields.model : "N/A"),
+                description: String(state.fields.description ? state.fields.description : "N/A"),
+                condition: String(state.fields.condition ? state.fields.condition : "N/A"),
+                location: String(state.fields.location ? state.fields.location : "N/A"),
+                featured: false,
+                confirmed: false,
+                delivery: String(state.fields.delivery ? state.fields.delivery : "N/A"),
+                price: Number(state.fields.price),
+                production_year: Number(state.fields.production_year),
+                case_material: String(state.fields.case_material ? state.fields.case_material : "N/A"),
+                movement: String(state.fields.movement ? state.fields.movement : "N/A"),
+                bracelet_material: String(state.fields.bracelet_material ? state.fields.bracelet_material : "N/A"),
+                gender: String(state.fields.gender ? state.fields.gender : "N/A"),
+                calibar: String(state.fields.calibar ? state.fields.calibar : "N/A"),
+                base_calibar: String(state.fields.base_calibar ? state.fields.base_calibar : "N/A"),
+                power_reserve: Number(state.fields.power_reserve),
+                jewels: Number(state.fields.jewels),
+                case_diameter: Number(state.fields.case_diameter),
+                water_resistance: Number(state.fields.water_resistance),
+                bezel_material: String(state.fields.bezel_material ? state.fields.bezel_material : "N/A"),
+                crystal: String(state.fields.crystal ? state.fields.crystal : "N/A"),
+                dial: String(state.fields.dial ? state.fields.dial : "N/A"),
+                dial_numbers: String(state.fields.dial_numbers ? state.fields.dial_numbers : "N/A"),
+                bracelet_color: String(state.fields.bracelet_color ? state.fields.bracelet_color : "N/A"),
+                clasp: String(state.fields.clasp ? state.fields.clasp : "N/A"),
+                clasp_material: String(state.fields.clasp_material ? state.fields.clasp_material : "N/A"),
+            }]
+
+            dispatch( watchesSlice.actions.addWatches(watches) )
+
+        })
 
     }
 
@@ -49,12 +104,14 @@ export default () => {
                     <Col md={6}>
                         <InputField
                             label={t("power_reserve")}
+                            type="number"
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(addWatcheSlice.actions.set({ field: "power_reserve", value: e.target.value }))}
                             value={state.fields.power_reserve} />
                     </Col>
                     <Col md={6}>
                         <InputField
                             label={t("water_resistance")}
+                            type="number"
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(addWatcheSlice.actions.set({ field: "water_resistance", value: e.target.value }))}
                             value={state.fields.water_resistance} />
                     </Col>
@@ -79,6 +136,7 @@ export default () => {
                     <Col md={6}>
                         <InputField
                             label={t("production_year")}
+                            type="number"
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(addWatcheSlice.actions.set({ field: "production_year", value: e.target.value }))}
                             value={state.fields.production_year} />
                     </Col>
@@ -97,7 +155,7 @@ export default () => {
                 }}
                 >Back</button>
                 <span className="margin-20"></span>
-                <button className="button round bg-gold color-white margin-top-30" style={{ padding: "0 80px" }}>Submit</button>
+                <button className="button round bg-gold color-white margin-top-30" style={{ padding: "0 80px", marginBottom: 5 }}>Submit</button>
 
             </form>
 
