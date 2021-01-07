@@ -52,6 +52,13 @@ export const usersSlice = createSlice({
         addUsers: ( state, {payload}: PayloadAction<user[]> ) => {
             state.users = [ ...state.users, ...payload ]
         },
+        deleteUsers: ( state, {payload}: PayloadAction<string[]> ) => {
+            payload.map(id => {
+                let index = state.users.findIndex( user => user.id === id )
+                if( index != -1 )
+                    state.users.splice( index, 1 )
+            })
+        },
         setDetailsIsOpen: ( state, {payload}: PayloadAction<boolean> ) => {
             state.detailsIsOpen = payload
         },
