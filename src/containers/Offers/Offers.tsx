@@ -127,8 +127,8 @@ export default () => {
                     price: watch.price,
                     proposed_price: <strong>{watch.proposed_price}</strong>,
                     actions: <div className="show-on-hover">
-                                <i className="icon-info" onClick={(e: React.MouseEvent<HTMLLIElement>) => showUserDetails(e, item.id) } />
-                                <i className="icon-info" onClick={(e: React.MouseEvent<HTMLLIElement>) => showWatchDetails(e, item.id, watch.id) } />
+                                <i className="icon-username-1" onClick={(e: React.MouseEvent<HTMLLIElement>) => showUserDetails(e, item.id) } />
+                                <i className="icon-time" onClick={(e: React.MouseEvent<HTMLLIElement>) => showWatchDetails(e, item.id, watch.id) } />
                                 <i className="icon-delete" />
                             </div>
                 }
@@ -140,12 +140,14 @@ export default () => {
 
     // Details Modal
     const showUserDetails = (e: React.MouseEvent<HTMLLIElement>, userId: string) => {
+        e.stopPropagation()
         dispatch( offersSlice.actions.setUserDetailsIsOpen(true) )
         dispatch( offersSlice.actions.setActiveUser(userId) )
     }
 
     
     const showWatchDetails = (e: React.MouseEvent<HTMLLIElement>, userId: string, watchId: string) => {
+        e.stopPropagation()
         dispatch( offersSlice.actions.setWatchDetailsIsOpen(true) )
         dispatch( offersSlice.actions.setActiveUser(userId) )
         dispatch( offersSlice.actions.setActiveWatch(watchId) )

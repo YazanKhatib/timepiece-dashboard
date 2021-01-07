@@ -66,5 +66,10 @@ export const dealersSlice = createSlice({
         setActiveDealer: ( state, {payload}: PayloadAction<string> ) => {
             state.activeDealer = payload
         },
+        setBlocked: ( state, {payload}: PayloadAction<{ id: string, blocked: boolean }> ) => {
+            let index = state.dealers.findIndex( dealer => dealer.id === payload.id )
+            if( index !== -1 )
+                state.dealers[index].status = payload.blocked
+        },
     }
 })

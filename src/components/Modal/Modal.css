@@ -1,6 +1,6 @@
 #modal-container { position: fixed; display: table; height: 100%; width: 100%; top: 0; left: 0; transform: scale(1); z-index: 100; transition: all .5s ease; }
 #modal-container .modal-background { display: table-cell; text-align: center; vertical-align: middle; background: rgba(0, 0, 0, 0); animation: fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
-#modal-container .modal-background .modal { padding: 50px; display: inline-block; border-radius: 3px; font-weight: 300; position: relative; background-color: transparent; animation: modalFadeIn 0.5s 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+#modal-container .modal-background .modal { padding: 50px; display: inline-block; border-radius: 3px; font-weight: 300; position: relative; background-color: transparent; animation: modalFadeIn 0.5s 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; max-height: 90vh; overflow-y: hidden; }
 .dark #modal-container .modal-background .modal { animation: modalFadeInDark 0.5s 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
 #modal-container .modal-background .modal .modal-content { opacity: 0; position: relative; animation: modalContentFadeIn 0.5s 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; z-index: 1; }
 #modal-container .modal-background .modal .modal-svg { position: absolute; top: 0; left: 0; height: 100%; width: 100%; border-radius: 3px; pointer-events: none; }
@@ -40,6 +40,7 @@
 	100% {
         background-color: white;
         box-shadow: 1px 2px 3px rgba(0, 0, 0, .1);
+        overflow-y: auto;
 	}
 }
 
@@ -47,9 +48,11 @@
 	0% {
         background-color: white;
         box-shadow: 1px 2px 3px rgba(0, 0, 0, .1);
+        overflow-y: auto;
 	}
 	100% {
-		background-color: transparent;
+        background-color: transparent;
+        overflow-y: auto;
 	}
 }
 
@@ -60,6 +63,7 @@
 	100% {
         background-color: #1a2029;
         box-shadow: 1px 2px 3px rgba(0, 0, 0, .2);
+        overflow-y: auto;
 	}
 }
 
@@ -67,9 +71,11 @@
 	0% {
         background-color: #1a2029;
         box-shadow: 1px 2px 3px rgba(0, 0, 0, .2);
+        overflow-y: auto;
 	}
 	100% {
-		background-color: transparent;
+        background-color: transparent;
+        overflow-y: auto;
 	}
 }
 

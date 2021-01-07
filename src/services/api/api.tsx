@@ -134,7 +134,8 @@ class API {
                                     phone,
                                     birth,
                                     gender,
-                                    address
+                                    address,
+                                    blocked
                                 }
                             }
                         }`
@@ -150,7 +151,7 @@ class API {
      * @param {}
      */
     users() {
-        var endpoints: { index: Function } = { index: Function };
+        var endpoints: { index: Function, update: Function } = { index: Function, update: Function };
 
         endpoints.index = (data: pagination) => axios({
             url: this.url,
@@ -170,6 +171,18 @@ class API {
                                     gender,
                                     address
                                 }
+                            }
+                        }`
+            }
+        })
+
+        endpoints.update = (data: {blocked: boolean, id: number}) => axios({
+            url: this.url,
+            method: 'post',
+            data: {
+                query: `mutation {
+                            updateUserbyId(id: ${data.id}, blocked: ${data.blocked}) {
+                                blocked
                             }
                         }`
             }

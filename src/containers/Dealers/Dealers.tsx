@@ -41,16 +41,18 @@ export default () => {
 
     // Get default status value
     const getDefaultStatusValue = (confirmed: boolean) => {
-        if (confirmed) return status_options[0];
-        else return status_options[1];
+        if (!confirmed) return status_options[0];
+        return status_options[1];
     };
 
     // Change dealer status
     const changeStatus = (selected: boolean, id: string) => {
         dispatch( dealersSlice.actions.addToLoadingStatuses(id) )
-        setTimeout(() => {
+        ENDPOINTS.users().update( { id: Number(id), blocked: selected } )
+        .then( (response: any) => {
             dispatch( dealersSlice.actions.removeFromLoadingStatuses(id) )
-        }, 5000);
+            dispatch( dealersSlice.actions.setBlocked({ id: id, blocked: selected }) )
+        })
     }
 
     // Fetch Data
