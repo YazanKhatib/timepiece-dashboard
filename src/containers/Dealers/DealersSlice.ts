@@ -52,6 +52,13 @@ export const dealersSlice = createSlice({
         addDealers: ( state, {payload}: PayloadAction<dealer[]> ) => {
             state.dealers = [ ...state.dealers, ...payload ]
         },
+        deleteDealers: ( state, {payload}: PayloadAction<string[]> ) => {
+            payload.map(id => {
+                let index = state.dealers.findIndex( dealer => dealer.id === id )
+                if( index != -1 )
+                    state.dealers.splice( index, 1 )
+            })
+        },
         setDetailsIsOpen: ( state, {payload}: PayloadAction<boolean> ) => {
             state.detailsIsOpen = payload
         },

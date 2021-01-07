@@ -152,7 +152,7 @@ class API {
      * @param {}
      */
     users() {
-        var endpoints: { index: Function, update: Function } = { index: Function, update: Function };
+        var endpoints: { index: Function, update: Function, delete: Function } = { index: Function, update: Function, delete: Function };
 
         endpoints.index = (data: pagination) => axios({
             url: this.url,
@@ -185,6 +185,16 @@ class API {
                             updateUserbyId(id: ${data.id}, blocked: ${data.blocked}) {
                                 blocked
                             }
+                        }`
+            }
+        })
+
+        endpoints.delete = ( data: string[] ) => axios({
+            url: this.url,
+            method: 'post',
+            data: {
+                query: `mutation {
+                            deleteUsers( ids: [${data.join(", ")}] )
                         }`
             }
         })

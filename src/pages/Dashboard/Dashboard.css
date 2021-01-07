@@ -1,9 +1,9 @@
 .dashboard-page { width: 100vw; min-height: 100vh; background: #F5F5F5; }
 .dark .dashboard-page { background: #222730; }
-.main-side { margin-left: 80px; background: #FFF; box-shadow: -1px 0 3px rgba(0, 0, 0, .1); min-height: 100vh; border-radius: 35px 0 0 35px; overflow: hidden; }
+.main-side { margin-left: 80px; background: #FFF; box-shadow: -1px 0 3px rgba(0, 0, 0, .1); min-height: 100vh; border-radius: 35px 0 0 35px; overflow: hidden; position: relative; z-index: 1; }
 .dark .main-side { background: #1a2029; }
 .rtl .main-side { margin-left: 0; margin-right: 80px; border-radius: 0 35px 35px 0; }
 .main-side > * { padding-left: 120px; }
 .rtl .main-side > * { padding-left: 0; padding-right: 120px; }
-.main-side .content { padding-top: 50px; padding-right: 40px; }
+.main-side .content { padding-top: 50px; padding-right: 40px; position: relative; min-height: 85vh; }
 .rtl .main-side .content { padding-left: 40px; padding-right: 120px; }

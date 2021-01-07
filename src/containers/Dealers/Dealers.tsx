@@ -14,7 +14,7 @@ import API from '../../services/api/api'
 // Components
 import TableActionBar from '../../components/TableActionBar/TableActionBar'
 import { DashboardTable } from '../../components/Table/Table'
-import { EllipsisLoader } from '../../components/Loader/Loader'
+import { EllipsisLoader, WhiteboxLoader } from '../../components/Loader/Loader'
 import { SelectField } from '../../components/FormElements/FormElements'
 import DetailsModal from '../../components/DetailsModal/DetailsModal'
 
@@ -102,7 +102,10 @@ export default () => {
                         </div>,
                 actions: <div className="show-on-hover">
                             <i className="icon-info" onClick={(e: React.MouseEvent<HTMLLIElement>) => showDetails(e, item.id) } />
-                            <i className="icon-delete" />
+                            <i className="icon-delete" onClick={(e: React.MouseEvent<HTMLLIElement>) => {
+                                e.stopPropagation()
+                                remove(item.id)
+                            }} />
                         </div>
             }
         })
@@ -145,6 +148,20 @@ export default () => {
             setSelectedIds([...selectedIds, id])
     }
 
+    // Delete
+    const remove = (id? :string) => {
+        
+        dispatch( dealersSlice.actions.setIsLoading(true) )
+
+        ENDPOINTS.users().delete(id ? [id] : selectedIds)
+        .then((response: any) => {
+            console.log(response)
+            dispatch( dealersSlice.actions.setIsLoading(false) )
+            dispatch( dealersSlice.actions.deleteDealers(id ? [id] : selectedIds) )
+            if(!id) setSelectedIds([])
+        })
+
+    }
 
     // First fetch
     if( !state.isLoaded && !state.isFetching )
@@ -154,11 +171,14 @@ export default () => {
         <>
             { state.isLoaded ?
             <>
+                { state.isLoading ? <WhiteboxLoader /> : ""}
+                
                 <TableActionBar
                     title={t("dealers")}
                     search={search}
                     showFilter={false}
                     showDelete={selectedIds.length > 0}
+                    delete={remove}
                     />
                 
                 <DashboardTable
