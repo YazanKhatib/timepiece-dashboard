@@ -89,5 +89,10 @@ export const watchesSlice = createSlice({
         setOpenAddModal: ( state, {payload}: PayloadAction<boolean> ) => {
             state.openAddModal = payload
         },
+        setConfirmed: ( state, {payload}: PayloadAction<{ id: string, confirmed: boolean }> ) => {
+            let index = state.watches.findIndex( watch => watch.id === payload.id )
+            if( index !== -1 )
+                state.watches[index].confirmed = payload.confirmed
+        },
     }
 })

@@ -33,8 +33,8 @@ export default () => {
 
     // Status options
     const status_options = [
-        { value: false, label: t("approved") },
-        { value: true, label: t("pending") }
+        { value: true, label: t("approved") },
+        { value: false, label: t("pending") }
     ]
 
     // Search
@@ -49,9 +49,11 @@ export default () => {
     // Change watch status
     const changeStatus = (selected: boolean, id: string) => {
         dispatch( watchesSlice.actions.addToLoadingStatuses(id) )
-        setTimeout(() => {
+        ENDPOINTS.watches().updateStatus( { id, confirmed: selected } )
+        .then( (response: any) => {
             dispatch( watchesSlice.actions.removeFromLoadingStatuses(id) )
-        }, 5000);
+            dispatch( watchesSlice.actions.setConfirmed({ id: id, confirmed: selected }) )
+        })
     }
 
     // Fetch Data

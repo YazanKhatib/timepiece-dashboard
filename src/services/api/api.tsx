@@ -198,7 +198,7 @@ class API {
      * @param {}
      */
     watches() {
-        var endpoints: { index: Function, add: Function } = { index: Function, add: Function };
+        var endpoints: { index: Function, add: Function, updateStatus: Function } = { index: Function, add: Function, updateStatus: Function };
 
         endpoints.index = (data: pagination) => axios({
             url: this.url,
@@ -275,6 +275,20 @@ class API {
                             brand: "${data.brand}"
                         ) { id }
                     }`
+            }
+        })
+
+        
+
+        endpoints.updateStatus = (data: {confirmed: boolean, id: string}) => axios({
+            url: this.url,
+            method: 'post',
+            data: {
+                query: `mutation {
+                            updateProduct(id: "${data.id}", confirmed: ${data.confirmed}) {
+                                confirmed
+                            }
+                        }`
             }
         })
 
