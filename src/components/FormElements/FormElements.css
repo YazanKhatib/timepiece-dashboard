@@ -201,6 +201,9 @@
 
 
 /* Select Field */
+form .react-select { margin: 10px 0; text-align: left; }
+.rtl form .react-select { text-align: right; }
+form .react-select .react-select__control { height: 55px; border-radius: 10px; border: none!important; background: #F7F7F7; font-size: 14px; padding: 0 10px; }
 .react-select .react-select__control { border-radius: 3px; cursor: pointer; }
 .react-select .react-select__control,
 .react-select .react-select__control:hover,
@@ -225,3 +228,10 @@
 .dark .react-select .react-select__menu-list .react-select__option--is-focused { background: #64708b!important; }
 .dark .react-select .react-select__menu-list .react-select__option--is-selected,
 .react-select .react-select__menu-list .react-select__option--is-selected { background: #CAAF75!important; }
+
+.select-holder { position: relative; }
+.select-holder .icon-error { position: absolute; top: 50%; transform: translateY(-50%); right: 20px; color: tomato; cursor: pointer; }
+.rtl .select-holder .icon-error { left: 20px; right: auto; }
+.select-holder .icon-error::before { background: #FFF; border-radius: 50%; }
+.select-holder .type-error { background: tomato; }
+.select-holder .type-error::after { border-left-color: tomato!important; }

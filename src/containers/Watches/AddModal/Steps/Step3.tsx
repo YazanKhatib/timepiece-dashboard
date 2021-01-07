@@ -15,12 +15,25 @@ import { watch, watchesSlice } from '../../WatchesSlice'
 import API from '../../../../services/api/api'
 
 // Components
-import { InputField } from '../../../../components/FormElements/FormElements'
+import { InputField, SelectField } from '../../../../components/FormElements/FormElements'
 
 export default () => {
 
     // Translation
     const t = useTranslation()
+
+    // Movement options
+    const movement_options = [
+        { value: "automatic", label: t("automatic") },
+        { value: 'quartz', label: t("quartz") },
+        { value: 'manual', label: t("manual") },
+    ]
+    
+    const gender_options = [
+        { value: "mens_watch", label: t("mens_watch") },
+        { value: 'unisex', label: t("unisex") },
+        { value: 'womens_watch', label: t("women") },
+    ]
 
     // Redux
     const dispatch = useDispatch()
@@ -31,56 +44,56 @@ export default () => {
 
     const submitWatch = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        
+
         // Submit
-        dispatch( addWatcheSlice.actions.setIsLoading(true) )
+        dispatch(addWatcheSlice.actions.setIsLoading(true))
 
         ENDPOINTS.watches().add(state.fields)
-        .then((response: any) => {
-            console.log(response)
-            dispatch( addWatcheSlice.actions.setIsLoading(false) )
-            dispatch( addWatcheSlice.actions.setIsSuccess(true) )
+            .then((response: any) => {
+                console.log(response)
+                dispatch(addWatcheSlice.actions.setIsLoading(false))
+                dispatch(addWatcheSlice.actions.setIsSuccess(true))
 
-            setTimeout(() => {
-                dispatch( addWatcheSlice.actions.setIsSuccess(false) )
-                dispatch( watchesSlice.actions.setOpenAddModal(false) )
-            }, 2000);
+                setTimeout(() => {
+                    dispatch(addWatcheSlice.actions.setIsSuccess(false))
+                    dispatch(watchesSlice.actions.setOpenAddModal(false))
+                }, 2000);
 
-            // Add to table
-            let watches: watch[] = [{
-                id: String(response.data.data.addProduct.id),
-                name: String(state.fields.brand ? state.fields.brand : "N/A"),
-                model: String(state.fields.model ? state.fields.model : "N/A"),
-                description: String(state.fields.description ? state.fields.description : "N/A"),
-                condition: String(state.fields.condition ? state.fields.condition : "N/A"),
-                location: String(state.fields.location ? state.fields.location : "N/A"),
-                featured: false,
-                confirmed: false,
-                delivery: String(state.fields.delivery ? state.fields.delivery : "N/A"),
-                price: Number(state.fields.price),
-                production_year: Number(state.fields.production_year),
-                case_material: String(state.fields.case_material ? state.fields.case_material : "N/A"),
-                movement: String(state.fields.movement ? state.fields.movement : "N/A"),
-                bracelet_material: String(state.fields.bracelet_material ? state.fields.bracelet_material : "N/A"),
-                gender: String(state.fields.gender ? state.fields.gender : "N/A"),
-                calibar: String(state.fields.calibar ? state.fields.calibar : "N/A"),
-                base_calibar: String(state.fields.base_calibar ? state.fields.base_calibar : "N/A"),
-                power_reserve: Number(state.fields.power_reserve),
-                jewels: Number(state.fields.jewels),
-                case_diameter: Number(state.fields.case_diameter),
-                water_resistance: Number(state.fields.water_resistance),
-                bezel_material: String(state.fields.bezel_material ? state.fields.bezel_material : "N/A"),
-                crystal: String(state.fields.crystal ? state.fields.crystal : "N/A"),
-                dial: String(state.fields.dial ? state.fields.dial : "N/A"),
-                dial_numbers: String(state.fields.dial_numbers ? state.fields.dial_numbers : "N/A"),
-                bracelet_color: String(state.fields.bracelet_color ? state.fields.bracelet_color : "N/A"),
-                clasp: String(state.fields.clasp ? state.fields.clasp : "N/A"),
-                clasp_material: String(state.fields.clasp_material ? state.fields.clasp_material : "N/A"),
-            }]
+                // Add to table
+                let watches: watch[] = [{
+                    id: String(response.data.data.addProduct.id),
+                    name: String(state.fields.brand ? state.fields.brand : "N/A"),
+                    model: String(state.fields.model ? state.fields.model : "N/A"),
+                    description: String(state.fields.description ? state.fields.description : "N/A"),
+                    condition: String(state.fields.condition ? state.fields.condition : "N/A"),
+                    location: String(state.fields.location ? state.fields.location : "N/A"),
+                    featured: false,
+                    confirmed: false,
+                    delivery: String(state.fields.delivery ? state.fields.delivery : "N/A"),
+                    price: Number(state.fields.price),
+                    production_year: Number(state.fields.production_year),
+                    case_material: String(state.fields.case_material ? state.fields.case_material : "N/A"),
+                    movement: String(state.fields.movement ? state.fields.movement : "N/A"),
+                    bracelet_material: String(state.fields.bracelet_material ? state.fields.bracelet_material : "N/A"),
+                    gender: String(state.fields.gender ? state.fields.gender : "N/A"),
+                    calibar: String(state.fields.calibar ? state.fields.calibar : "N/A"),
+                    base_calibar: String(state.fields.base_calibar ? state.fields.base_calibar : "N/A"),
+                    power_reserve: Number(state.fields.power_reserve),
+                    jewels: Number(state.fields.jewels),
+                    case_diameter: Number(state.fields.case_diameter),
+                    water_resistance: Number(state.fields.water_resistance),
+                    bezel_material: String(state.fields.bezel_material ? state.fields.bezel_material : "N/A"),
+                    crystal: String(state.fields.crystal ? state.fields.crystal : "N/A"),
+                    dial: String(state.fields.dial ? state.fields.dial : "N/A"),
+                    dial_numbers: String(state.fields.dial_numbers ? state.fields.dial_numbers : "N/A"),
+                    bracelet_color: String(state.fields.bracelet_color ? state.fields.bracelet_color : "N/A"),
+                    clasp: String(state.fields.clasp ? state.fields.clasp : "N/A"),
+                    clasp_material: String(state.fields.clasp_material ? state.fields.clasp_material : "N/A"),
+                }]
 
-            dispatch( watchesSlice.actions.addWatches(watches) )
+                dispatch(watchesSlice.actions.addWatches(watches))
 
-        })
+            })
 
     }
 
@@ -89,7 +102,7 @@ export default () => {
             <form onSubmit={submitWatch}>
 
                 <Row>
-                <Col md={6}>
+                    <Col md={6}>
                         <InputField
                             label={t("calibar")}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(addWatcheSlice.actions.set({ field: "calibar", value: e.target.value }))}
@@ -128,10 +141,11 @@ export default () => {
                             value={state.fields.dial_numbers} />
                     </Col>
                     <Col md={6}>
-                        <InputField
-                            label={t("gender")}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(addWatcheSlice.actions.set({ field: "gender", value: e.target.value }))}
-                            value={state.fields.gender} />
+                        <SelectField
+                            placeholder={t("gender")}
+                            value={state.fields.gender ? gender_options.find( option => option.value === state.fields.gender ) : null}
+                            onChange={(option: { value: string }) => dispatch(addWatcheSlice.actions.set({ field: "gender", value: option.value }))}
+                            options={gender_options} />
                     </Col>
                     <Col md={6}>
                         <InputField
@@ -141,18 +155,19 @@ export default () => {
                             value={state.fields.production_year} />
                     </Col>
                     <Col md={12}>
-                        <InputField
-                            label={t("movement")}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(addWatcheSlice.actions.set({ field: "movement", value: e.target.value }))}
-                            value={state.fields.movement} />
+                        <SelectField
+                            placeholder={t("movement")}
+                            value={state.fields.movement ? movement_options.find( option => option.value === state.fields.movement ) : null}
+                            onChange={(option: { value: string }) => dispatch(addWatcheSlice.actions.set({ field: "movement", value: option.value }))}
+                            options={movement_options} />
                     </Col>
                 </Row>
 
                 <button className="button round bg-gray color-gold margin-top-30" style={{ padding: "0 70px" }}
-                onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                    e.preventDefault();
-                    dispatch( addWatcheSlice.actions.setStep(2) )
-                }}
+                    onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                        e.preventDefault();
+                        dispatch(addWatcheSlice.actions.setStep(2))
+                    }}
                 >Back</button>
                 <span className="margin-20"></span>
                 <button className="button round bg-gold color-white margin-top-30" style={{ padding: "0 80px", marginBottom: 5 }}>Submit</button>

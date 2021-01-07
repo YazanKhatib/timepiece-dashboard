@@ -139,7 +139,11 @@ export const LanguageSwitcher = (props: any) => {
 export const SelectField = (props: any) => {
 
     return(
-        <Select {...props} className="react-select" classNamePrefix="react-select"  />
+        <div className="select-holder">
+            <Select {...props} className="react-select" classNamePrefix="react-select"  />
+            {props.error ? <i className="icon-error" data-tip={props.error}></i> : ''}
+            {props.error ? <ReactTooltip place="left" type="error" effect="solid" delayHide={500} /> : ''}
+        </div>
     )
 
 }

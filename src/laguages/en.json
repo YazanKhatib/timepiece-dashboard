@@ -65,6 +65,36 @@
     "clasp": "Clasp",
     "clasp_material": "Clasp Material",
 
+    "new": "New",
+    "unworn": "Unworn",
+    "excellent": "Excellent",
+    "good": "Good",
+    "fair": "Fair",
+
+    "original_box": "Original Box",
+    "original_papers": "Original Papers",
+
+    "qatar": "Qatar",
+    "kuwait": "Kuwait",
+    "uae": "UAE",
+
+    "mens_watch": "Men's Watch",
+    "womens_watch": "Women's Watch",
+    "unisex": "Unisex",
+
+    "steel": "Steel",
+    "rose_gold": "Rose Gold",
+    "yellow_gold": "Yellow Gold",
+    "titanium": "Titanium",
+    "platinum": "Platinum",
+    "white_gold": "White Gold",
+    "leather": "Leather",
+    "rubber": "Rubber",
+
+    "automatic": "Automatic",
+    "quartz": "Quartz",
+    "manual": "Manual",
+
     "offers": "Offers",
 
     "sa": "Sa",

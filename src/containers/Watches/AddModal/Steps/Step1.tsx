@@ -11,7 +11,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addWatcheSlice, addWatcheState } from '../AddWatchSlice'
 
 // Components
-import { InputField, Textarea } from '../../../../components/FormElements/FormElements'
+import { InputField, SelectField, Textarea } from '../../../../components/FormElements/FormElements'
+
+
 
 export default () => {
 
@@ -20,6 +22,24 @@ export default () => {
 
     // Hooks
     const [showErrors, setShowErrors] = useState<boolean>(false)
+
+    // Condition options
+    const condition_options = [
+        { value: "new", label: t("new") },
+        { value: "unworn", label: t("unworn") },
+        { value: "excellent", label: t("excellent") },
+        { value: "good", label: t("good") },
+        { value: "fair", label: t("fair") }
+    ]
+    const delivery_options = [
+        { value: "original_box", label: t("original_box") },
+        { value: "original_papers", label: t("original_papers") },
+    ]
+    const location_options = [
+        { value: "qatar", label: t("qatar") },
+        { value: "kuwait", label: t("kuwait") },
+        { value: "uae", label: t("uae") },
+    ]
 
     // Redux
     const dispatch = useDispatch()
@@ -42,6 +62,15 @@ export default () => {
 
         dispatch( addWatcheSlice.actions.setStep(2) )
 
+    }
+
+    const getDeliveryOptions = (): { value: string, label: string }[] => {
+        let selected_options = state.fields.delivery.split(", ")
+        let options: any[] = []
+        selected_options.map( ( selected_option ) => {
+            options.push( delivery_options.find( option => option.value === selected_option ) )
+        })
+        return options
     }
 
     return (
@@ -72,18 +101,27 @@ export default () => {
                             error={(showErrors && state.fields.price === "") ? t("required_error") : ""} />
                     </Col>
                     <Col md={6}>
-                        <InputField
-                            label={"Delivery *"}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(addWatcheSlice.actions.set({ field: "delivery", value: e.target.value }))}
-                            value={state.fields.delivery}
-                            error={(showErrors && state.fields.delivery === "") ? t("required_error") : ""} />
+                        <SelectField
+                            placeholder={t("Condition *")}
+                            value={state.fields.condition ? condition_options.find( option => option.value === state.fields.condition ) : null}
+                            onChange={(option: { value: string }) => dispatch(addWatcheSlice.actions.set({ field: "condition", value: option.value }))}
+                            error={(showErrors && state.fields.condition === "") ? t("required_error") : ""}
+                            options={condition_options} />
                     </Col>
                     <Col md={12}>
-                        <InputField
-                            label={"Condition *"}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(addWatcheSlice.actions.set({ field: "condition", value: e.target.value }))}
-                            value={state.fields.condition}
-                            error={(showErrors && state.fields.condition === "") ? t("required_error") : ""} />
+                        <SelectField
+                            placeholder={t("Scope of delivery *")}
+                            isMulti
+                            value={state.fields.delivery ? getDeliveryOptions() : null}
+                            onChange={(option: {value: string}[]) => {
+                                if(option) {
+                                    let joined_value = option.map( (item) => ( item.value )).join(", ")
+                                    dispatch(addWatcheSlice.actions.set({ field: "delivery", value: joined_value }))
+                                } else if( state.fields.delivery !== "" )
+                                    dispatch(addWatcheSlice.actions.set({ field: "delivery", value: "" }))
+                            }}
+                            error={(showErrors && state.fields.delivery === "") ? t("required_error") : ""}
+                            options={delivery_options} />
                     </Col>
                     <Col md={12}>
                         <Textarea
@@ -94,11 +132,12 @@ export default () => {
                             error={(showErrors && state.fields.description === "") ? t("required_error") : ""} />
                     </Col>
                     <Col md={12}>
-                        <InputField
-                            label={"Location *"}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(addWatcheSlice.actions.set({ field: "location", value: e.target.value }))}
-                            value={state.fields.location}
-                            error={(showErrors && state.fields.location === "") ? t("required_error") : ""} />
+                        <SelectField
+                            placeholder={t("location")}
+                            value={state.fields.location ? location_options.find( option => option.value === state.fields.location ) : null}
+                            onChange={(option: { value: string }) => dispatch(addWatcheSlice.actions.set({ field: "location", value: option.value }))}
+                            error={(showErrors && state.fields.location === "") ? t("required_error") : ""}
+                            options={location_options} />
                     </Col>
                 </Row>
 

@@ -11,12 +11,34 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addWatcheSlice, addWatcheState } from '../AddWatchSlice'
 
 // Components
-import { InputField } from '../../../../components/FormElements/FormElements'
+import { InputField, SelectField } from '../../../../components/FormElements/FormElements'
 
 export default () => {
 
     // Translation
     const t = useTranslation()
+
+    // Bracelet material options
+    const bracelet_material_options = [
+        { value: "steel", label: t("steel") },
+        { value: 'rose_gold', label: t("rose_gold") },
+        { value: 'yellow_gold', label: t("yellow_gold") },
+        { value: 'titanium', label: t("titanium") },
+        { value: 'platinum', label: t("platinum") },
+        { value: 'white_gold', label: t("white_gold") },
+        { value: 'leather', label: t("leather") },
+        { value: 'rubber', label: t("rubber") },
+    ]
+
+    // Bracelet material options
+    const case_material_options = [
+        { value: "steel", label: t("steel") },
+        { value: 'rose_gold', label: t("rose_gold") },
+        { value: 'yellow_gold', label: t("yellow_gold") },
+        { value: 'titanium', label: t("titanium") },
+        { value: 'platinum', label: t("platinum") },
+        { value: 'white_gold', label: t("white_gold") },
+    ]
 
     // Redux
     const dispatch = useDispatch()
@@ -24,7 +46,7 @@ export default () => {
 
     const nextStep = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        dispatch( addWatcheSlice.actions.setStep(3) )
+        dispatch(addWatcheSlice.actions.setStep(3))
     }
 
     return (
@@ -32,7 +54,7 @@ export default () => {
             <form onSubmit={nextStep}>
 
                 <Row>
-                <Col md={6}>
+                    <Col md={6}>
                         <InputField
                             label={t("clasp")}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(addWatcheSlice.actions.set({ field: "clasp", value: e.target.value }))}
@@ -51,16 +73,18 @@ export default () => {
                             value={state.fields.bracelet_color} />
                     </Col>
                     <Col md={6}>
-                        <InputField
-                            label={t("bracelet_material")}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(addWatcheSlice.actions.set({ field: "bracelet_material", value: e.target.value }))}
-                            value={state.fields.bracelet_material} />
+                        <SelectField
+                            placeholder={t("bracelet_material")}
+                            value={state.fields.bracelet_material ? bracelet_material_options.find( option => option.value === state.fields.bracelet_material ) : null}
+                            onChange={(option: { value: string }) => dispatch(addWatcheSlice.actions.set({ field: "bracelet_material", value: option.value }))}
+                            options={bracelet_material_options} />
                     </Col>
                     <Col md={6}>
-                        <InputField
-                            label={t("case_material")}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(addWatcheSlice.actions.set({ field: "case_material", value: e.target.value }))}
-                            value={state.fields.case_material} />
+                        <SelectField
+                            placeholder={t("case_material")}
+                            value={state.fields.case_material ? case_material_options.find( option => option.value === state.fields.case_material ) : null}
+                            onChange={(option: { value: string }) => dispatch(addWatcheSlice.actions.set({ field: "case_material", value: option.value }))}
+                            options={case_material_options} />
                     </Col>
                     <Col md={6}>
                         <InputField
@@ -91,10 +115,10 @@ export default () => {
                 </Row>
 
                 <button className="button round bg-gray color-gold margin-top-30" style={{ padding: "0 70px" }}
-                onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                    e.preventDefault();
-                    dispatch( addWatcheSlice.actions.setStep(1) )
-                }}
+                    onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                        e.preventDefault();
+                        dispatch(addWatcheSlice.actions.setStep(1))
+                    }}
                 >Back</button>
                 <span className="margin-20"></span>
                 <button className="button round bg-gold color-white margin-top-30" style={{ padding: "0 80px", marginBottom: 5 }}>Next</button>

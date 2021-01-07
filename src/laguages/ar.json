@@ -64,6 +64,36 @@
     "clasp": "القفل",
     "clasp_material": "نوع القفل",
 
+    "new": "جديد",
+    "unworn": "غير ملبوس",
+    "excellent": "ممتاز",
+    "good": "جيد",
+    "fair": "Fair",
+
+    "original_box": "الصندوق الأصلي",
+    "original_papers": "الأوراق الأصلية",
+
+    "qatar": "قطر",
+    "kuwait": "الكويت",
+    "uae": "الإمارات",
+
+    "mens_watch": "ساعة رجالية",
+    "womens_watch": "ساعة نسائية",
+    "unisex": "ساعة للجنسين",
+
+    "steel": "فولاذ",
+    "rose_gold": "ذهبي وردي",
+    "yellow_gold": "ذهبي أصفر",
+    "titanium": "تيتانيوم",
+    "platinum": "بلاتين",
+    "white_gold": "أبيض ذهبي",
+    "leather": "جلد",
+    "rubber": "مطاطي",
+
+    "automatic": "تلقائي",
+    "quartz": "كوارتز",
+    "manual": "يدوية",
+
     "offers": "العروض",
 
     "sa": "سبت",
