@@ -6,4 +6,5 @@
 .main-side > * { padding-left: 120px; }
 .rtl .main-side > * { padding-left: 0; padding-right: 120px; }
 .main-side .content { padding-top: 50px; padding-right: 40px; position: relative; min-height: 85vh; }
+.main-side .content .whitebox-loader { position: fixed; z-index: 100; top: 75px; }
 .rtl .main-side .content { padding-left: 40px; padding-right: 120px; }

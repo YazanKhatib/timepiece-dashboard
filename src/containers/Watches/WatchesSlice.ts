@@ -72,6 +72,13 @@ export const watchesSlice = createSlice({
         addWatches: ( state, {payload}: PayloadAction<watch[]> ) => {
             state.watches = [ ...state.watches, ...payload ]
         },
+        deleteWatches: ( state, {payload}: PayloadAction<string[]> ) => {
+            payload.map(id => {
+                let index = state.watches.findIndex( watch => watch.id === id )
+                if( index != -1 )
+                    state.watches.splice( index, 1 )
+            })
+        },
         setDetailsIsOpen: ( state, {payload}: PayloadAction<boolean> ) => {
             state.detailsIsOpen = payload
         },
