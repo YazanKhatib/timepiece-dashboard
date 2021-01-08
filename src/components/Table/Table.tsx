@@ -1,6 +1,9 @@
 import React from 'react'
 import { SimpleCheckbox } from '../FormElements/FormElements'
 
+// Infinite Scroll
+import InfiniteScroll from 'react-infinite-scroller';
+
 import './Table.css'
 
 interface DashboardTableProps {
@@ -8,7 +11,9 @@ interface DashboardTableProps {
     body: {
         [key: string]: { [key: string]: any } // Cells
     }, // Rows
-    onSelect?: Function // Fire this function when the user selects a raw
+    onSelect?: Function, // Fire this function when the user selects a raw,
+    hasMore?: boolean,
+    loadMore?: Function
 }
 
 export const DashboardTable = (props: DashboardTableProps) => {
@@ -37,16 +42,24 @@ export const DashboardTable = (props: DashboardTableProps) => {
                         ))}
                     </tr>
                 </thead>
-                <tbody>
-                    { Object.keys(props.body).map( ( id, tr_index ) => (
-                        <tr key={id} style={{ zIndex: Object.keys(props.body).length - tr_index }} onClick={(e: React.MouseEvent<HTMLTableRowElement>) => selectRow(e, id) }>
-                            <td width="50"><SimpleCheckbox className="select-row" onClick={(e: React.MouseEvent<HTMLTableDataCellElement>) => e.stopPropagation()} /></td>
-                            { Object.keys(props.body[id]).map( ( key, td_index ) => (
-                                <td key={tr_index + "_" + td_index}>{props.body[id][key]}</td>
-                            ) ) }
-                        </tr>
-                    ) ) }
-                </tbody>
+                <InfiniteScroll
+                    element="tbody"
+                    pageStart={1}
+                    hasMore={props.hasMore}
+                    loader={<tr className="text-center" key={0}>Loading ...</tr>}
+                    loadMore={(page: number) => {
+                        if(props.loadMore)
+                            props.loadMore(page)
+                    }}>
+                { Object.keys(props.body).map( ( id, tr_index ) => (
+                    <tr key={id} style={{ zIndex: Object.keys(props.body).length - tr_index }} onClick={(e: React.MouseEvent<HTMLTableRowElement>) => selectRow(e, id) }>
+                        <td width="50"><SimpleCheckbox className="select-row" onClick={(e: React.MouseEvent<HTMLTableDataCellElement>) => e.stopPropagation()} /></td>
+                        { Object.keys(props.body[id]).map( ( key, td_index ) => (
+                            <td key={tr_index + "_" + td_index}>{props.body[id][key]}</td>
+                        ) ) }
+                    </tr>
+                ) ) }
+                </InfiniteScroll>
             </table>
         </div>
     )
