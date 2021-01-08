@@ -4,6 +4,7 @@ import { useTranslation } from 'react-multi-lang'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { watch, watchesSlice, watchesState } from './WatchesSlice'
+import { addWatcheSlice } from './AddModal/AddWatchSlice'
 
 // Models
 import { Watch } from '../../services/models/models'
@@ -121,6 +122,7 @@ export default () => {
                         </div>,
                 actions: <div className="show-on-hover">
                             <i className="icon-info" onClick={(e: React.MouseEvent<HTMLLIElement>) => showDetails(e, item.id) } />
+                            <i className="icon-edit" onClick={(e: React.MouseEvent<HTMLLIElement>) => edit(e, item.id) } />
                             <i className="icon-delete" onClick={(e: React.MouseEvent<HTMLLIElement>) => {
                                 e.stopPropagation()
                                 remove(item.id)
@@ -129,6 +131,44 @@ export default () => {
             }
         })
         return data
+    }
+
+    // Edit
+    const edit = (e: React.MouseEvent<HTMLLIElement>, id: string) => {
+        e.stopPropagation()
+        let watchToEdit = state.watches.find(watch => watch.id === id)
+        if(watchToEdit) {
+            dispatch( addWatcheSlice.actions.setAll({
+                clasp_material: watchToEdit.clasp_material,
+                clasp: watchToEdit.clasp,
+                bracelet_color: watchToEdit.bracelet_color,
+                dial_numbers: watchToEdit.dial_numbers,
+                dial: watchToEdit.dial,
+                crystal: watchToEdit.crystal,
+                bezel_material: watchToEdit.bezel_material,
+                water_resistance: String(watchToEdit.water_resistance),
+                case_diameter: String(watchToEdit.case_diameter),
+                jewels: String(watchToEdit.jewels),
+                power_reserve: String(watchToEdit.power_reserve),
+                base_calibar: watchToEdit.base_calibar,
+                calibar: watchToEdit.calibar,
+                gender: watchToEdit.gender,
+                production_year: String(watchToEdit.production_year),
+                bracelet_material: watchToEdit.bracelet_material,
+                case_material: watchToEdit.case_material,
+                movement: watchToEdit.movement,
+                location: watchToEdit.location,
+                description: watchToEdit.description,
+                condition: watchToEdit.condition,
+                delivery: watchToEdit.delivery,
+                price: String(watchToEdit.price),
+                model: watchToEdit.model,
+                brand: watchToEdit.name
+            }) )
+            dispatch( addWatcheSlice.actions.setEditId(watchToEdit.id) )
+            dispatch( watchesSlice.actions.setOpenAddModal(true) )
+        }
+
     }
 
     // Details Modal

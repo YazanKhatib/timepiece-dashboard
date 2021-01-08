@@ -32,6 +32,7 @@ export interface addWatchFields {
 // Watches state
 export interface addWatcheState {
     fields: addWatchFields,
+    editId: string,
     step: number,
     isLoading: boolean,
     isSuccess: boolean
@@ -65,9 +66,10 @@ const initialAddWatchState: addWatcheState = {
         model: "",
         brand: ""
     },
+    editId: "",
     step: 1,
     isLoading: false,
-    isSuccess: false
+    isSuccess: false,
 }
 
 type fieldType = "clasp_material" | "clasp" | "bracelet_color" | "dial_numbers" | "dial" | "crystal" | "bezel_material" | "water_resistance" | "case_diameter" | "jewels" | "power_reserve" | "base_calibar" | "calibar" | "gender" | "production_year" | "bracelet_material" | "case_material" | "movement" | "location" | "description" | "condition" | "delivery" | "price" | "model" | "brand"
@@ -77,8 +79,15 @@ export const addWatcheSlice = createSlice({
     name: 'add_watche',
     initialState: initialAddWatchState,
     reducers: {
+        init: state => initialAddWatchState,
         set: ( state, {payload}: PayloadAction<{ field: fieldType, value: string }> ) => {
             state.fields[payload.field] = payload.value
+        },
+        setAll: ( state, {payload}: PayloadAction<addWatchFields> ) => {
+            state.fields = payload
+        },
+        setEditId: ( state, {payload}: PayloadAction<string> ) => {
+            state.editId = payload
         },
         setStep: ( state, {payload}: PayloadAction<number> ) => {
             state.step = payload

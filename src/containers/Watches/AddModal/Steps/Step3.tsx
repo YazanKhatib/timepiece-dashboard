@@ -48,20 +48,22 @@ export default () => {
         // Submit
         dispatch(addWatcheSlice.actions.setIsLoading(true))
 
-        ENDPOINTS.watches().add(state.fields)
+        let api_call = state.editId ? ENDPOINTS.watches().update(state.fields, state.editId) : ENDPOINTS.watches().add(state.fields)
+
+        api_call
             .then((response: any) => {
                 console.log(response)
                 dispatch(addWatcheSlice.actions.setIsLoading(false))
                 dispatch(addWatcheSlice.actions.setIsSuccess(true))
 
                 setTimeout(() => {
-                    dispatch(addWatcheSlice.actions.setIsSuccess(false))
+                    dispatch( addWatcheSlice.actions.init() )
                     dispatch(watchesSlice.actions.setOpenAddModal(false))
                 }, 2000);
 
                 // Add to table
-                let watches: watch[] = [{
-                    id: String(response.data.data.addProduct.id),
+                let watch: watch = {
+                    id: state.editId ? String(response.data.data.updateProduct.id) : String(response.data.data.addProduct.id),
                     name: String(state.fields.brand ? state.fields.brand : "N/A"),
                     model: String(state.fields.model ? state.fields.model : "N/A"),
                     description: String(state.fields.description ? state.fields.description : "N/A"),
@@ -89,9 +91,12 @@ export default () => {
                     bracelet_color: String(state.fields.bracelet_color ? state.fields.bracelet_color : "N/A"),
                     clasp: String(state.fields.clasp ? state.fields.clasp : "N/A"),
                     clasp_material: String(state.fields.clasp_material ? state.fields.clasp_material : "N/A"),
-                }]
+                }
 
-                dispatch(watchesSlice.actions.addWatches(watches))
+                if( state.editId )
+                    dispatch(watchesSlice.actions.updateWatch(watch))
+                else
+                    dispatch(watchesSlice.actions.addWatches([watch]))
 
             })
 

@@ -208,7 +208,7 @@ class API {
      * @param {}
      */
     watches() {
-        var endpoints: { index: Function, add: Function, updateStatus: Function, delete: Function } = { index: Function, add: Function, updateStatus: Function, delete: Function };
+        var endpoints: { index: Function, add: Function, update: Function, updateStatus: Function, delete: Function } = { index: Function, add: Function, update: Function, updateStatus: Function, delete: Function };
 
         endpoints.index = (data: pagination) => axios({
             url: this.url,
@@ -288,7 +288,42 @@ class API {
             }
         })
 
-        
+        endpoints.update = (data: addWatchFields, id: string) => axios({
+            url: this.url,
+            method: 'post',
+            data: {
+                query: `mutation {
+                            updateProduct(
+                                id: "${id}",
+                                clasp_material: "${data.clasp_material}",
+                                clasp: "${data.clasp}",
+                                bracelet_color: "${data.bracelet_color}",
+                                dial_numbers: "${data.dial_numbers}",
+                                dial: "${data.dial}",
+                                crystal: "${data.crystal}",
+                                bezel_material: "${data.bezel_material}",
+                                water_resistance: ${Number(data.water_resistance)},
+                                case_diameter: ${Number(data.case_diameter)},
+                                jewels: ${Number(data.jewels)},
+                                power_reserve: ${Number(data.power_reserve)},
+                                base_calibar: "${data.base_calibar}",
+                                calibar: "${data.calibar}",
+                                gender: "${data.gender}",
+                                production_year: ${Number(data.production_year)},
+                                bracelet_material: "${data.bracelet_material}",
+                                case_material: "${data.case_diameter}",
+                                movement: "${data.movement}",
+                                location: "${data.location}",
+                                description: "${data.description}",
+                                condition: "${data.condition}",
+                                delivery: "${data.delivery}",
+                                price: ${Number(data.price)},
+                                model: "${data.model}",
+                                brand: "${data.brand}"
+                            ) { id }
+                        }`
+            }
+        })
 
         endpoints.updateStatus = (data: {confirmed: boolean, id: string}) => axios({
             url: this.url,

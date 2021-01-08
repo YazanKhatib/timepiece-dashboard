@@ -72,6 +72,11 @@ export const watchesSlice = createSlice({
         addWatches: ( state, {payload}: PayloadAction<watch[]> ) => {
             state.watches = [ ...state.watches, ...payload ]
         },
+        updateWatch: ( state, {payload}: PayloadAction<watch> ) => {
+            let index = state.watches.findIndex( watch => watch.id === payload.id )
+            if( index !== -1 )
+                state.watches[index] = payload
+        },
         deleteWatches: ( state, {payload}: PayloadAction<string[]> ) => {
             payload.map(id => {
                 let index = state.watches.findIndex( watch => watch.id === id )

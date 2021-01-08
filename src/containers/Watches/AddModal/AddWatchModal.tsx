@@ -3,7 +3,7 @@ import React from 'react'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { watchesSlice, watchesState } from '../WatchesSlice'
-import { addWatcheState } from './AddWatchSlice'
+import { addWatcheSlice, addWatcheState } from './AddWatchSlice'
 
 // Components
 import Modal from '../../../components/Modal/Modal'
@@ -19,8 +19,13 @@ export default () => {
     const watchesState = useSelector( ( state: { watches: watchesState } ) => state.watches )
     const addState = useSelector( ( state: { add_watch: addWatcheState } ) => state.add_watch )
 
+    const toggle = () => {
+        dispatch( watchesSlice.actions.setOpenAddModal(false) )
+        dispatch( addWatcheSlice.actions.init() )
+    }
+
     return(
-        <Modal open={watchesState.openAddModal} toggle={() => dispatch( watchesSlice.actions.setOpenAddModal(false) )}>
+        <Modal open={watchesState.openAddModal} toggle={toggle}>
             
             { addState.isLoading ? <WhiteboxLoader /> : "" }
             { addState.isSuccess ? <SuccessMark /> : "" }
