@@ -46,13 +46,16 @@ export default () => {
     };
 
     // Fetch Data
-    const fetchData = () => {
+    const fetchData = (page: number, page_size: number = 2) => {
         
-        dispatch( usersSlice.actions.setIsLoading(true) )
         dispatch( usersSlice.actions.setIsFetching(true) )
 
-        ENDPOINTS.users().index( { limit: 100, offset: 0 } )
+        ENDPOINTS.users().index( { limit: page_size, offset: page - 1 } )
         .then( (response: any) => {
+            
+            // Has more
+            if( response.data.data.getUsers.total <= page * page_size )
+                dispatch( usersSlice.actions.setHasMore(false) )
             
             let users: user[] = []
 
@@ -72,7 +75,6 @@ export default () => {
             })
 
             dispatch( usersSlice.actions.addUsers(users) )
-            dispatch( usersSlice.actions.setIsLoading(false) )
             dispatch( usersSlice.actions.setIsLoaded(true) )
             dispatch( usersSlice.actions.setIsFetching(false) )
         })
@@ -155,7 +157,7 @@ export default () => {
 
     // First fetch
     if( !state.isLoaded && !state.isFetching )
-        fetchData()
+        fetchData(1)
 
     return(
         <>
@@ -174,6 +176,8 @@ export default () => {
                     header={[ t("username"), t("name"), t("email"), t("phone"), "" ]}
                     body={generateData()}
                     onSelect={toggleSelectedId}
+                    hasMore={state.hasMore}
+                    loadMore={fetchData}
                     />
                 
                 <DetailsModal isOpen={state.detailsIsOpen} toggle={() => dispatch( usersSlice.actions.setDetailsIsOpen(false) )} data={getActiveUser()} title={t("user_details")} />

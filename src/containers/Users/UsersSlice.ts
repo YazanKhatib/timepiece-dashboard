@@ -19,6 +19,7 @@ export interface usersState {
     isLoaded: boolean, // First load
     isLoading: boolean, // On filtering laoder
     isFetching: boolean,
+    hasMore: boolean,
     users: user[],
     detailsIsOpen: boolean,
     loadingStatuses: string[],
@@ -29,6 +30,7 @@ const initialUsersState: usersState = {
     isLoaded: false,
     isLoading: false,
     isFetching: false,
+    hasMore: true,
     users: [],
     detailsIsOpen: false,
     loadingStatuses: [],
@@ -48,6 +50,9 @@ export const usersSlice = createSlice({
         },
         setIsFetching: ( state, {payload}: PayloadAction<boolean> ) => {
             state.isFetching = payload
+        },        
+        setHasMore: ( state, {payload}: PayloadAction<boolean> ) => {
+            state.hasMore = payload
         },
         addUsers: ( state, {payload}: PayloadAction<user[]> ) => {
             state.users = [ ...state.users, ...payload ]

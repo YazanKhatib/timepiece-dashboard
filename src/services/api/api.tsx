@@ -161,6 +161,7 @@ class API {
             data: {
                 query: `query {
                             getUsers(dealer: false, limit: ${data.limit}, offset: ${data.offset}) {
+                                total,
                                 results {
                                     id,
                                     username,
