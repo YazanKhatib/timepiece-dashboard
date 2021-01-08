@@ -435,3 +435,12 @@
 .icon-filter-2:before {
   content: "\e025";
 }
+.icon-video:before {
+  content: "\e026";
+}
+.icon-star-o:before {
+  content: "\e027";
+}
+.icon-star-2:before {
+  content: "\e028";
+}

@@ -106,5 +106,10 @@ export const watchesSlice = createSlice({
             if( index !== -1 )
                 state.watches[index].confirmed = payload.confirmed
         },
+        setFeatured: ( state, {payload}: PayloadAction<{ id: string, featured: boolean }> ) => {
+            let index = state.watches.findIndex( watch => watch.id === payload.id )
+            if( index !== -1 )
+                state.watches[index].featured = payload.featured
+        },
     }
 })

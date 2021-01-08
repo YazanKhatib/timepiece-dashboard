@@ -120,6 +120,7 @@ export default () => {
                 status: <div onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
                             <SelectField isLoading={state.loadingStatuses.includes(item.id)} defaultValue={getDefaultStatusValue(item.confirmed)} onChange={ (selected: { value: boolean }) => changeStatus( selected.value, item.id ) } options={status_options} />
                         </div>,
+                featured: <i className={ "icon-star-" + ( item.featured ? "2" : "o" ) } onClick={(e: React.MouseEvent<HTMLLIElement>) => toggleFeatured(e, item.id, item.featured) } />,
                 actions: <div className="show-on-hover">
                             <i className="icon-info" onClick={(e: React.MouseEvent<HTMLLIElement>) => showDetails(e, item.id) } />
                             <i className="icon-edit" onClick={(e: React.MouseEvent<HTMLLIElement>) => edit(e, item.id) } />
@@ -131,6 +132,22 @@ export default () => {
             }
         })
         return data
+    }
+
+
+    // Toggle featured
+    const toggleFeatured = (e: React.MouseEvent<HTMLLIElement>, id: string, currentValue: boolean) => {
+        e.stopPropagation()
+        
+        ENDPOINTS.watches().setFeatured({ id, featured: !currentValue })
+        .then((response: any) => {
+            // In case somthing went wrong
+            let watchToEdit = state.watches.find( watch => watch.id === id )
+            if( watchToEdit && watchToEdit.featured !== response.data.data.updateProduct.featured )
+                dispatch( watchesSlice.actions.setFeatured({ id, featured: response.data.data.updateProduct.featured }) )
+        })
+
+        dispatch( watchesSlice.actions.setFeatured({ id, featured: !currentValue }) )
     }
 
     // Edit
@@ -261,7 +278,7 @@ export default () => {
                     />
                 
                 <DashboardTable
-                    header={[ t("name"), t("condition"), t("price"), t("status"), "" ]}
+                    header={[ t("name"), t("condition"), t("price"), t("status"), t("featured"), "" ]}
                     body={generateData()}
                     onSelect={toggleSelectedId}
                     />

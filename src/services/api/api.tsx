@@ -209,7 +209,7 @@ class API {
      * @param {}
      */
     watches() {
-        var endpoints: { index: Function, add: Function, update: Function, updateStatus: Function, delete: Function } = { index: Function, add: Function, update: Function, updateStatus: Function, delete: Function };
+        var endpoints: { index: Function, add: Function, update: Function, updateStatus: Function, setFeatured: Function, delete: Function } = { index: Function, add: Function, update: Function, updateStatus: Function, setFeatured: Function, delete: Function };
 
         endpoints.index = (data: pagination) => axios({
             url: this.url,
@@ -333,6 +333,18 @@ class API {
                 query: `mutation {
                             updateProduct(id: "${data.id}", confirmed: ${data.confirmed}) {
                                 confirmed
+                            }
+                        }`
+            }
+        })
+
+        endpoints.setFeatured = (data: {featured: boolean, id: string}) => axios({
+            url: this.url,
+            method: 'post',
+            data: {
+                query: `mutation {
+                            updateProduct(id: "${data.id}", featured: ${data.featured}) {
+                                featured
                             }
                         }`
             }
