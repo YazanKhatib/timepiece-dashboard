@@ -98,6 +98,11 @@
 
     "offers": "Offers",
 
+    "brands": "Brands",
+    "brand_information": "Brand Information",
+    "add_to_brands": "Add to brands",
+    "brand_already_exists": "This brand already exists",
+
     "sa": "Sa",
     "su": "Su",
     "mo": "Mo",

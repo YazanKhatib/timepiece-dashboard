@@ -427,6 +427,68 @@ class API {
         return endpoints
     }
 
+    /**
+     * Brands APIs
+     * @param {}
+     */
+    brands() {
+        var endpoints: { index: Function, add: Function, update: Function, delete: Function } = { index: Function, add: Function, update: Function, delete: Function };
+
+        endpoints.index = (data: pagination) => axios({
+            url: this.url,
+            method: 'post',
+            data: {
+                query: `query {
+                            getBrands(limit: ${data.limit}, offset: ${data.offset}) {
+                                total,
+                                results {
+                                    id,
+                                    name,
+                                }
+                            }
+                        }`
+            }
+        })
+
+        endpoints.add = (name: string) => axios({
+            url: this.url,
+            method: 'post',
+            data: {
+                query: `mutation {
+                        createBrand(
+                            name: "${name}",
+                        ) { id }
+                    }`
+            }
+        })
+
+        endpoints.update = (name: string, id: string) => axios({
+            url: this.url,
+            method: 'post',
+            data: {
+                query: `mutation {
+                            updateBrand(
+                                id: "${id}",
+                                name: "${name}",
+                            ) { id }
+                        }`
+            }
+        })
+        
+
+        endpoints.delete = ( data: string[] ) => axios({
+            url: this.url,
+            method: 'post',
+            data: {
+                query: `mutation {
+                            deleteBrands( ids: [${data.join(", ")}] )
+                        }`
+            }
+        })
+
+        return endpoints
+    }
+
 }
 
 

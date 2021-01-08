@@ -45,7 +45,7 @@ export interface watchesState {
     openAddModal: boolean
 }
 
-const initialUsersState: watchesState = {
+const initialWatchesState: watchesState = {
     isLoaded: false,
     isLoading: false,
     isFetching: false,
@@ -60,7 +60,7 @@ const initialUsersState: watchesState = {
 // Users slice
 export const watchesSlice = createSlice({
     name: 'watches',
-    initialState: initialUsersState,
+    initialState: initialWatchesState,
     reducers: {
         setIsLoaded: ( state, {payload}: PayloadAction<boolean> ) => {
             state.isLoaded = payload

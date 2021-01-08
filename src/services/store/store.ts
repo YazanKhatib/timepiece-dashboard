@@ -8,6 +8,8 @@ import { watchesSlice } from '../../containers/Watches/WatchesSlice';
 import { addWatcheSlice } from '../../containers/Watches/AddModal/AddWatchSlice';
 import { analyticsSlice } from "../../containers/Analytics/AnalyticsSlice";
 import { offersSlice } from "../../containers/Offers/OffersSclice";
+import { brandsSlice } from "../../containers/Brands/BrandsSlice";
+import { addBrandSlice } from "../../containers/Brands/AddModal/AddBrandSlice"
 
 
 const reducer = {
@@ -18,6 +20,8 @@ const reducer = {
     watches: watchesSlice.reducer,
     add_watch: addWatcheSlice.reducer,
     offers: offersSlice.reducer,
+    brands: brandsSlice.reducer,
+    add_brand: addBrandSlice.reducer
 }
 
 export default configureStore({

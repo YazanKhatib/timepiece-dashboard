@@ -235,3 +235,6 @@ form .react-select .react-select__control { height: 55px; border-radius: 10px; b
 .select-holder .icon-error::before { background: #FFF; border-radius: 50%; }
 .select-holder .type-error { background: tomato; }
 .select-holder .type-error::after { border-left-color: tomato!important; }
+
+/* To fix a weird issue! */
+.add-brand .__react_component_tooltip  { transition: none; }

@@ -37,3 +37,7 @@ export interface Watch {
     clasp: string,
     clasp_material: string,
 }
+
+export interface Brand {
+    name: string,
+}
