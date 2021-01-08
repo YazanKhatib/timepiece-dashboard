@@ -33,3 +33,7 @@
 .dark .dashboard-table table tbody tr td .show-on-hover i { background: #343b49; }
 .dashboard-table table tbody tr td .show-on-hover i.icon-edit { color: #0984E3; }
 .dashboard-table table tbody tr td .show-on-hover i.icon-delete { color: #FF6B6B; }
+
+.dashboard-table table tbody tr.table-loader { height: 60px; }
+.dashboard-table table tbody tr.table-loader::after { display: none; }
+.dashboard-table table tbody tr.table-loader .lds-ellipsis { transform: scale(.7); margin-top: 20px; }

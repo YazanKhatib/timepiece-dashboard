@@ -1,10 +1,14 @@
 import React from 'react'
-import { SimpleCheckbox } from '../FormElements/FormElements'
 
 // Infinite Scroll
 import InfiniteScroll from 'react-infinite-scroller';
 
+// Stylesheet
 import './Table.css'
+
+// Components
+import { SimpleCheckbox } from '../FormElements/FormElements'
+import { EllipsisLoader } from '../Loader/Loader';
 
 interface DashboardTableProps {
     header: string[], // Table header data
@@ -46,7 +50,7 @@ export const DashboardTable = (props: DashboardTableProps) => {
                     element="tbody"
                     pageStart={1}
                     hasMore={props.hasMore}
-                    loader={<tr className="text-center" key={0}>Loading ...</tr>}
+                    loader={<tr className="table-loader" key={0}><div className="center"><EllipsisLoader /></div></tr>}
                     loadMore={(page: number) => {
                         if(props.loadMore)
                             props.loadMore(page)

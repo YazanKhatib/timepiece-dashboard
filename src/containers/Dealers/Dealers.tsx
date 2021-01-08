@@ -56,14 +56,17 @@ export default () => {
     }
 
     // Fetch Data
-    const fetchData = () => {
+    const fetchData = (page: number, page_size: number = 10) => {
         
-        dispatch( dealersSlice.actions.setIsLoading(true) )
         dispatch( dealersSlice.actions.setIsFetching(true) )
 
-        ENDPOINTS.dealers().index( { limit: 100, offset: 0 } )
+        ENDPOINTS.dealers().index( { limit: page_size, offset: page - 1 } )
         .then( (response: any) => {
             
+            // Has more
+            if( response.data.data.getUsers.total <= page * page_size )
+                dispatch( dealersSlice.actions.setHasMore(false) )
+
             let dealers: dealer[] = []
 
             response.data.data.getUsers.results.map( (item: any) => {
@@ -82,7 +85,6 @@ export default () => {
             })
 
             dispatch( dealersSlice.actions.addDealers(dealers) )
-            dispatch( dealersSlice.actions.setIsLoading(false) )
             dispatch( dealersSlice.actions.setIsLoaded(true) )
             dispatch( dealersSlice.actions.setIsFetching(false) )
         })
@@ -109,6 +111,7 @@ export default () => {
                         </div>
             }
         })
+        
         return data
     }
 
@@ -165,7 +168,7 @@ export default () => {
 
     // First fetch
     if( !state.isLoaded && !state.isFetching )
-        fetchData()
+        fetchData(1)
 
     return(
         <>
@@ -185,6 +188,8 @@ export default () => {
                     header={[ t("username"), t("name"), t("email"), t("status"), "" ]}
                     body={generateData()}
                     onSelect={toggleSelectedId}
+                    hasMore={state.hasMore}
+                    loadMore={fetchData}
                     />
                 
                 <DetailsModal isOpen={state.detailsIsOpen} toggle={() => dispatch( dealersSlice.actions.setDetailsIsOpen(false) )} data={getActiveDealer()} title={t("dealer_details")} />

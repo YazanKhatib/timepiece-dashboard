@@ -19,6 +19,7 @@ export interface dealersState {
     isLoaded: boolean, // First load
     isLoading: boolean, // On filtering laoder
     isFetching: boolean,
+    hasMore: boolean,
     dealers: dealer[],
     detailsIsOpen: boolean,
     loadingStatuses: string[],
@@ -29,6 +30,7 @@ const initialDealersState: dealersState = {
     isLoaded: false,
     isLoading: false,
     isFetching: false,
+    hasMore: true,
     dealers: [],
     detailsIsOpen: false,
     loadingStatuses: [],
@@ -48,6 +50,9 @@ export const dealersSlice = createSlice({
         },
         setIsFetching: ( state, {payload}: PayloadAction<boolean> ) => {
             state.isFetching = payload
+        },
+        setHasMore: ( state, {payload}: PayloadAction<boolean> ) => {
+            state.hasMore = payload
         },
         addDealers: ( state, {payload}: PayloadAction<dealer[]> ) => {
             state.dealers = [ ...state.dealers, ...payload ]
