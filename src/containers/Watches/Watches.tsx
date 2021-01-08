@@ -58,13 +58,16 @@ export default () => {
     }
 
     // Fetch Data
-    const fetchData = () => {
+    const fetchData = (page: number, page_size: number = 10) => {
         
-        dispatch( watchesSlice.actions.setIsLoading(true) )
         dispatch( watchesSlice.actions.setIsFetching(true) )
 
-        ENDPOINTS.watches().index( { limit: 100, offset: 0 } )
+        ENDPOINTS.watches().index( { limit: page_size, offset: page - 1 } )
         .then( (response: any) => {
+
+            // Has more
+            if( response.data.data.getProducts.total <= page * page_size )
+                dispatch( watchesSlice.actions.setHasMore(false) )
             
             let watches: watch[] = []
 
@@ -102,7 +105,6 @@ export default () => {
             })
 
             dispatch( watchesSlice.actions.addWatches(watches) )
-            dispatch( watchesSlice.actions.setIsLoading(false) )
             dispatch( watchesSlice.actions.setIsLoaded(true) )
             dispatch( watchesSlice.actions.setIsFetching(false) )
         })
@@ -260,7 +262,7 @@ export default () => {
 
     // First fetch
     if( !state.isLoaded && !state.isFetching )
-        fetchData()
+        fetchData(1)
 
     return(
         <>
@@ -281,6 +283,8 @@ export default () => {
                     header={[ t("name"), t("condition"), t("price"), t("status"), t("featured"), "" ]}
                     body={generateData()}
                     onSelect={toggleSelectedId}
+                    hasMore={state.hasMore}
+                    loadMore={fetchData}
                     />
                 
                 <DetailsModal isOpen={state.detailsIsOpen} toggle={() => dispatch( watchesSlice.actions.setDetailsIsOpen(false) )} data={getActiveWatch()} title={t("watch_details")} />

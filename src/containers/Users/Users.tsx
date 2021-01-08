@@ -46,7 +46,7 @@ export default () => {
     };
 
     // Fetch Data
-    const fetchData = (page: number, page_size: number = 2) => {
+    const fetchData = (page: number, page_size: number = 10) => {
         
         dispatch( usersSlice.actions.setIsFetching(true) )
 

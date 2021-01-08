@@ -37,6 +37,7 @@ export interface watchesState {
     isLoaded: boolean, // First load
     isLoading: boolean, // On filtering laoder
     isFetching: boolean,
+    hasMore: boolean,
     watches: watch[],
     detailsIsOpen: boolean,
     loadingStatuses: string[],
@@ -48,6 +49,7 @@ const initialUsersState: watchesState = {
     isLoaded: false,
     isLoading: false,
     isFetching: false,
+    hasMore: true,
     watches: [],
     detailsIsOpen: false,
     loadingStatuses: [],
@@ -68,6 +70,9 @@ export const watchesSlice = createSlice({
         },
         setIsFetching: ( state, {payload}: PayloadAction<boolean> ) => {
             state.isFetching = payload
+        },
+        setHasMore: ( state, {payload}: PayloadAction<boolean> ) => {
+            state.hasMore = payload
         },
         addWatches: ( state, {payload}: PayloadAction<watch[]> ) => {
             state.watches = [ ...state.watches, ...payload ]

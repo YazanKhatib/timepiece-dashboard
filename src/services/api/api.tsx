@@ -218,6 +218,7 @@ class API {
             data: {
                 query: `query {
                             getProducts(featured: false, limit: ${data.limit}, offset: ${data.offset}) {
+                                total,
                                 results {
                                     id,
                                     name,
