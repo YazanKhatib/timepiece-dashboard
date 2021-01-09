@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-multi-lang'
 
 import './TableActionBar.css'
@@ -17,13 +17,27 @@ export default (props: ActionBarProps) => {
 
     const t = useTranslation()
 
+    const [searchValue, setSearchValue] = useState<string>("")
+
     return(
         <div className="action-bar">
             { props.title ? <h2>{props.title}</h2> : "" }
+            { props.search ?
             <div className="search">
-                <input type="text" placeholder={t('search')} />
-                <i className="icon-search"></i>
-            </div>
+                <input type="text" value={searchValue} placeholder={t('search')}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value)}
+                onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                    if(e.key === "Enter" && props.search)
+                        props.search(e.currentTarget.value)
+                }} />
+                { searchValue === "" ?
+                <i className="icon-search" /> :
+                <i className="icon-close" onClick={() => {
+                    setSearchValue("")
+                    if(props.search)
+                        props.search("")
+                }} /> }
+            </div> : "" }
             <div className="actions">
                 { props.showDelete ? <button className="delete" onClick={() => { if(props.delete) props.delete() }}><i className="icon-delete"></i></button> : "" }
                 { props.showFilter === false ?  "" : <button className="filter"><i className="icon-filter-2"></i> {t("filter")}</button> }

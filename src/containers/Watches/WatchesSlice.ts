@@ -39,6 +39,7 @@ export interface watchesState {
     isFetching: boolean,
     hasMore: boolean,
     watches: watch[],
+    filteredWatches: watch[],
     detailsIsOpen: boolean,
     loadingStatuses: string[],
     activeWatch: string,
@@ -51,6 +52,7 @@ const initialWatchesState: watchesState = {
     isFetching: false,
     hasMore: true,
     watches: [],
+    filteredWatches: [],
     detailsIsOpen: false,
     loadingStatuses: [],
     activeWatch: "",
@@ -81,13 +83,22 @@ export const watchesSlice = createSlice({
             let index = state.watches.findIndex( watch => watch.id === payload.id )
             if( index !== -1 )
                 state.watches[index] = payload
+            let filteredIndex = state.filteredWatches.findIndex( watch => watch.id === payload.id )
+            if( filteredIndex !== -1 )
+                state.filteredWatches[index] = payload
         },
         deleteWatches: ( state, {payload}: PayloadAction<string[]> ) => {
             payload.map(id => {
                 let index = state.watches.findIndex( watch => watch.id === id )
                 if( index != -1 )
                     state.watches.splice( index, 1 )
+                let filteredIndex = state.filteredWatches.findIndex( watch => watch.id === id )
+                if( filteredIndex !== -1 )
+                    state.filteredWatches.splice( index, 1 )
             })
+        },
+        setFilteredWatches: ( state, {payload}: PayloadAction<watch[]> ) => {
+            state.filteredWatches = payload
         },
         setDetailsIsOpen: ( state, {payload}: PayloadAction<boolean> ) => {
             state.detailsIsOpen = payload
@@ -110,11 +121,17 @@ export const watchesSlice = createSlice({
             let index = state.watches.findIndex( watch => watch.id === payload.id )
             if( index !== -1 )
                 state.watches[index].confirmed = payload.confirmed
+            let filteredIndex = state.filteredWatches.findIndex( watch => watch.id === payload.id )
+            if( filteredIndex !== -1 )
+                state.filteredWatches[filteredIndex].confirmed = payload.confirmed
         },
         setFeatured: ( state, {payload}: PayloadAction<{ id: string, featured: boolean }> ) => {
             let index = state.watches.findIndex( watch => watch.id === payload.id )
             if( index !== -1 )
                 state.watches[index].featured = payload.featured
+            let filteredIndex = state.filteredWatches.findIndex( watch => watch.id === payload.id )
+            if( filteredIndex !== -1 )
+                state.filteredWatches[filteredIndex].featured = payload.featured
         },
     }
 })

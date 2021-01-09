@@ -39,7 +39,57 @@ export default () => {
     ]
 
     // Search
-    const search = () => {}
+    const search = (keyword: string) => {
+        if(keyword === "") {
+            dispatch( watchesSlice.actions.setFilteredWatches([]) )
+            return
+        }
+        dispatch(watchesSlice.actions.setIsLoading(true))
+
+        ENDPOINTS.watches().search(keyword)
+        .then( (response: any) => {
+            
+            let watches: watch[] = []
+
+            response.data.data.searchProducts.map( (item: any) => {
+                watches.push({
+                    id: String(item.id),
+                    name: String(item.name ? item.name : "N/A"),
+                    model: String(item.model ? item.model : "N/A"),
+                    description: String(item.description ? item.description : "N/A"),
+                    condition: String(item.condition ? item.condition : "N/A"),
+                    location: String(item.location ? item.location : "N/A"),
+                    featured: Boolean(item.featured),
+                    confirmed: Boolean(item.confirmed),
+                    delivery: String(item.delivery ? item.delivery : "N/A"),
+                    price: Number(item.price),
+                    production_year: Number(item.production_year),
+                    case_material: String(item.case_material ? item.case_material : "N/A"),
+                    movement: String(item.movement ? item.movement : "N/A"),
+                    bracelet_material: String(item.bracelet_material ? item.bracelet_material : "N/A"),
+                    gender: String(item.gender ? item.gender : "N/A"),
+                    calibar: String(item.calibar ? item.calibar : "N/A"),
+                    base_calibar: String(item.base_calibar ? item.base_calibar : "N/A"),
+                    power_reserve: Number(item.power_reserve),
+                    jewels: Number(item.jewels),
+                    case_diameter: Number(item.case_diameter),
+                    water_resistance: Number(item.water_resistance),
+                    bezel_material: String(item.bezel_material ? item.bezel_material : "N/A"),
+                    crystal: String(item.crystal ? item.crystal : "N/A"),
+                    dial: String(item.dial ? item.dial : "N/A"),
+                    dial_numbers: String(item.dial_numbers ? item.dial_numbers : "N/A"),
+                    bracelet_color: String(item.bracelet_color ? item.bracelet_color : "N/A"),
+                    clasp: String(item.clasp ? item.clasp : "N/A"),
+                    clasp_material: String(item.clasp_material ? item.clasp_material : "N/A"),
+                })
+            })
+
+            dispatch( watchesSlice.actions.setFilteredWatches(watches) )
+            dispatch(watchesSlice.actions.setIsLoading(false))
+
+        })
+
+    }
 
     // Get default status value
     const getDefaultStatusValue = (confirmed: boolean) => {
@@ -114,7 +164,8 @@ export default () => {
     interface tableDataType { [key: string]: { [key: string]: any } }
     const generateData: () => tableDataType = () => {
         let data: tableDataType = {}
-        state.watches.map( (item, index) => {
+        let watchesToIndex = state.filteredWatches.length > 0 ? state.filteredWatches : state.watches
+        watchesToIndex.map( (item, index) => {
             data[item.id] = {
                 name: item.name,
                 condition: item.condition,
@@ -144,7 +195,8 @@ export default () => {
         ENDPOINTS.watches().setFeatured({ id, featured: !currentValue })
         .then((response: any) => {
             // In case somthing went wrong
-            let watchToEdit = state.watches.find( watch => watch.id === id )
+            let watches = state.filteredWatches.length > 0 ? state.filteredWatches : state.watches
+            let watchToEdit = watches.find( watch => watch.id === id )
             if( watchToEdit && watchToEdit.featured !== response.data.data.updateProduct.featured )
                 dispatch( watchesSlice.actions.setFeatured({ id, featured: response.data.data.updateProduct.featured }) )
         })
@@ -155,7 +207,8 @@ export default () => {
     // Edit
     const edit = (e: React.MouseEvent<HTMLLIElement>, id: string) => {
         e.stopPropagation()
-        let watchToEdit = state.watches.find(watch => watch.id === id)
+        let watches = state.filteredWatches.length > 0 ? state.filteredWatches : state.watches
+        let watchToEdit = watches.find(watch => watch.id === id)
         if(watchToEdit) {
             dispatch( addWatcheSlice.actions.setAll({
                 clasp_material: watchToEdit.clasp_material,
@@ -198,7 +251,8 @@ export default () => {
     }
     
     const getActiveWatch = (): { [key: string]: any } => {
-        let activeWatch = state.watches[state.watches.findIndex(watch => watch.id === state.activeWatch)]
+        let watches = state.filteredWatches.length > 0 ? state.filteredWatches : state.watches
+        let activeWatch = watches.find(watch => watch.id === state.activeWatch)
         
         if(!activeWatch)
             return {}
@@ -283,7 +337,7 @@ export default () => {
                     header={[ t("name"), t("condition"), t("price"), t("status"), t("featured"), "" ]}
                     body={generateData()}
                     onSelect={toggleSelectedId}
-                    hasMore={state.hasMore}
+                    hasMore={state.hasMore && state.filteredWatches.length === 0}
                     loadMore={fetchData}
                     />
                 

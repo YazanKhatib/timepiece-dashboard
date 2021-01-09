@@ -210,7 +210,22 @@ class API {
      * @param {}
      */
     watches() {
-        var endpoints: { index: Function, add: Function, update: Function, updateStatus: Function, setFeatured: Function, delete: Function } = { index: Function, add: Function, update: Function, updateStatus: Function, setFeatured: Function, delete: Function };
+        var endpoints: {
+            index: Function,
+            search: Function,
+            add: Function,
+            update: Function,
+            updateStatus: Function,
+            setFeatured: Function,
+            delete: Function } =
+            {
+            index: Function,
+            search: Function,
+            add: Function,
+            update: Function,
+            updateStatus: Function,
+            setFeatured: Function,
+            delete: Function };
 
         endpoints.index = (data: pagination) => axios({
             url: this.url,
@@ -250,6 +265,46 @@ class API {
                                     clasp,
                                     clasp_material
                                 }
+                            }
+                        }`
+            }
+        })
+
+        endpoints.search = (keyword: string) => axios({
+            url: this.url,
+            method: 'post',
+            data: {
+                query: `query {
+                            searchProducts(brand: "${keyword}") {
+                                id,
+                                name,
+                                model,
+                                description,
+                                condition,
+                                location,
+                                featured,
+                                confirmed,
+                                delivery,
+                                price,
+                                production_year,
+                                case_material,
+                                movement,
+                                bracelet_material,
+                                gender,
+                                brand_id,
+                                calibar,
+                                base_calibar,
+                                power_reserve,
+                                jewels,
+                                case_diameter,
+                                water_resistance,
+                                bezel_material,
+                                crystal,
+                                dial,
+                                dial_numbers,
+                                bracelet_color,
+                                clasp,
+                                clasp_material
                             }
                         }`
             }
