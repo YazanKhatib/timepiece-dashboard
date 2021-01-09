@@ -41,6 +41,7 @@
     "watch_details": "تفاصيل الساعة",
     "description": "الوصف",
     "featured": "مفضلة",
+    "brand": "العلامة التجارية",
     "condition": "حالة الساعة",
     "model": "النوع",
     "location": "الموقع",
@@ -64,6 +65,7 @@
     "bracelet_color": "لون الكستك",
     "clasp": "القفل",
     "clasp_material": "نوع القفل",
+    "scope_of_delivery": "مرفقات التسليم",
 
     "new": "جديد",
     "unworn": "غير ملبوس",
@@ -95,12 +97,22 @@
     "quartz": "كوارتز",
     "manual": "يدوية",
 
+    "orders": "الطلبات",
+
     "offers": "العروض",
 
     "brands": "العلامات التجارية",
     "brand_information": "معلومات العلامة التجارية",
     "add_to_brands": "إضافة علامة تجارية",
     "brand_already_exists": "هذه العلامة التجارية موجودة مسبقا.",
+
+    "basic_information": "المعلومات الأساسية",
+    "watch_materials": "مواد صناعة الساعة",
+    "advanced_information": "المعلومات الأساسية",
+
+    "next": "التالي",
+    "back": "السابق",
+    "submit": "إدخال",
 
     "sa": "سبت",
     "su": "أحد",

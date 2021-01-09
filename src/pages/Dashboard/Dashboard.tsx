@@ -7,6 +7,7 @@ import Analytics from '../../containers/Analytics/Analytics'
 import Dealers from '../../containers/Dealers/Dealers'
 import Users from '../../containers/Users/Users'
 import Watches from '../../containers/Watches/Watches'
+import Orders from '../../containers/Orders/Orders'
 import Offers from '../../containers/Offers/Offers'
 import Brands from '../../containers/Brands/Brands'
 
@@ -72,6 +73,8 @@ export default (props: any) => {
                 return(<Watches />)
             case "users":
                 return(<Users />)
+            case "orders":
+                return(<Orders />)
             case "offers":
                 return(<Offers />)
             case "brands":

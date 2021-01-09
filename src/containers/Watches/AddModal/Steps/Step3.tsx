@@ -173,9 +173,9 @@ export default () => {
                         e.preventDefault();
                         dispatch(addWatcheSlice.actions.setStep(2))
                     }}
-                >Back</button>
+                >{t("back")}</button>
                 <span className="margin-20"></span>
-                <button className="button round bg-gold color-white margin-top-30" style={{ padding: "0 80px", marginBottom: 5 }}>Submit</button>
+                <button className="button round bg-gold color-white margin-top-30" style={{ padding: "0 80px", marginBottom: 5 }}>{t("submit")}</button>
 
             </form>
 

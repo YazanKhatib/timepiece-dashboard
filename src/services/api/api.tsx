@@ -481,6 +481,68 @@ class API {
 
         return endpoints
     }
+    
+
+    /**
+     * Orders APIs
+     * @param {}
+     */
+    orders() {
+        var endpoints: { index: Function } = { index: Function };
+
+        endpoints.index = (data: pagination) => axios({
+            url: this.url,
+            method: 'post',
+            data: {
+                query: `query {
+                         getOrders {
+                            id,
+                            username,
+                            first_name,
+                            last_name,
+                            email,
+                            phone,
+                            birth,
+                            gender,
+                            address,
+                            orders {
+                                    id,
+                                    name,
+                                    model,
+                                    description,
+                                    condition,
+                                    location,
+                                    featured,
+                                    confirmed,
+                                    delivery,
+                                    price,
+                                    production_year,
+                                    case_material,
+                                    movement,
+                                    bracelet_material,
+                                    gender,
+                                    brand_id,
+                                    calibar,
+                                    base_calibar,
+                                    power_reserve,
+                                    jewels,
+                                    case_diameter,
+                                    water_resistance,
+                                    bezel_material,
+                                    crystal,
+                                    dial,
+                                    dial_numbers,
+                                    bracelet_color,
+                                    clasp,
+                                    clasp_material
+                        }
+                    }
+                }`
+            }
+        })
+
+        return endpoints
+    }
 
     /**
      * Brands APIs

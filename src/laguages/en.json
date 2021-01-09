@@ -65,6 +65,7 @@
     "bracelet_color": "Bracelet Color",
     "clasp": "Clasp",
     "clasp_material": "Clasp Material",
+    "scope_of_delivery": "Scope of Delivery",
 
     "new": "New",
     "unworn": "Unworn",
@@ -96,12 +97,22 @@
     "quartz": "Quartz",
     "manual": "Manual",
 
+    "orders": "Orders",
+
     "offers": "Offers",
 
     "brands": "Brands",
     "brand_information": "Brand Information",
     "add_to_brands": "Add to brands",
     "brand_already_exists": "This brand already exists",
+
+    "basic_information": "Basic information",
+    "watch_materials": "Watch materials",
+    "advanced_information": "Advanced information",
+
+    "next": "Next",
+    "back": "Back",
+    "submit": "Submit",
 
     "sa": "Sa",
     "su": "Su",

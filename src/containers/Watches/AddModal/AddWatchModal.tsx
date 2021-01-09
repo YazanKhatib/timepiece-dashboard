@@ -11,6 +11,7 @@ import Step1 from './Steps/Step1'
 import Step2 from './Steps/Step2'
 import Step3 from './Steps/Step3'
 import { SuccessMark, WhiteboxLoader } from '../../../components/Loader/Loader'
+import { t } from 'react-multi-lang'
 
 export default () => {
     
@@ -33,9 +34,9 @@ export default () => {
             {/* Steps */}
             <h2 className="text-center" style={{ margin: "0 0 20px" }}>
             {
-                addState.step === 1 ? "Basic information" :
-                addState.step === 2 ? "Watch materials" :
-                "Advanced information"
+                addState.step === 1 ? t("basic_information") :
+                addState.step === 2 ? t("watch_materials") :
+                t("advanced_information")
             }
             </h2>
 

@@ -81,21 +81,21 @@ export default () => {
                 <Row>
                     <Col md={6}>
                         <BrandsMenu
-                            placeholder={t("Brand *")}
+                            placeholder={t("brand") + " *"}
                             value={state.fields.brand ? { label: state.fields.brand, value: state.fields.brand } : null}
                             onChange={(option: { value: string }) => dispatch(addWatcheSlice.actions.set({ field: "brand", value: option.value }))}
                             error={(showErrors && state.fields.brand === "") ? t("required_error") : ""} />
                     </Col>
                     <Col md={6}>
                         <InputField
-                            label={"Model *"}
+                            label={t("model") + " *"}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(addWatcheSlice.actions.set({ field: "model", value: e.target.value }))}
                             value={state.fields.model}
                             error={(showErrors && state.fields.model === "") ? t("required_error") : ""} />
                     </Col>
                     <Col md={6}>
                         <InputField
-                            label={"Price *"}
+                            label={t("price") + " *"}
                             type="number"
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(addWatcheSlice.actions.set({ field: "price", value: e.target.value }))}
                             value={state.fields.price}
@@ -103,7 +103,7 @@ export default () => {
                     </Col>
                     <Col md={6}>
                         <SelectField
-                            placeholder={t("Condition *")}
+                            placeholder={t("condition") + " *"}
                             value={state.fields.condition ? condition_options.find( option => option.value === state.fields.condition ) : null}
                             onChange={(option: { value: string }) => dispatch(addWatcheSlice.actions.set({ field: "condition", value: option.value }))}
                             error={(showErrors && state.fields.condition === "") ? t("required_error") : ""}
@@ -111,7 +111,7 @@ export default () => {
                     </Col>
                     <Col md={12}>
                         <SelectField
-                            placeholder={t("Scope of delivery *")}
+                            placeholder={t("scope_of_delivery") + " *"}
                             isMulti
                             value={state.fields.delivery ? getDeliveryOptions() : null}
                             onChange={(option: {value: string}[]) => {
@@ -126,7 +126,7 @@ export default () => {
                     </Col>
                     <Col md={12}>
                         <Textarea
-                            label={"Description *"}
+                            label={t("description") + " *"}
                             rows={3}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(addWatcheSlice.actions.set({ field: "description", value: e.target.value }))}
                             value={state.fields.description}
@@ -134,7 +134,7 @@ export default () => {
                     </Col>
                     <Col md={12}>
                         <SelectField
-                            placeholder={t("location")}
+                            placeholder={t("location") + " *"}
                             value={state.fields.location ? location_options.find( option => option.value === state.fields.location ) : null}
                             onChange={(option: { value: string }) => dispatch(addWatcheSlice.actions.set({ field: "location", value: option.value }))}
                             error={(showErrors && state.fields.location === "") ? t("required_error") : ""}
@@ -142,7 +142,7 @@ export default () => {
                     </Col>
                 </Row>
 
-                <button className="button round bg-gold color-white margin-top-30" style={{ padding: "0 80px", marginBottom: 5 }}>Next</button>
+                <button className="button round bg-gold color-white margin-top-30" style={{ padding: "0 80px", marginBottom: 5 }}>{t("next")}</button>
 
             </form>
 
