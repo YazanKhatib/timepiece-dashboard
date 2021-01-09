@@ -34,7 +34,8 @@ export const SideNav = (props: NavProps) => {
     }
 
     const getActiveBoxPositionByIndex = (index: number): number => {
-        return index === 0 ? index * 90 : index === props.list.length - 1 ? index * 90 + 10 : index * 90 + 5
+        // return index === 0 ? index * 90 : index === props.list.length - 1 ? index * 90 + 10 : index * 90 + 5
+        return index * 90
     }
 
     const [activeBox, setActiveBox] = useState<number>(getActiveBoxPositionByIndex(getActiveIndexByName(props.active)))

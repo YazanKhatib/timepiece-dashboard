@@ -10,6 +10,7 @@ import { analyticsSlice } from "../../containers/Analytics/AnalyticsSlice";
 import { offersSlice } from "../../containers/Offers/OffersSclice";
 import { brandsSlice } from "../../containers/Brands/BrandsSlice";
 import { addBrandSlice } from "../../containers/Brands/AddModal/AddBrandSlice"
+import { predefinedMenusSlice } from '../../components/PredefinedMenus/PredefinedMenusSlice'
 
 
 const reducer = {
@@ -21,7 +22,8 @@ const reducer = {
     add_watch: addWatcheSlice.reducer,
     offers: offersSlice.reducer,
     brands: brandsSlice.reducer,
-    add_brand: addBrandSlice.reducer
+    add_brand: addBrandSlice.reducer,
+    predefined_menus: predefinedMenusSlice.reducer
 }
 
 export default configureStore({

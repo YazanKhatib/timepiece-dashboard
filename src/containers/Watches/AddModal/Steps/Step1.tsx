@@ -12,6 +12,7 @@ import { addWatcheSlice, addWatcheState } from '../AddWatchSlice'
 
 // Components
 import { InputField, SelectField, Textarea } from '../../../../components/FormElements/FormElements'
+import { BrandsMenu } from '../../../../components/PredefinedMenus/PredefinedMenus'
 
 
 
@@ -79,10 +80,10 @@ export default () => {
 
                 <Row>
                     <Col md={6}>
-                        <InputField
-                            label={"Brand *"}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(addWatcheSlice.actions.set({ field: "brand", value: e.target.value }))}
-                            value={state.fields.brand}
+                        <BrandsMenu
+                            placeholder={t("Brand *")}
+                            value={state.fields.brand ? { label: state.fields.brand, value: state.fields.brand } : null}
+                            onChange={(option: { value: string }) => dispatch(addWatcheSlice.actions.set({ field: "brand", value: option.value }))}
                             error={(showErrors && state.fields.brand === "") ? t("required_error") : ""} />
                     </Col>
                     <Col md={6}>
