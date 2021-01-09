@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { Link, Redirect, useLocation } from 'react-router-dom'
 
+// Custom scrollbar
+import { Scrollbars } from 'react-custom-scrollbars';
+
 // Stylesheet
 import './Nav.css'
 
@@ -40,14 +43,21 @@ export const SideNav = (props: NavProps) => {
 
     return (
         <nav className="side-nav">
-            <div className="active-box" style={{ top: activeBox }} />
-            <ul>
-                {props.list.map((item, index) => {
-                    return (
-                        <li key={index} className={item.link.substring(1) === props.active ? "active" : ""} onClick={() => setActiveBox(getActiveBoxPositionByIndex(index))}><Link to={item.link}><span><i className={item.icon}></i> {item.name}</span></Link></li>
-                    )
-                })}
-            </ul>
+            <Scrollbars
+                autoHeight
+                autoHeightMin="75vh"
+                autoHide
+                renderTrackHorizontal={props => <div {...props} className="track-horizontal" style={{display:"none"}}/>}
+                renderThumbHorizontal={props => <div {...props} className="thumb-horizontal" style={{display:"none"}}/>} >
+                <div className="active-box" style={{ top: activeBox }} />
+                <ul>
+                    {props.list.map((item, index) => {
+                        return (
+                            <li key={index} className={item.link.substring(1) === props.active ? "active" : ""} onClick={() => setActiveBox(getActiveBoxPositionByIndex(index))}><Link to={item.link}><span><i className={item.icon}></i> {item.name}</span></Link></li>
+                        )
+                    })}
+                </ul>
+            </Scrollbars>
         </nav>
     )
 }
