@@ -116,7 +116,7 @@ export default () => {
                     </Col>
                 </Row>
 
-                <button className="button round bg-gold color-white margin-top-30" style={{ padding: "0 80px", marginBottom: 5 }}>Submit</button>
+                <button className="button round bg-gold color-white margin-top-30" style={{ padding: "0 80px", marginBottom: 5 }}>{t("submit")}</button>
 
             </form>
 

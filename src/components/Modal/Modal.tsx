@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
+// Custom scrollbar
+import { Scrollbars } from 'react-custom-scrollbars';
+
 import './Modal.css'
 
 interface ModalProps {
@@ -22,7 +25,7 @@ export default (props: ModalProps) => {
     }
 
     const handleEsc = (e: KeyboardEvent) => {
-        if( e.key === 'Escape' )
+        if (e.key === 'Escape')
             hide()
     }
 
@@ -40,13 +43,21 @@ export default (props: ModalProps) => {
                 <div id="modal-container" className={out ? "out" : ""} onClick={hide}>
                     <div className="modal-background">
                         <div ref={(component: HTMLDivElement) => { if (component) setDasharray(component.offsetWidth * 2 + component.offsetHeight * 2) }} className="modal" onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
-                            <div className="modal-content">
-                                {props.children}
-                            </div>
-                            {dasharray ?
-                                <svg className="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
-                                    <rect style={{ strokeDasharray: dasharray, strokeDashoffset: dasharray }} x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
-                                </svg> : ""}
+                            <Scrollbars
+                                className="modal-scroller"
+                                autoHeight
+                                autoHeightMin="100%" autoHeightMax="90vh"
+                                autoHide
+                                renderTrackHorizontal={props => <div {...props} className="track-horizontal" style={{ display: "none" }} />}
+                                renderThumbHorizontal={props => <div {...props} className="thumb-horizontal" style={{ display: "none" }} />} >
+                                <div className="modal-content">
+                                    {props.children}
+                                </div>
+                                {dasharray ?
+                                    <svg className="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
+                                        <rect style={{ strokeDasharray: dasharray, strokeDashoffset: dasharray }} x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
+                                    </svg> : ""}
+                            </Scrollbars>
                         </div>
                     </div>
                     <style>{`

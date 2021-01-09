@@ -41,7 +41,7 @@ export default (props: any) => {
         },
         {
             icon: "icon-product",
-            name: t("Orders"),
+            name: t("orders"),
             link: "/orders"
         },
         {
