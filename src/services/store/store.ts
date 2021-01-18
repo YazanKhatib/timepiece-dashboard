@@ -12,10 +12,12 @@ import { ordersSlice } from "../../containers/Orders/OrdersSclice";
 import { brandsSlice } from "../../containers/Brands/BrandsSlice";
 import { addBrandSlice } from "../../containers/Brands/AddModal/AddBrandSlice"
 import { predefinedMenusSlice } from '../../components/PredefinedMenus/PredefinedMenusSlice'
+import { resetPasswordSlice } from "../../containers/ResetPasswordForm/ResetPasswordFormSlice";
 
 
 const reducer = {
     login: loginSlice.reducer,
+    reset_password: resetPasswordSlice.reducer,
     analytics: analyticsSlice.reducer,
     dealers: dealersSlice.reducer,
     users: usersSlice.reducer,

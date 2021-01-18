@@ -2,10 +2,14 @@
     
     "username": "Username",
     "password": "Password",
+    "confirm_password": "Confirm password",
     "remember_me": "Remember Me",
     "login": "Login",
     "required_error": "Please fill in this field",
     "login_error": "Invalid data. Please check your information.",
+    "reset_success": "Your password has been changed successfully!",
+    "reset_password": "Reset password",
+    "passwords_didnt_match": "Passwords didn't match",
 
     "analytics": "Analytics",
     "dealers": "Dealers",

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-d
 
 import ScrollToTop from './ScrollToTop'
 import Login from '../../pages/Login/Login'
+import ResetPassword from '../../pages/ResetPassword/ResetPassword'
 import Dashboard from '../../pages/Dashboard/Dashboard'
 import { withCookies } from "react-cookie";
 
@@ -25,6 +26,7 @@ class AppRoutes extends Component<{cookies: any}> {
                     // Auth pages
                     <Switch>
                         <Route exact path="/" component={Login} />
+                        <Route exact path="/reset-password/:token" component={ResetPassword} />
                         <Route path="/" component={() => <Redirect to="/" />} />
                     </Switch> :
 

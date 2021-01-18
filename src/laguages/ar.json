@@ -2,10 +2,14 @@
     
     "username": "اسم المستخدم",
     "password": "كلمة المرور",
+    "confirm_password": "تأكيد كلمة المرور",
     "remember_me": "تذكرني",
     "login": "تسجيل الدخول",
     "required_error": "يرجى ملىء الحقل التالي",
     "login_error": "معلومات غير صحيحة. يرجى التأكد من المعلومات.",
+    "reset_success": "تم تعديل كلمة المرور الخاص بك بنجاح!",
+    "reset_password": "تغيير كلمة المرور",
+    "passwords_didnt_match": "كلمتا المرور غير متطابقتين",
 
     "analytics": "الاحصائيات",
     "dealers": "التجار",
