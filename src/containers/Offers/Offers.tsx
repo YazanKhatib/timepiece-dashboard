@@ -14,7 +14,7 @@ import API from '../../services/api/api'
 // Components
 import TableActionBar from '../../components/TableActionBar/TableActionBar'
 import { DashboardTable } from '../../components/Table/Table'
-import { EllipsisLoader } from '../../components/Loader/Loader'
+import { EllipsisLoader, WhiteboxLoader } from '../../components/Loader/Loader'
 import { SelectField } from '../../components/FormElements/FormElements'
 import DetailsModal from '../../components/DetailsModal/DetailsModal'
 
@@ -127,9 +127,10 @@ export default () => {
                     price: watch.price,
                     proposed_price: <strong>{watch.proposed_price}</strong>,
                     actions: <div className="show-on-hover">
+                                <i className="icon-checkmark" onClick={(e: React.MouseEvent<HTMLLIElement>) => approveOffer(e, true, watch.id, item.id) }  />
+                                <i className="icon-close" onClick={(e: React.MouseEvent<HTMLLIElement>) => approveOffer(e, false, watch.id, item.id) } />
                                 <i className="icon-username-1" onClick={(e: React.MouseEvent<HTMLLIElement>) => showUserDetails(e, item.id) } />
                                 <i className="icon-time" onClick={(e: React.MouseEvent<HTMLLIElement>) => showWatchDetails(e, item.id, watch.id) } />
-                                <i className="icon-delete" />
                             </div>
                 }
                 x++;
@@ -153,6 +154,15 @@ export default () => {
         dispatch( offersSlice.actions.setActiveWatch(watchId) )
     }
 
+    
+    const approveOffer = (e: React.MouseEvent<HTMLLIElement>,approved: boolean, watchId: string, userId: string) => {
+        dispatch( offersSlice.actions.setIsLoading(true) )
+        e.stopPropagation()
+        ENDPOINTS.offers().approve(approved, watchId, userId)
+        .then((response: any) => {
+            dispatch( offersSlice.actions.setIsLoading(false) )
+        });
+    }
     
     
     const getActiveUser = (): { [key: string]: any } => {
@@ -233,6 +243,7 @@ export default () => {
         <>
             { state.isLoaded ?
             <>
+               { state.isLoading ? <WhiteboxLoader /> : "" }
                 <TableActionBar
                     title={t("offers")}
                     search={search}
