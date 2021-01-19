@@ -498,7 +498,7 @@ class API {
      * @param {}
      */
     orders() {
-        var endpoints: { index: Function } = { index: Function };
+        var endpoints: { index: Function, approve: Function } = { index: Function, approve: Function };
 
         endpoints.index = (data: pagination) => axios({
             url: this.url,
@@ -548,6 +548,16 @@ class API {
                         }
                     }
                 }`
+            }
+        })
+
+        endpoints.approve = (approved: boolean, watchId: number) => axios({
+            url: this.url,
+            method: 'post',
+            data: {
+                query: `mutation {
+                    approveOrder( approved: ${approved}, watchId: ${watchId}) 
+                  }`
             }
         })
 

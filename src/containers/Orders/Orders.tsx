@@ -14,7 +14,7 @@ import API from '../../services/api/api'
 // Components
 import TableActionBar from '../../components/TableActionBar/TableActionBar'
 import { DashboardTable } from '../../components/Table/Table'
-import { EllipsisLoader } from '../../components/Loader/Loader'
+import { EllipsisLoader, WhiteboxLoader } from '../../components/Loader/Loader'
 import { SelectField } from '../../components/FormElements/FormElements'
 import DetailsModal from '../../components/DetailsModal/DetailsModal'
 
@@ -126,9 +126,10 @@ export default () => {
                     price: watch.price,
                     proposed_price: <strong>{watch.proposed_price}</strong>,
                     actions: <div className="show-on-hover">
+                                <i className="icon-checkmark" onClick={(e: React.MouseEvent<HTMLLIElement>) => approveOrder(e, true, watch.id) }  />
+                                <i className="icon-close" onClick={(e: React.MouseEvent<HTMLLIElement>) => approveOrder(e, false, watch.id) } />
                                 <i className="icon-username-1" onClick={(e: React.MouseEvent<HTMLLIElement>) => showUserDetails(e, item.id) } />
                                 <i className="icon-time" onClick={(e: React.MouseEvent<HTMLLIElement>) => showWatchDetails(e, item.id, watch.id) } />
-                                <i className="icon-delete" />
                             </div>
                 }
                 x++;
@@ -136,6 +137,8 @@ export default () => {
         })
         return data
     }
+
+    
 
     // Details Modal
     const showUserDetails = (e: React.MouseEvent<HTMLLIElement>, userId: string) => {
@@ -150,6 +153,16 @@ export default () => {
         dispatch( ordersSlice.actions.setWatchDetailsIsOpen(true) )
         dispatch( ordersSlice.actions.setActiveUser(userId) )
         dispatch( ordersSlice.actions.setActiveWatch(watchId) )
+    }
+
+    
+    const approveOrder = (e: React.MouseEvent<HTMLLIElement>,approved: boolean, watchId: string) => {
+        dispatch( ordersSlice.actions.setIsLoading(true) )
+        e.stopPropagation()
+        ENDPOINTS.orders().approve(approved, watchId)
+        .then((response: any) => {
+            dispatch( ordersSlice.actions.setIsLoading(false) )
+        });
     }
 
     
@@ -232,6 +245,7 @@ export default () => {
         <>
             { state.isLoaded ?
             <>
+                { state.isLoading ? <WhiteboxLoader /> : "" }
                 <TableActionBar
                     title={t("orders")}
                     search={search}
