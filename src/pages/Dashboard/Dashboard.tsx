@@ -9,6 +9,7 @@ import Users from '../../containers/Users/Users'
 import Watches from '../../containers/Watches/Watches'
 import Orders from '../../containers/Orders/Orders'
 import Offers from '../../containers/Offers/Offers'
+import Certificates from '../../containers/Certificates/Certificates'
 import Brands from '../../containers/Brands/Brands'
 
 // Stylesheet
@@ -50,6 +51,11 @@ export default (props: any) => {
             link: "/offers"
         },
         {
+            icon: "icon-orders",
+            name: t("certificates"),
+            link: "/certificates"
+        },
+        {
             icon: "icon-categories-1",
             name: t("brands"),
             link: "/brands"
@@ -77,6 +83,8 @@ export default (props: any) => {
                 return(<Orders />)
             case "offers":
                 return(<Offers />)
+            case "certificates":
+                return(<Certificates />)
             case "brands":
                 return(<Brands />)
             case "notifications":

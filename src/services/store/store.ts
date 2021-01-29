@@ -9,6 +9,7 @@ import { addWatcheSlice } from '../../containers/Watches/AddModal/AddWatchSlice'
 import { analyticsSlice } from "../../containers/Analytics/AnalyticsSlice";
 import { offersSlice } from "../../containers/Offers/OffersSclice";
 import { ordersSlice } from "../../containers/Orders/OrdersSclice";
+import { certificatesSlice } from "../../containers/Certificates/CertificatesSlice";
 import { brandsSlice } from "../../containers/Brands/BrandsSlice";
 import { addBrandSlice } from "../../containers/Brands/AddModal/AddBrandSlice"
 import { predefinedMenusSlice } from '../../components/PredefinedMenus/PredefinedMenusSlice'
@@ -25,6 +26,7 @@ const reducer = {
     add_watch: addWatcheSlice.reducer,
     offers: offersSlice.reducer,
     orders: ordersSlice.reducer,
+    certificates: certificatesSlice.reducer,
     brands: brandsSlice.reducer,
     add_brand: addBrandSlice.reducer,
     predefined_menus: predefinedMenusSlice.reducer

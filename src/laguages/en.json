@@ -143,6 +143,11 @@
     "weekly": "Weekly",
     "monthly": "Monthly",
     "yearly": "Yearly",
-    "all_the_time": "All the time"
+    "all_the_time": "All the time",
+
+    "certificates": "Certificates",
+    "fulfilled": "Fulfilled",
+    "yes": "Yes",
+    "no": "No"
 
 }

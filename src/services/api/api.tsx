@@ -13,7 +13,7 @@ class API {
     url: string;
 
     constructor() {
-        this.url = "https://timepiecenodejs.herokuapp.com/graphql"
+        this.url = "http://207.154.217.198:4000/graphql"
 
         const [cookies, setCookie] = useCookies();
 
@@ -557,6 +557,52 @@ class API {
             data: {
                 query: `mutation {
                     approveOrder( approved: ${approved}, watchId: ${watchId}) 
+                  }`
+            }
+        })
+
+        return endpoints
+    }
+    
+
+    /**
+     * Certificates APIs
+     * @param {}
+     */
+    certificates() {
+        var endpoints: { index: Function, fulfillCertificate: Function } = { index: Function, fulfillCertificate: Function };
+
+        endpoints.index = () => axios({
+            url: this.url,
+            method: 'post',
+            data: {
+                query: `query {
+                            getCertificates {
+                                id,
+                                fulfilled,
+                                user {
+                                    id,
+                                    username,
+                                    first_name,
+                                    last_name,
+                                    email,
+                                    confirmed,
+                                    phone,
+                                    birth,
+                                    gender,
+                                    address
+                                }
+                            }
+                  }`
+            }
+        })
+
+        endpoints.fulfillCertificate = (id: number) => axios({
+            url: this.url,
+            method: 'post',
+            data: {
+                query: `mutation {
+                    fulfillCertificate(id: ${id})
                   }`
             }
         })

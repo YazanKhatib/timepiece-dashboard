@@ -143,6 +143,11 @@
     "weekly": "أسبوعي",
     "monthly": "شهري",
     "yearly": "سنوي",
-    "all_the_time": "كل الوقت"
+    "all_the_time": "كل الوقت",
+
+    "certificates": "الشهادات",
+    "fulfilled": "Fulfilled",
+    "yes": "نعم",
+    "no": "لا"
 
 }
