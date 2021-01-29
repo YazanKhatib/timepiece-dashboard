@@ -74,6 +74,8 @@ export const TopNav = () => {
     const logout = () => {
         setRedirect(true)
         removeCookie("userinfo")
+        removeCookie("token")
+        removeCookie("refresh_token")
     }
 
     return (

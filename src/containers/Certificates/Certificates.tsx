@@ -42,7 +42,8 @@ export default () => {
         .then( (response: any) => {
             console.log('Response: ', response)
             let certificates: certificate[] = []
-
+            if(!response.data.data)
+                return
             response.data.data.getCertificates.map( (item: any) => {
                 certificates.push({
                     id: String(item.id),

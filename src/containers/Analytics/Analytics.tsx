@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Col, Row } from 'react-grid-system'
 import { useTranslation } from 'react-multi-lang'
 
@@ -54,8 +54,9 @@ export default () => {
 
     }
 
-    if( !state.isFetching && ( !state.dealers || !state.users || !state.watches ) )
+    useEffect(() => {
         fetchData()
+    }, [])
 
     let LineChartLabels = [t("sa"), t("su"), t("mo"), t("tu"), t("we"), t("th"), t("fr")]
     let LineChartDatasets = [

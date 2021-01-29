@@ -25,22 +25,17 @@ class API {
                 else {
                     // Rrefresh token
                     await axios({
-                        url: this.url,
+                        url: "http://207.154.217.198:4000/refresh_token",
                         method: 'post',
-                        data: {
-                            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                            // !!!!!!!!! Should be replaced with refreshToken query !!!!!!!!!
-                            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                            query: `mutation {
-                                            loginAdmin(username: "admin", password: "123456") { user { id, username, email }, accessToken, refreshToken }
-                                        }`
-                        },
+                        data: {},
                         headers: {
-                            "skipInterceptors": true
+                            "skipInterceptors": true,
+                            "refresh_token": cookies.refresh_token.refreshToken
                         }
                     }).then((response) => {
-                        setCookie("token", { accessToken: response.data.data.loginAdmin.accessToken, refreshToken: response.data.data.loginAdmin.refreshToken }, { expires: addToDate( new Date(), "minutes", 29 ) })
-                        config.headers["Authorization"] = "Bearer " + response.data.data.loginAdmin.accessToken;
+                        setCookie("token", { accessToken: response.data.accessToken }, { expires: addToDate( new Date(), "minutes", 29 ) })
+                        setCookie("refresh_token", { refreshToken: response.data.refreshToken })
+                        config.headers["Authorization"] = "Bearer " + response.data.accessToken;
                     })
                 }
             }
