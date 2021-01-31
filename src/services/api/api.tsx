@@ -15,7 +15,7 @@ class API {
     constructor() {
         this.url = "http://207.154.217.198:4000/graphql"
 
-        const [cookies, setCookie] = useCookies();
+        const [cookies, setCookie, removeCookie] = useCookies();
 
         // Add Auth header
         axios.interceptors.request.use(async (config) => {
@@ -24,19 +24,25 @@ class API {
                     config.headers["Authorization"] = "Bearer " + cookies.token.accessToken;
                 else {
                     // Rrefresh token
-                    await axios({
-                        url: "http://207.154.217.198:4000/refresh_token",
-                        method: 'post',
-                        data: {},
-                        headers: {
-                            "skipInterceptors": true,
-                            "refresh_token": cookies.refresh_token.refreshToken
-                        }
-                    }).then((response) => {
-                        setCookie("token", { accessToken: response.data.accessToken }, { expires: addToDate( new Date(), "minutes", 29 ) })
-                        setCookie("refresh_token", { refreshToken: response.data.refreshToken })
-                        config.headers["Authorization"] = "Bearer " + response.data.accessToken;
-                    })
+                    if( cookies.refresh_token ) {
+                        await axios({
+                            url: "http://207.154.217.198:4000/refresh_token",
+                            method: 'post',
+                            data: {},
+                            headers: {
+                                "skipInterceptors": true,
+                                "refresh_token": cookies.refresh_token.refreshToken
+                            }
+                        }).then((response) => {
+                            setCookie("token", { accessToken: response.data.accessToken }, { expires: addToDate( new Date(), "minutes", 29 ) })
+                            setCookie("refresh_token", { refreshToken: response.data.refreshToken })
+                            config.headers["Authorization"] = "Bearer " + response.data.accessToken;
+                        })
+                    } else {
+                        removeCookie("userinfo")
+                        removeCookie("token")
+                        removeCookie("refresh_token")
+                    }
                 }
             }
             return (config);
