@@ -55,14 +55,13 @@ export default () => {
         dispatch(addBrandSlice.actions.setIsLoading(true))
 
         let api_call = addState.editId ? ENDPOINTS.brands().update(addState.name, addState.editId) : ENDPOINTS.brands().add(addState.name)
-        console.log("Edit ID", addState.editId);
 
         api_call
             .then((response: any) => {
                 
                 dispatch(addBrandSlice.actions.setIsLoading(false))
                 
-                if(response.data.errors) {
+                if(response.data?.errors) {
                     setNameError(t("brand_already_exists"))
                     return
                 }
@@ -76,7 +75,7 @@ export default () => {
 
                 // Add to table
                 let brand: brand = {
-                    id: addState.editId ? String(response.data.data.updateBrand.id) : String(response.data.data.createBrand.id),
+                    id: addState.editId ? String(response.data?.data?.updateBrand?.id) : String(response.data?.data?.createBrand?.id),
                     name: String(addState.name ? addState.name : "N/A"),
                 }
 

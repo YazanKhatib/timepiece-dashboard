@@ -40,12 +40,12 @@ export default () => {
         .then( (response: any) => {
 
             // Has more
-            if( response.data.data.getBrands.total <= page * page_size )
+            if( response.data?.data?.getBrands?.total <= page * page_size )
                 dispatch( brandsSlice.actions.setHasMore(false) )
             
             let brands: brand[] = []
 
-            response.data.data.getBrands.results.map( (item: any) => {
+            response.data?.data?.getBrands?.results?.map( (item: any) => {
                 brands.push({
                     id: String(item.id),
                     name: String(item.name ? item.name : "N/A"),
@@ -108,8 +108,7 @@ export default () => {
         dispatch( brandsSlice.actions.setIsLoading(true) )
 
         ENDPOINTS.brands().delete(id ? [id] : selectedIds)
-        .then((response: any) => {
-            console.log(response)
+        .then(() => {
             dispatch( brandsSlice.actions.setIsLoading(false) )
             dispatch( brandsSlice.actions.deleteBrands(id ? [id] : selectedIds) )
             if(!id) setSelectedIds([])

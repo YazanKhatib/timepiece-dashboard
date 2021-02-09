@@ -49,7 +49,7 @@ export default () => {
     const changeStatus = (selected: boolean, id: string) => {
         dispatch( dealersSlice.actions.addToLoadingStatuses(id) )
         ENDPOINTS.users().update( { id: Number(id), blocked: selected } )
-        .then( (response: any) => {
+        .then( () => {
             dispatch( dealersSlice.actions.removeFromLoadingStatuses(id) )
             dispatch( dealersSlice.actions.setBlocked({ id: id, blocked: selected }) )
         })
@@ -64,12 +64,12 @@ export default () => {
         .then( (response: any) => {
             
             // Has more
-            if( response.data.data.getUsers.total <= page * page_size )
+            if( response.data?.data?.getUsers?.total <= page * page_size )
                 dispatch( dealersSlice.actions.setHasMore(false) )
 
             let dealers: dealer[] = []
 
-            response.data.data.getUsers.results.map( (item: any) => {
+            response.data?.data?.getUsers?.results?.map( (item: any) => {
                 dealers.push({
                     id: String(item.id),
                     username: String(item.username),
@@ -157,8 +157,7 @@ export default () => {
         dispatch( dealersSlice.actions.setIsLoading(true) )
 
         ENDPOINTS.users().delete(id ? [id] : selectedIds)
-        .then((response: any) => {
-            console.log(response)
+        .then(() => {
             dispatch( dealersSlice.actions.setIsLoading(false) )
             dispatch( dealersSlice.actions.deleteDealers(id ? [id] : selectedIds) )
             if(!id) setSelectedIds([])

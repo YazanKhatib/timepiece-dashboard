@@ -51,7 +51,7 @@ export default () => {
             
             let watches: watch[] = []
 
-            response.data.data.searchProducts.map( (item: any) => {
+            response.data?.data?.searchProducts?.map( (item: any) => {
                 watches.push({
                     id: String(item.id),
                     name: String(item.name ? item.name : "N/A"),
@@ -101,7 +101,7 @@ export default () => {
     const changeStatus = (selected: boolean, id: string) => {
         dispatch( watchesSlice.actions.addToLoadingStatuses(id) )
         ENDPOINTS.watches().updateStatus( { id, confirmed: selected } )
-        .then( (response: any) => {
+        .then( () => {
             dispatch( watchesSlice.actions.removeFromLoadingStatuses(id) )
             dispatch( watchesSlice.actions.setConfirmed({ id: id, confirmed: selected }) )
         })
@@ -116,12 +116,12 @@ export default () => {
         .then( (response: any) => {
 
             // Has more
-            if( response.data.data.getProducts.total <= page * page_size )
+            if( response.data?.data?.getProducts?.total <= page * page_size )
                 dispatch( watchesSlice.actions.setHasMore(false) )
             
             let watches: watch[] = []
 
-            response.data.data.getProducts.results.map( (item: any) => {
+            response.data?.data?.getProducts?.results?.map( (item: any) => {
                 watches.push({
                     id: String(item.id),
                     name: String(item.name ? item.name : "N/A"),
@@ -197,8 +197,8 @@ export default () => {
             // In case somthing went wrong
             let watches = state.filteredWatches.length > 0 ? state.filteredWatches : state.watches
             let watchToEdit = watches.find( watch => watch.id === id )
-            if( watchToEdit && watchToEdit.featured !== response.data.data.updateProduct.featured )
-                dispatch( watchesSlice.actions.setFeatured({ id, featured: response.data.data.updateProduct.featured }) )
+            if( watchToEdit && watchToEdit.featured !== response.data?.data?.updateProduct?.featured )
+                dispatch( watchesSlice.actions.setFeatured({ id, featured: response.data?.data?.updateProduct?.featured }) )
         })
 
         dispatch( watchesSlice.actions.setFeatured({ id, featured: !currentValue }) )
@@ -304,8 +304,7 @@ export default () => {
         dispatch( watchesSlice.actions.setIsLoading(true) )
 
         ENDPOINTS.watches().delete(id ? [id] : selectedIds)
-        .then((response: any) => {
-            console.log(response)
+        .then(() => {
             dispatch( watchesSlice.actions.setIsLoading(false) )
             dispatch( watchesSlice.actions.deleteWatches(id ? [id] : selectedIds) )
             if(!id) setSelectedIds([])

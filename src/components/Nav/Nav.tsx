@@ -40,8 +40,6 @@ export const SideNav = (props: NavProps) => {
 
     const [activeBox, setActiveBox] = useState<number>(getActiveBoxPositionByIndex(getActiveIndexByName(props.active)))
 
-    console.log(activeBox)
-
     return (
         <nav className="side-nav">
             <Scrollbars

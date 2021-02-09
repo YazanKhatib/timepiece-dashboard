@@ -57,7 +57,7 @@ export default () => {
             let users: user[] = []
             let offers: watch[] = []
 
-            response.data.data.getOffers.map( (item: any) => {
+            response.data?.data?.getOffers?.map( (item: any) => {
                 item.offers.map((watch: any) => {
                    offers.push({
                     id: String(watch.id),
@@ -102,7 +102,6 @@ export default () => {
                 })
                 offers = [];
             })
-            console.log('hello');
 
             dispatch( offersSlice.actions.addUsers(users) )
             dispatch( offersSlice.actions.setIsLoading(false) )
@@ -159,7 +158,7 @@ export default () => {
         dispatch( offersSlice.actions.setIsLoading(true) )
         e.stopPropagation()
         ENDPOINTS.offers().approve(approved, watchId, userId)
-        .then((response: any) => {
+        .then(() => {
             dispatch( offersSlice.actions.setIsLoading(false) )
         });
     }

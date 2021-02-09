@@ -62,15 +62,15 @@ export default function () {
         ENDPOINTS.auth().login({ username, password })
         .then((response: any) => {
             
-            if(response.data.data) {
+            if(response.data?.data) {
 
                 dispatch( loginSlice.actions.success() )
                 setShowSuccessMark(true)
                 setTimeout(() => {
                     let expires: Date = rememberMe ? addToDate( new Date(), "years", 1 ) : addToDate( new Date(), "hours", 1 );
-                    setCookie("refresh_token", { refreshToken: response.data.data.loginAdmin.refreshToken }, { expires })
-                    setCookie("token", { accessToken: response.data.data.loginAdmin.accessToken }, { expires: addToDate( new Date(), "minutes", 29 ) })
-                    setCookie("userinfo", response.data.data.loginAdmin.user, { expires })
+                    setCookie("refresh_token", { refreshToken: response.data.data.loginAdmin?.refreshToken }, { expires })
+                    setCookie("token", { accessToken: response.data.data.loginAdmin?.accessToken }, { expires: addToDate( new Date(), "minutes", 29 ) })
+                    setCookie("userinfo", response.data.data.loginAdmin?.user, { expires })
                     dispatch( loginSlice.actions.init() )
                 }, 1500);
 

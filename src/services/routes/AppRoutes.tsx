@@ -21,7 +21,7 @@ class AppRoutes extends Component<{cookies: any}> {
         return(
             <Router basename="/">
                 <ScrollToTop>
-                    { !this.props.cookies.get("userinfo") ?
+                    { ( !this.props.cookies.get("userinfo") || !this.props.cookies.get("token") || !this.props.cookies.get("refresh_token") ) ?
                     
                     // Auth pages
                     <Switch>

@@ -34,21 +34,21 @@ export default () => {
         // Users
         ENDPOINTS.analytics().users()
         .then((response: any) => {
-            dispatch( analyticsSlice.actions.setUsers(response.data.data.getUsers.total) )
+            dispatch( analyticsSlice.actions.setUsers(response.data?.data?.getUsers?.total) )
         })
         .catch((error: any) => {})
 
         // Dealers
         ENDPOINTS.analytics().dealers()
         .then((response: any) => {
-            dispatch( analyticsSlice.actions.setDealers(response.data.data.getUsers.total) )
+            dispatch( analyticsSlice.actions.setDealers(response.data?.data?.getUsers?.total) )
         })
         .catch((error: any) => {})
 
         // Watches
         ENDPOINTS.analytics().watches()
         .then((response: any) => {
-            dispatch( analyticsSlice.actions.setWatches(response.data.data.getProducts.total) )
+            dispatch( analyticsSlice.actions.setWatches(response.data?.data?.getProducts?.total) )
         })
         .catch((error: any) => {})
 

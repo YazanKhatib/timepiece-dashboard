@@ -54,12 +54,12 @@ export default () => {
         .then( (response: any) => {
             
             // Has more
-            if( response.data.data.getUsers.total <= page * page_size )
+            if( response.data?.data?.getUsers?.total <= page * page_size )
                 dispatch( usersSlice.actions.setHasMore(false) )
             
             let users: user[] = []
 
-            response.data.data.getUsers.results.map( (item: any) => {
+            response.data?.data?.getUsers?.results?.map( (item: any) => {
                 users.push({
                     id: String(item.id),
                     username: String(item.username),
@@ -145,8 +145,7 @@ export default () => {
         dispatch( usersSlice.actions.setIsLoading(true) )
 
         ENDPOINTS.users().delete(id ? [id] : selectedIds)
-        .then((response: any) => {
-            console.log(response)
+        .then(() => {
             dispatch( usersSlice.actions.setIsLoading(false) )
             dispatch( usersSlice.actions.deleteUsers(id ? [id] : selectedIds) )
             if(!id) setSelectedIds([])

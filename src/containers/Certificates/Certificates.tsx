@@ -40,11 +40,10 @@ export default () => {
 
         ENDPOINTS.certificates().index()
         .then( (response: any) => {
-            console.log('Response: ', response)
             let certificates: certificate[] = []
             if(!response.data.data)
                 return
-            response.data.data.getCertificates.map( (item: any) => {
+            response.data?.data?.getCertificates?.map( (item: any) => {
                 certificates.push({
                     id: String(item.id),
                     fulfilled: Boolean(item.fulfilled),
@@ -102,7 +101,7 @@ export default () => {
         ENDPOINTS.certificates().fulfillCertificate(certificateId)
         .then((response: any) => {
             dispatch( certificatesSlice.actions.setIsLoading(false) )
-            dispatch(certificatesSlice.actions.setFulfilled({ id: certificateId, fulfilled: response.data.data.fulfillCertificate }))
+            dispatch(certificatesSlice.actions.setFulfilled({ id: certificateId, fulfilled: response.data?.data?.fulfillCertificate }))
         });
     }
     

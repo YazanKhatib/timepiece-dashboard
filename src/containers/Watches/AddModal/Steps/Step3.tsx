@@ -52,7 +52,7 @@ export default () => {
 
         api_call
             .then((response: any) => {
-                console.log(response)
+                
                 dispatch(addWatcheSlice.actions.setIsLoading(false))
                 dispatch(addWatcheSlice.actions.setIsSuccess(true))
 
@@ -63,7 +63,7 @@ export default () => {
 
                 // Add to table
                 let watch: watch = {
-                    id: state.editId ? String(response.data.data.updateProduct.id) : String(response.data.data.addProduct.id),
+                    id: state.editId ? String(response.data?.data?.updateProduct?.id) : String(response.data?.data?.addProduct?.id),
                     name: String(state.fields.brand ? state.fields.brand : "N/A"),
                     model: String(state.fields.model ? state.fields.model : "N/A"),
                     description: String(state.fields.description ? state.fields.description : "N/A"),

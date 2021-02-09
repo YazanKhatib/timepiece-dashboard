@@ -26,7 +26,7 @@ export const BrandsMenu = (props: any) => {
         ENDPOINTS.brands().index({ limit: 1000, offset: 0 })
         .then((response: any) => {
             let brands: {label: string, value: string}[] = []
-            response.data.data.getBrands.results.map((brand: {name: string}) => {
+            response.data?.data?.getBrands?.results?.map((brand: {name: string}) => {
                 brands.push({ label: brand.name, value: brand.name })
             })
             dispatch( predefinedMenusSlice.actions.setBrands(brands) )

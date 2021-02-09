@@ -57,7 +57,7 @@ export default () => {
             let users: user[] = []
             let orders: watch[] = []
 
-            response.data.data.getOrders.map( (item: any) => {
+            response.data?.data?.getOrders?.map( (item: any) => {
                 item.orders.map((watch: any) => {
                    orders.push({
                     id: String(watch.id),
@@ -160,7 +160,7 @@ export default () => {
         dispatch( ordersSlice.actions.setIsLoading(true) )
         e.stopPropagation()
         ENDPOINTS.orders().approve(approved, watchId)
-        .then((response: any) => {
+        .then(() => {
             dispatch( ordersSlice.actions.setIsLoading(false) )
         });
     }
