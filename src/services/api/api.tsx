@@ -12,7 +12,7 @@ class API {
   url: string;
 
   constructor() {
-    this.url = 'https://dev.timepiece.qa';
+    this.url = 'https://dev.timepiece.qa/graphql';
 
     const [cookies, setCookie, removeCookie] = useCookies();
 
