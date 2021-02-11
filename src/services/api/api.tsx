@@ -26,7 +26,7 @@ class API {
           // Rrefresh token
           if (cookies.refresh_token) {
             await axios({
-              url: 'http://207.154.217.198:4000/refresh_token',
+              url: 'https://dev.timepiece.qa/refresh_token',
               method: 'post',
               data: {},
               headers: {
