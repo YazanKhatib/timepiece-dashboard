@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useMediaQuery } from 'react-responsive'
 
 // Custom scrollbar
 import { Scrollbars } from 'react-custom-scrollbars';
@@ -15,6 +16,9 @@ export default (props: ModalProps) => {
 
     const [out, setOut] = useState<boolean>(false)
     const [dasharray, setDasharray] = useState<number>(0)
+
+    // Media query
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
     const hide = () => {
         setOut(true);
@@ -46,7 +50,7 @@ export default (props: ModalProps) => {
                             <Scrollbars
                                 className="modal-scroller"
                                 autoHeight
-                                autoHeightMin="100%" autoHeightMax="100vh"
+                                autoHeightMin="100%" autoHeightMax={isMobile ? "100vh" : "90vh"}
                                 autoHide
                                 renderTrackHorizontal={props => <div {...props} className="track-horizontal" style={{ display: "none" }} />}
                                 renderThumbHorizontal={props => <div {...props} className="thumb-horizontal" style={{ display: "none" }} />} >

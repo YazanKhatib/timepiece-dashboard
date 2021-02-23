@@ -252,7 +252,7 @@ class API {
                 method: 'post',
                 data: {
                     query: `query {
-                            getProducts(featured: false, limit: ${data.limit}, offset: ${data.offset}) {
+                            getProducts(featured: true, limit: ${data.limit}, offset: ${data.offset}) {
                                 total,
                                 results {
                                     id,

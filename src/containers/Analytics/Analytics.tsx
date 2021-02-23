@@ -102,13 +102,13 @@ export default () => {
                 <NumberBox isLoading={state.watches === null} showFilter={false} label={t("watches")} value={<>{state.watches}</>} />
             </Col>
 
-            <Col className="mobile-nopadd" md={6}>
+            {/* <Col className="mobile-nopadd" md={6}>
                 <LineChart title={t("items_by_time")} labels={LineChartLabels} datasets={LineChartDatasets} />
             </Col>
 
             <Col className="mobile-nopadd" md={6}>
                 <LineChart title={t("growth_rate")} labels={GrowthLabels} datasets={GrowthDatasets} />
-            </Col>
+            </Col> */}
             
         </Row>
     )
