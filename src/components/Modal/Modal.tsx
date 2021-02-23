@@ -46,11 +46,12 @@ export default (props: ModalProps) => {
                             <Scrollbars
                                 className="modal-scroller"
                                 autoHeight
-                                autoHeightMin="100%" autoHeightMax="90vh"
+                                autoHeightMin="100%" autoHeightMax="100vh"
                                 autoHide
                                 renderTrackHorizontal={props => <div {...props} className="track-horizontal" style={{ display: "none" }} />}
                                 renderThumbHorizontal={props => <div {...props} className="thumb-horizontal" style={{ display: "none" }} />} >
                                 <div className="modal-content">
+                                    <i className="icon-close" style={{ display: "none" }} onClick={hide} />
                                     {props.children}
                                 </div>
                                 {dasharray ?

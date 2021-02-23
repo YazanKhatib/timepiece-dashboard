@@ -4,139 +4,139 @@ import { addWatchFields } from '../../containers/Watches/AddModal/AddWatchSlice'
 import { addToDate } from '../hoc/helpers';
 
 interface pagination {
-  offset: number;
-  limit: number;
+    offset: number;
+    limit: number;
 }
 
 class API {
-  url: string;
+    url: string;
 
-  constructor() {
-    this.url = 'https://dev.timepiece.qa/graphql';
+    constructor() {
+        this.url = 'https://dev.timepiece.qa/graphql';
 
-    const [cookies, setCookie, removeCookie] = useCookies();
+        const [cookies, setCookie, removeCookie] = useCookies();
+        console.log(cookies)
+        // Add Auth header
+        axios.interceptors.request.use(async (config) => {
+            if (cookies.userinfo && !config.headers.skipInterceptors) {
+                if (cookies.token)
+                    config.headers['Authorization'] =
+                        'Bearer ' + cookies.token.accessToken;
+                else {
+                    // Rrefresh token
+                    if (cookies.refresh_token) {
+                        await axios({
+                            url: 'https://dev.timepiece.qa/refresh_token',
+                            method: 'post',
+                            data: {},
+                            headers: {
+                                skipInterceptors: true,
+                                refresh_token: cookies.refresh_token.refreshToken,
+                            },
+                        }).then((response) => {
+                            setCookie(
+                                'token',
+                                { accessToken: response.data.accessToken },
+                                { expires: addToDate(new Date(), 'minutes', 29) },
+                            );
+                            setCookie('refresh_token', {
+                                refreshToken: response.data.refreshToken,
+                            });
+                            config.headers['Authorization'] =
+                                'Bearer ' + response.data.accessToken;
+                        });
+                    } else {
+                        removeCookie('userinfo');
+                        removeCookie('token');
+                        removeCookie('refresh_token');
+                    }
+                }
+            }
+            return config;
+        });
+    }
 
-    // Add Auth header
-    axios.interceptors.request.use(async (config) => {
-      if (cookies.userinfo && !config.headers.skipInterceptors) {
-        if (cookies.token)
-          config.headers['Authorization'] =
-            'Bearer ' + cookies.token.accessToken;
-        else {
-          // Rrefresh token
-          if (cookies.refresh_token) {
-            await axios({
-              url: 'https://dev.timepiece.qa/refresh_token',
-              method: 'post',
-              data: {},
-              headers: {
-                skipInterceptors: true,
-                refresh_token: cookies.refresh_token.refreshToken,
-              },
-            }).then((response) => {
-              setCookie(
-                'token',
-                { accessToken: response.data.accessToken },
-                { expires: addToDate(new Date(), 'minutes', 29) },
-              );
-              setCookie('refresh_token', {
-                refreshToken: response.data.refreshToken,
-              });
-              config.headers['Authorization'] =
-                'Bearer ' + response.data.accessToken;
-            });
-          } else {
-            removeCookie('userinfo');
-            removeCookie('token');
-            removeCookie('refresh_token');
-          }
-        }
-      }
-      return config;
-    });
-  }
+    /**
+     * Authentication APIs
+     * @param {}
+     */
+    auth() {
+        var endpoints: { login: Function } = { login: Function };
 
-  /**
-   * Authentication APIs
-   * @param {}
-   */
-  auth() {
-    var endpoints: { login: Function } = { login: Function };
-
-    endpoints.login = (data: { username: string; password: string }) =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `mutation {
+        endpoints.login = (data: { username: string; password: string }) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `mutation {
                             loginAdmin(username: "${data.username}", password: "${data.password}") { user { id, username, email }, accessToken, refreshToken }
                         }`,
-        },
-      });
+                },
+            });
 
-    return endpoints;
-  }
+        return endpoints;
+    }
 
-  /**
-   * Analytics APIs
-   * @param {}
-   */
-  analytics() {
-    var endpoints: { users: Function; dealers: Function; watches: Function } = {
-      users: Function,
-      dealers: Function,
-      watches: Function,
-    };
+    /**
+     * Analytics APIs
+     * @param {}
+     */
+    analytics() {
+        var endpoints: { users: Function; dealers: Function; watches: Function } = {
+            users: Function,
+            dealers: Function,
+            watches: Function,
+        };
 
-    endpoints.users = () =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `query {
+        endpoints.users = () =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `query {
                             getUsers(dealer: false) { total }
                         }`,
-        },
-      });
+                },
+            });
 
-    endpoints.dealers = () =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `query {
+        endpoints.dealers = () =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `query {
                             getUsers(dealer: true) { total }
                         }`,
-        },
-      });
+                },
+            });
 
-    endpoints.watches = () =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `query {
+        endpoints.watches = () =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `query {
                             getProducts(featured: false) { total }
                         }`,
-        },
-      });
+                },
+            });
 
-    return endpoints;
-  }
+        return endpoints;
+    }
 
-  /**
-   * Dealers APIs
-   * @param {}
-   */
-  dealers() {
-    var endpoints: { index: Function } = { index: Function };
+    /**
+     * Dealers APIs
+     * @param {}
+     */
+    dealers() {
+        var endpoints: { index: Function } = { index: Function };
 
-    endpoints.index = (data: pagination) =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `query {
+        endpoints.index = (data: pagination) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `query {
                             getUsers(dealer: true, limit: ${data.limit}, offset: ${data.offset}) {
                                 total,
                                 results {
@@ -154,29 +154,29 @@ class API {
                                 }
                             }
                         }`,
-        },
-      });
+                },
+            });
 
-    return endpoints;
-  }
+        return endpoints;
+    }
 
-  /**
-   * Users APIs
-   * @param {}
-   */
-  users() {
-    var endpoints: { index: Function; update: Function; delete: Function } = {
-      index: Function,
-      update: Function,
-      delete: Function,
-    };
+    /**
+     * Users APIs
+     * @param {}
+     */
+    users() {
+        var endpoints: { index: Function; update: Function; delete: Function } = {
+            index: Function,
+            update: Function,
+            delete: Function,
+        };
 
-    endpoints.index = (data: pagination) =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `query {
+        endpoints.index = (data: pagination) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `query {
                             getUsers(dealer: false, limit: ${data.limit}, offset: ${data.offset}) {
                                 total,
                                 results {
@@ -193,65 +193,65 @@ class API {
                                 }
                             }
                         }`,
-        },
-      });
+                },
+            });
 
-    endpoints.update = (data: { blocked: boolean; id: number }) =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `mutation {
+        endpoints.update = (data: { blocked: boolean; id: number }) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `mutation {
                             updateUserbyId(id: ${data.id}, blocked: ${data.blocked}) {
                                 blocked
                             }
                         }`,
-        },
-      });
+                },
+            });
 
-    endpoints.delete = (data: string[]) =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `mutation {
+        endpoints.delete = (data: string[]) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `mutation {
                             deleteUsers( ids: [${data.join(', ')}] )
                         }`,
-        },
-      });
+                },
+            });
 
-    return endpoints;
-  }
+        return endpoints;
+    }
 
-  /**
-   * Watches APIs
-   * @param {}
-   */
-  watches() {
-    var endpoints: {
-      index: Function;
-      search: Function;
-      add: Function;
-      update: Function;
-      updateStatus: Function;
-      setFeatured: Function;
-      delete: Function;
-    } = {
-      index: Function,
-      search: Function,
-      add: Function,
-      update: Function,
-      updateStatus: Function,
-      setFeatured: Function,
-      delete: Function,
-    };
+    /**
+     * Watches APIs
+     * @param {}
+     */
+    watches() {
+        var endpoints: {
+            index: Function;
+            search: Function;
+            add: Function;
+            update: Function;
+            updateStatus: Function;
+            setFeatured: Function;
+            delete: Function;
+        } = {
+            index: Function,
+            search: Function,
+            add: Function,
+            update: Function,
+            updateStatus: Function,
+            setFeatured: Function,
+            delete: Function,
+        };
 
-    endpoints.index = (data: pagination) =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `query {
+        endpoints.index = (data: pagination) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `query {
                             getProducts(featured: false, limit: ${data.limit}, offset: ${data.offset}) {
                                 total,
                                 results {
@@ -287,15 +287,15 @@ class API {
                                 }
                             }
                         }`,
-        },
-      });
+                },
+            });
 
-    endpoints.search = (keyword: string) =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `query {
+        endpoints.search = (keyword: string) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `query {
                             searchProducts(brand: "${keyword}") {
                                 id,
                                 name,
@@ -328,15 +328,15 @@ class API {
                                 clasp_material
                             }
                         }`,
-        },
-      });
+                },
+            });
 
-    endpoints.add = (data: addWatchFields) =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `mutation {
+        endpoints.add = (data: addWatchFields) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `mutation {
                         addProduct(
                             clasp_material: "${data.clasp_material}",
                             clasp: "${data.clasp}",
@@ -365,15 +365,15 @@ class API {
                             brand: "${data.brand}"
                         ) { id }
                     }`,
-        },
-      });
+                },
+            });
 
-    endpoints.update = (data: addWatchFields, id: string) =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `mutation {
+        endpoints.update = (data: addWatchFields, id: string) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `mutation {
                             updateProduct(
                                 id: "${id}",
                                 clasp_material: "${data.clasp_material}",
@@ -384,8 +384,8 @@ class API {
                                 crystal: "${data.crystal}",
                                 bezel_material: "${data.bezel_material}",
                                 water_resistance: ${Number(
-                                  data.water_resistance,
-                                )},
+                        data.water_resistance,
+                    )},
                                 case_diameter: ${Number(data.case_diameter)},
                                 jewels: ${Number(data.jewels)},
                                 power_reserve: ${Number(data.power_reserve)},
@@ -393,8 +393,8 @@ class API {
                                 calibar: "${data.calibar}",
                                 gender: "${data.gender}",
                                 production_year: ${Number(
-                                  data.production_year,
-                                )},
+                        data.production_year,
+                    )},
                                 bracelet_material: "${data.bracelet_material}",
                                 case_material: "${data.case_diameter}",
                                 movement: "${data.movement}",
@@ -407,65 +407,65 @@ class API {
                                 brand: "${data.brand}"
                             ) { id }
                         }`,
-        },
-      });
+                },
+            });
 
-    endpoints.updateStatus = (data: { confirmed: boolean; id: string }) =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `mutation {
+        endpoints.updateStatus = (data: { confirmed: boolean; id: string }) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `mutation {
                             updateProduct(id: "${data.id}", confirmed: ${data.confirmed}) {
                                 confirmed
                             }
                         }`,
-        },
-      });
+                },
+            });
 
-    endpoints.setFeatured = (data: { featured: boolean; id: string }) =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `mutation {
+        endpoints.setFeatured = (data: { featured: boolean; id: string }) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `mutation {
                             updateProduct(id: "${data.id}", featured: ${data.featured}) {
                                 featured
                             }
                         }`,
-        },
-      });
+                },
+            });
 
-    endpoints.delete = (data: string[]) =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `mutation {
+        endpoints.delete = (data: string[]) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `mutation {
                             deleteProducts( ids: [${data.join(', ')}] )
                         }`,
-        },
-      });
+                },
+            });
 
-    return endpoints;
-  }
+        return endpoints;
+    }
 
-  /**
-   * Offers APIs
-   * @param {}
-   */
-  offers() {
-    var endpoints: { index: Function; approve: Function } = {
-      index: Function,
-      approve: Function,
-    };
+    /**
+     * Offers APIs
+     * @param {}
+     */
+    offers() {
+        var endpoints: { index: Function; approve: Function } = {
+            index: Function,
+            approve: Function,
+        };
 
-    endpoints.index = (data: pagination) =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `query {
+        endpoints.index = (data: pagination) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `query {
                          getOffers {
                             id,
                             username,
@@ -510,39 +510,39 @@ class API {
                         }
                     }
                 }`,
-        },
-      });
+                },
+            });
 
-    endpoints.approve = (approved: boolean, watchId: number, id: number) =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `mutation {
+        endpoints.approve = (approved: boolean, watchId: number, id: number) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `mutation {
                     approveOffer( approved: ${approved}, watchId: ${watchId}, id: ${id}) 
                   }`,
-        },
-      });
+                },
+            });
 
-    return endpoints;
-  }
+        return endpoints;
+    }
 
-  /**
-   * Orders APIs
-   * @param {}
-   */
-  orders() {
-    var endpoints: { index: Function; approve: Function } = {
-      index: Function,
-      approve: Function,
-    };
+    /**
+     * Orders APIs
+     * @param {}
+     */
+    orders() {
+        var endpoints: { index: Function; approve: Function } = {
+            index: Function,
+            approve: Function,
+        };
 
-    endpoints.index = (data: pagination) =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `query {
+        endpoints.index = (data: pagination) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `query {
                          getOrders {
                             id,
                             username,
@@ -586,39 +586,39 @@ class API {
                         }
                     }
                 }`,
-        },
-      });
+                },
+            });
 
-    endpoints.approve = (approved: boolean, watchId: number) =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `mutation {
+        endpoints.approve = (approved: boolean, watchId: number) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `mutation {
                     approveOrder( approved: ${approved}, watchId: ${watchId}) 
                   }`,
-        },
-      });
+                },
+            });
 
-    return endpoints;
-  }
+        return endpoints;
+    }
 
-  /**
-   * Certificates APIs
-   * @param {}
-   */
-  certificates() {
-    var endpoints: { index: Function; fulfillCertificate: Function } = {
-      index: Function,
-      fulfillCertificate: Function,
-    };
+    /**
+     * Certificates APIs
+     * @param {}
+     */
+    certificates() {
+        var endpoints: { index: Function; fulfillCertificate: Function } = {
+            index: Function,
+            fulfillCertificate: Function,
+        };
 
-    endpoints.index = () =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `query {
+        endpoints.index = () =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `query {
                             getCertificates {
                                 id,
                                 fulfilled,
@@ -636,41 +636,41 @@ class API {
                                 }
                             }
                   }`,
-        },
-      });
+                },
+            });
 
-    endpoints.fulfillCertificate = (id: number) =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `mutation {
+        endpoints.fulfillCertificate = (id: number) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `mutation {
                     fulfillCertificate(id: ${id})
                   }`,
-        },
-      });
+                },
+            });
 
-    return endpoints;
-  }
+        return endpoints;
+    }
 
-  /**
-   * Brands APIs
-   * @param {}
-   */
-  brands() {
-    var endpoints: {
-      index: Function;
-      add: Function;
-      update: Function;
-      delete: Function;
-    } = { index: Function, add: Function, update: Function, delete: Function };
+    /**
+     * Brands APIs
+     * @param {}
+     */
+    brands() {
+        var endpoints: {
+            index: Function;
+            add: Function;
+            update: Function;
+            delete: Function;
+        } = { index: Function, add: Function, update: Function, delete: Function };
 
-    endpoints.index = (data: pagination) =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `query {
+        endpoints.index = (data: pagination) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `query {
                             getBrands(limit: ${data.limit}, offset: ${data.offset}) {
                                 total,
                                 results {
@@ -679,49 +679,49 @@ class API {
                                 }
                             }
                         }`,
-        },
-      });
+                },
+            });
 
-    endpoints.add = (name: string) =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `mutation {
+        endpoints.add = (name: string) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `mutation {
                         createBrand(
                             name: "${name}",
                         ) { id }
                     }`,
-        },
-      });
+                },
+            });
 
-    endpoints.update = (name: string, id: string) =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `mutation {
+        endpoints.update = (name: string, id: string) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `mutation {
                             updateBrand(
                                 id: "${id}",
                                 name: "${name}",
                             ) { id }
                         }`,
-        },
-      });
+                },
+            });
 
-    endpoints.delete = (data: string[]) =>
-      axios({
-        url: this.url,
-        method: 'post',
-        data: {
-          query: `mutation {
+        endpoints.delete = (data: string[]) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `mutation {
                             deleteBrands( ids: [${data.join(', ')}] )
                         }`,
-        },
-      });
+                },
+            });
 
-    return endpoints;
-  }
+        return endpoints;
+    }
 }
 
 export default API;

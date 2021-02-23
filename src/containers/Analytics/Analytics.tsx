@@ -88,25 +88,25 @@ export default () => {
 
     return (
 
-        <Row style={{ width: "100%" }}>
+        <Row className="mobile-nomargin" style={{ width: "100%" }}>
 
-            <Col md={4}>
+            <Col className="mobile-nopadd" md={4}>
                 <NumberBox isLoading={state.users === null} showFilter={false} label={t("users")} value={<>{state.users}</>} />
             </Col>
 
-            <Col md={4}>
+            <Col className="mobile-nopadd" md={4}>
                 <NumberBox isLoading={state.dealers === null} showFilter={false} label={t("dealers")} value={<>{state.dealers}</>} />
             </Col>
 
-            <Col md={4}>
+            <Col className="mobile-nopadd" md={4}>
                 <NumberBox isLoading={state.watches === null} showFilter={false} label={t("watches")} value={<>{state.watches}</>} />
             </Col>
 
-            <Col md={6}>
+            <Col className="mobile-nopadd" md={6}>
                 <LineChart title={t("items_by_time")} labels={LineChartLabels} datasets={LineChartDatasets} />
             </Col>
 
-            <Col md={6}>
+            <Col className="mobile-nopadd" md={6}>
                 <LineChart title={t("growth_rate")} labels={GrowthLabels} datasets={GrowthDatasets} />
             </Col>
             

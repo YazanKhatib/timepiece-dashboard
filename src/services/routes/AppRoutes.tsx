@@ -7,6 +7,8 @@ import ResetPassword from '../../pages/ResetPassword/ResetPassword'
 import Dashboard from '../../pages/Dashboard/Dashboard'
 import { withCookies } from "react-cookie";
 
+import '../../assets/css/responsive.css'
+
 class AppRoutes extends Component<{cookies: any}> {
 
     constructor(props: any) {
