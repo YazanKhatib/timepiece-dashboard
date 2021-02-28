@@ -148,6 +148,9 @@
     "certificates": "Certificates",
     "fulfilled": "Fulfilled",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+
+    "notification_text": "Notification text",
+    "send_notification": "Send notification"
 
 }

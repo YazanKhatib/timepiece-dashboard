@@ -148,6 +148,9 @@
     "certificates": "الشهادات",
     "fulfilled": "Fulfilled",
     "yes": "نعم",
-    "no": "لا"
+    "no": "لا",
+
+    "notification_text": "اكتب الإشعار",
+    "send_notification": "إرسال الإشعار"
 
 }

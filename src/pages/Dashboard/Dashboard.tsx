@@ -14,6 +14,7 @@ import Brands from '../../containers/Brands/Brands'
 
 // Stylesheet
 import './Dashboard.css'
+import Notifications from '../../containers/Notifications/Notifications'
 
 export default (props: any) => {
 
@@ -88,7 +89,7 @@ export default (props: any) => {
             case "brands":
                 return(<Brands />)
             case "notifications":
-                return("notifications")
+                return(<Notifications />)
             default:
                 break;
 
