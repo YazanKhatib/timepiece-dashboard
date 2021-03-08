@@ -31,7 +31,7 @@ class API {
                             data: {},
                             headers: {
                                 skipInterceptors: true,
-                                refresh_token: cookies.refresh_token.refreshToken,
+                                refreshToken: cookies.refresh_token.refreshToken,
                             },
                         }).then((response) => {
                             setCookie(
@@ -39,9 +39,9 @@ class API {
                                 { accessToken: response.data.accessToken },
                                 { expires: addToDate(new Date(), 'minutes', 29) },
                             );
-                            setCookie('refresh_token', {
-                                refreshToken: response.data.refreshToken,
-                            });
+                            // setCookie('refresh_token', {
+                            //     refreshToken: response.data.refreshToken,
+                            // });
                             config.headers['Authorization'] =
                                 'Bearer ' + response.data.accessToken;
                         });
@@ -116,7 +116,7 @@ class API {
                 method: 'post',
                 data: {
                     query: `query {
-                            getProducts(featured: false) { total }
+                            getProducts { total }
                         }`,
                 },
             });
@@ -252,7 +252,7 @@ class API {
                 method: 'post',
                 data: {
                     query: `query {
-                            getProducts(featured: true, limit: ${data.limit}, offset: ${data.offset}) {
+                            getProducts(limit: ${data.limit}, offset: ${data.offset}) {
                                 total,
                                 results {
                                     id,
