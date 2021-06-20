@@ -38,6 +38,12 @@ export default () => {
         { value: false, label: t("pending") }
     ]
 
+    // Certfieid options
+    const certified_options = [
+        { value: true, label: t("certified") },
+        { value: false, label: t("not_certified") }
+    ]
+
     // Search
     const search = (keyword: string) => {
         if(keyword === "") {
@@ -61,6 +67,8 @@ export default () => {
                     location: String(item.location ? item.location : "N/A"),
                     featured: Boolean(item.featured),
                     confirmed: Boolean(item.confirmed),
+                    certified: Boolean(item.certified),
+                    images: item.images?.map((image: {url: string;}) => "https://dev.timepiece.qa/" + image.url),
                     delivery: String(item.delivery ? item.delivery : "N/A"),
                     price: Number(item.price),
                     production_year: Number(item.production_year),
@@ -97,6 +105,12 @@ export default () => {
         else return status_options[1];
     };
 
+    // Get default certified value
+    const getDefaultCertifiedValue = (confirmed: boolean) => {
+        if (confirmed) return certified_options[0];
+        else return certified_options[1];
+    };
+
     // Change watch status
     const changeStatus = (selected: boolean, id: string) => {
         dispatch( watchesSlice.actions.addToLoadingStatuses(id) )
@@ -104,6 +118,16 @@ export default () => {
         .then( () => {
             dispatch( watchesSlice.actions.removeFromLoadingStatuses(id) )
             dispatch( watchesSlice.actions.setConfirmed({ id: id, confirmed: selected }) )
+        })
+    }
+
+    // Change watch certified
+    const changeCertified = (selected: boolean, id: string) => {
+        dispatch( watchesSlice.actions.addToLoadingCertified(id) )
+        ENDPOINTS.watches().updateCertified( { id, certified: selected } )
+        .then( () => {
+            dispatch( watchesSlice.actions.removeFromLoadingCertified(id) )
+            dispatch( watchesSlice.actions.setCertified({ id: id, certified: selected }) )
         })
     }
 
@@ -131,6 +155,8 @@ export default () => {
                     location: String(item.location ? item.location : "N/A"),
                     featured: Boolean(item.featured),
                     confirmed: Boolean(item.confirmed),
+                    certified: Boolean(item.certified),
+                    images: item.images?.map((image: {url: string;}) => "https://dev.timepiece.qa/" + image.url),
                     delivery: String(item.delivery ? item.delivery : "N/A"),
                     price: Number(item.price),
                     production_year: Number(item.production_year),
@@ -167,11 +193,15 @@ export default () => {
         let watchesToIndex = state.filteredWatches.length > 0 ? state.filteredWatches : state.watches
         watchesToIndex.map( (item, index) => {
             data[item.id] = {
+                id: item.id,
                 name: item.name,
                 condition: item.condition,
                 price: item.price,
                 status: <div onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
                             <SelectField isLoading={state.loadingStatuses.includes(item.id)} defaultValue={getDefaultStatusValue(item.confirmed)} onChange={ (selected: { value: boolean }) => changeStatus( selected.value, item.id ) } options={status_options} />
+                        </div>,
+                certified: <div onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
+                            <SelectField isLoading={state.loadingCertified.includes(item.id)} defaultValue={getDefaultCertifiedValue(item.certified)} onChange={ (selected: { value: boolean }) => changeCertified( selected.value, item.id ) } options={certified_options} />
                         </div>,
                 featured: <i className={ "icon-star-" + ( item.featured ? "2" : "o" ) } onClick={(e: React.MouseEvent<HTMLLIElement>) => toggleFeatured(e, item.id, item.featured) } />,
                 actions: <div className="show-on-hover">
@@ -283,6 +313,7 @@ export default () => {
             bracelet_color: activeWatch.bracelet_color,
             clasp: activeWatch.clasp,
             clasp_material: activeWatch.clasp_material,
+            images: activeWatch.images
         }
         return watch
     }
@@ -333,7 +364,7 @@ export default () => {
                     />
                 
                 <DashboardTable
-                    header={[ t("name"), t("condition"), t("price"), t("status"), t("featured"), "" ]}
+                    header={[ "#", t("name"), t("condition"), t("price"), t("status"), t("certified"), t("featured"), "" ]}
                     body={generateData()}
                     onSelect={toggleSelectedId}
                     hasMore={state.hasMore && state.filteredWatches.length === 0}

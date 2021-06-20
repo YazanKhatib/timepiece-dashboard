@@ -59,7 +59,7 @@ export default function () {
 
         dispatch( loginSlice.actions.load() )
 
-        ENDPOINTS.auth().login({ username, password })
+        ENDPOINTS.auth().login({ username: username.toLowerCase(), password })
         .then((response: any) => {
             
             if(response.data?.data) {

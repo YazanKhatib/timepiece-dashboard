@@ -71,6 +71,8 @@ export default () => {
                     location: String(state.fields.location ? state.fields.location : "N/A"),
                     featured: false,
                     confirmed: false,
+                    certified: false,
+                    images: [],
                     delivery: String(state.fields.delivery ? state.fields.delivery : "N/A"),
                     price: Number(state.fields.price),
                     production_year: Number(state.fields.production_year),

@@ -151,6 +151,11 @@
     "no": "No",
 
     "notification_text": "Notification text",
-    "send_notification": "Send notification"
+    "send_notification": "Send notification",
+
+    "certified": "Certified",
+    "not_certified": "Not certified",
+
+    "images": "Images"
 
 }

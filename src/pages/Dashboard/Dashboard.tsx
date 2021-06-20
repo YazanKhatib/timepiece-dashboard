@@ -51,11 +51,11 @@ export default (props: any) => {
             name: t("offers"),
             link: "/offers"
         },
-        {
-            icon: "icon-orders",
-            name: t("certificates"),
-            link: "/certificates"
-        },
+        // {
+        //     icon: "icon-orders",
+        //     name: t("certificates"),
+        //     link: "/certificates"
+        // },
         {
             icon: "icon-categories-1",
             name: t("brands"),
@@ -84,8 +84,8 @@ export default (props: any) => {
                 return(<Orders />)
             case "offers":
                 return(<Offers />)
-            case "certificates":
-                return(<Certificates />)
+            // case "certificates":
+            //     return(<Certificates />)
             case "brands":
                 return(<Brands />)
             case "notifications":

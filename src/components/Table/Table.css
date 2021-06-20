@@ -10,15 +10,18 @@
 
 
 /* Body */
-.dashboard-table table tbody tr { line-height: 60px; position: relative; transform: translateX(0); cursor: pointer; transition: all .3s ease; }
+.dashboard-table table tbody tr { line-height: 60px; position: relative; transform: translateX(0); cursor: pointer; background: #FAFAFA;; transition: all .3s ease; }
+.dark .dashboard-table table tbody tr { background: #222730; }
 .dashboard-table table tbody tr.active { transform: translateX(10px); }
 .rtl .dashboard-table table tbody tr.active { transform: translateX(-10px); }
-.dashboard-table table tbody tr::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; background: #FAFAFA; border-radius: 5px; transition: all .3s ease; }
+
+.dashboard-table table tbody tr::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; background: #FAFAFA; border-radius: 5px; transition: all .3s ease; opacity: 0; }
 .dark .dashboard-table table tbody tr::after { background: #222730; }
 .dashboard-table table tbody tr:hover::after,
 .dashboard-table table tbody tr.active::after { background: #F5F5F5; }
 .dark .dashboard-table table tbody tr:hover::after,
 .dark .dashboard-table table tbody tr.active::after { background: #292f3a; }
+
 .dashboard-table table tbody tr td { position: relative; z-index: 1; font-size: 13px; padding: 0 10px; }
 .dark .dashboard-table table tbody tr td { color: #DDD; }
 .dashboard-table table tbody tr td:first-of-type label { top: 5px; transform: scale(.8); }

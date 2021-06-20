@@ -5,7 +5,7 @@ export interface User {
     phone: string,
     birth: string,
     gender: string,
-    address: string
+    address: any
 }
 
 
@@ -36,6 +36,7 @@ export interface Watch {
     bracelet_color: string,
     clasp: string,
     clasp_material: string,
+    images?: string[]
 }
 
 export interface Brand {

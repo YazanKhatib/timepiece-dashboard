@@ -10,6 +10,8 @@ export interface watch {
     location: string,
     featured: boolean,
     confirmed: boolean,
+    certified: boolean,
+    images: string[],
     delivery: string,
     price: number,
     production_year: number,
@@ -42,6 +44,7 @@ export interface watchesState {
     filteredWatches: watch[],
     detailsIsOpen: boolean,
     loadingStatuses: string[],
+    loadingCertified: string[],
     activeWatch: string,
     openAddModal: boolean
 }
@@ -55,6 +58,7 @@ const initialWatchesState: watchesState = {
     filteredWatches: [],
     detailsIsOpen: false,
     loadingStatuses: [],
+    loadingCertified: [],
     activeWatch: "",
     openAddModal: false
 }
@@ -111,6 +115,14 @@ export const watchesSlice = createSlice({
             if( index != -1 )
                 state.loadingStatuses.splice( index, 1 )
         },
+        addToLoadingCertified: ( state, {payload}: PayloadAction<string> ) => {
+            state.loadingCertified.push(payload)
+        },
+        removeFromLoadingCertified: ( state, {payload}: PayloadAction<string> ) => {
+            let index = state.loadingCertified.findIndex( status => status === payload )
+            if( index != -1 )
+                state.loadingCertified.splice( index, 1 )
+        },
         setActiveWatch: ( state, {payload}: PayloadAction<string> ) => {
             state.activeWatch = payload
         },
@@ -124,6 +136,14 @@ export const watchesSlice = createSlice({
             let filteredIndex = state.filteredWatches.findIndex( watch => watch.id === payload.id )
             if( filteredIndex !== -1 )
                 state.filteredWatches[filteredIndex].confirmed = payload.confirmed
+        },
+        setCertified: ( state, {payload}: PayloadAction<{ id: string, certified: boolean }> ) => {
+            let index = state.watches.findIndex( watch => watch.id === payload.id )
+            if( index !== -1 )
+                state.watches[index].certified = payload.certified
+            let filteredIndex = state.filteredWatches.findIndex( watch => watch.id === payload.id )
+            if( filteredIndex !== -1 )
+                state.filteredWatches[filteredIndex].certified = payload.certified
         },
         setFeatured: ( state, {payload}: PayloadAction<{ id: string, featured: boolean }> ) => {
             let index = state.watches.findIndex( watch => watch.id === payload.id )

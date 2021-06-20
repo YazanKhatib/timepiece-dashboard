@@ -119,6 +119,7 @@ export default () => {
         state.users.map( (item) => {
             item.orders.map((watch, index) => {
                 data[x] = {
+                    id: item.id,
                     username: item.username,
                     email: item.email,
                     phone: item.phone,
@@ -254,7 +255,7 @@ export default () => {
                     />
                 
                 <DashboardTable
-                    header={[ t("username"), t("email"), t("phone"), t("model"), t("price"), t("proposed_price"), "" ]}
+                    header={[ "#", t("username"), t("email"), t("phone"), t("model"), t("price"), t("proposed_price"), "" ]}
                     body={generateData()}
                     onSelect={toggleSelectedId}
                     />

@@ -151,6 +151,11 @@
     "no": "لا",
 
     "notification_text": "اكتب الإشعار",
-    "send_notification": "إرسال الإشعار"
+    "send_notification": "إرسال الإشعار",
+
+    "certified": "معتمد",
+    "not_certified": "غير معتمد",
+
+    "images": "الصور"
 
 }

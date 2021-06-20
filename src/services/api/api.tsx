@@ -234,6 +234,7 @@ class API {
             add: Function;
             update: Function;
             updateStatus: Function;
+            updateCertified: Function;
             setFeatured: Function;
             delete: Function;
         } = {
@@ -242,6 +243,7 @@ class API {
             add: Function,
             update: Function,
             updateStatus: Function,
+            updateCertified: Function,
             setFeatured: Function,
             delete: Function,
         };
@@ -263,6 +265,10 @@ class API {
                                     location,
                                     featured,
                                     confirmed,
+                                    certified,
+                                    images {
+                                        url
+                                    },
                                     delivery,
                                     price,
                                     production_year,
@@ -305,6 +311,10 @@ class API {
                                 location,
                                 featured,
                                 confirmed,
+                                certified,
+                                images {
+                                    url
+                                },
                                 delivery,
                                 price,
                                 production_year,
@@ -420,6 +430,17 @@ class API {
                                 confirmed
                             }
                         }`,
+                },
+            });
+
+        endpoints.updateCertified = (data: { certified: boolean; id: string }) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `mutation {
+                    fulfillCertificate(id: ${data.id})
+                }`,
                 },
             });
 

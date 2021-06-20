@@ -11,12 +11,19 @@ import { User } from '../../services/models/models'
 // API
 import API from '../../services/api/api'
 
+// Mapbox map
+import ReactMapboxGl, { Layer, Feature, Marker } from 'react-mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import { setRTLTextPlugin } from 'mapbox-gl';
+import marker from '../../assets/images/vector/marker.png'
+
 // Components
 import TableActionBar from '../../components/TableActionBar/TableActionBar'
 import { DashboardTable } from '../../components/Table/Table'
 import { EllipsisLoader, WhiteboxLoader } from '../../components/Loader/Loader'
 import { SelectField } from '../../components/FormElements/FormElements'
 import DetailsModal from '../../components/DetailsModal/DetailsModal'
+import { useEffect } from 'react'
 
 export default () => {
 
@@ -35,6 +42,14 @@ export default () => {
         { value: false, label: t("approved") },
         { value: true, label: t("pending") }
     ]
+
+    // Map
+    const Map = ReactMapboxGl({
+        accessToken:
+            'pk.eyJ1IjoibWFqZHNoYW1tYSIsImEiOiJja3E1Z2dpeXkxM2c2MnBvMHExdzNnZ2xxIn0.8WIFOZkv9ivooX6OzFMvzQ',
+        attributionControl: true,
+        scrollZoom: true
+    });
 
     // Search
     const search = () => {}
@@ -109,6 +124,33 @@ export default () => {
         dispatch( usersSlice.actions.setDetailsIsOpen(true) )
         dispatch( usersSlice.actions.setActiveUser(id) )
     }
+
+    const getAddress = (address: string) => {
+        if (!address)
+            return "N/A"
+        let address_object = JSON.parse(address)
+        if (address_object.length === 0)
+            return "N/A"
+        return (
+            <div>
+                <Map
+                    style="mapbox://styles/mapbox/light-v10"
+                    containerStyle={{
+                        height: '300px',
+                        width: '500px'
+                    }}
+                    center={[address_object[0].coordinates.lng, address_object[0].coordinates.lat]}
+                    zoom={[15]}
+                >
+                    <Marker
+                        coordinates={[address_object[0].coordinates.lng, address_object[0].coordinates.lat]}
+                        anchor="bottom" style={{ pointerEvents: 'none' }}>
+                        <img src={marker} style={{ maxWidth: 30, pointerEvents: 'none' }} />
+                    </Marker>
+                </Map>
+            </div>
+        )
+    }
     
     const getActiveUser = (): { [key: string]: any } => {
         let activeUser = state.users[state.users.findIndex(user => user.id === state.activeUser)]
@@ -123,7 +165,7 @@ export default () => {
             phone: activeUser.phone,
             birth: activeUser.birth,
             gender: activeUser.gender,
-            address: activeUser.address
+            address: getAddress(activeUser.address)
         }
         return user
     }
