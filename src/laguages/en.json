@@ -150,6 +150,7 @@
     "yes": "Yes",
     "no": "No",
 
+    "notification_title": "Notification title",
     "notification_text": "Notification text",
     "send_notification": "Send notification",
 

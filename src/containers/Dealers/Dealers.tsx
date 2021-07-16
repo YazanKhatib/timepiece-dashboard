@@ -150,7 +150,7 @@ export default () => {
             return "N/A"
         return (
             <div>
-                <Map
+                {/* <Map
                     style="mapbox://styles/mapbox/light-v10"
                     containerStyle={{
                         height: '300px',
@@ -164,7 +164,8 @@ export default () => {
                         anchor="bottom" style={{ pointerEvents: 'none' }}>
                         <img src={marker} style={{ maxWidth: 30, pointerEvents: 'none' }} />
                     </Marker>
-                </Map>
+                </Map> */}
+                <iframe style={{ width: "100%", minHeight: 300, border: 'none' }} src={`https://maps.google.com/maps?q=${address_object[0].coordinates.lat},${address_object[0].coordinates.lng}&t=&z=15&ie=UTF8&iwloc=&output=embed`} />
             </div>
         )
     }

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Component } from 'react';
 import { useCookies, withCookies } from 'react-cookie';
 import { addWatchFields } from '../../containers/Watches/AddModal/AddWatchSlice';
 import { addToDate } from '../hoc/helpers';
@@ -8,13 +9,18 @@ interface pagination {
     limit: number;
 }
 
+const GetCookies = () => {
+    const [cookies, setCookie, removeCookie] = useCookies();
+    return {cookies, setCookie, removeCookie}
+}
+
 class API {
     url: string;
 
     constructor() {
         this.url = 'https://dev.timepiece.qa/graphql';
 
-        const [cookies, setCookie, removeCookie] = useCookies();
+        const { cookies, setCookie, removeCookie } = GetCookies();
         console.log(cookies)
         // Add Auth header
         axios.interceptors.request.use(async (config) => {
@@ -743,6 +749,27 @@ class API {
 
         return endpoints;
     }
+
+
+    notifications() {
+        var endpoints: {
+            send: Function;
+        } = { send: Function };
+
+        endpoints.send = (data: { body: String; title: string; }) =>
+            axios({
+                url: this.url,
+                method: 'post',
+                data: {
+                    query: `mutation {
+                                sendNotification(body: "${data.body}", title: "${data.title}")
+                            }`,
+                },
+            });
+
+        return endpoints;
+    }
+    
 }
 
 export default API;

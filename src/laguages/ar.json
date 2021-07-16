@@ -150,6 +150,7 @@
     "yes": "نعم",
     "no": "لا",
 
+    "notification_title": "عنوان الإشعار",
     "notification_text": "اكتب الإشعار",
     "send_notification": "إرسال الإشعار",
 

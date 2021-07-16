@@ -167,7 +167,20 @@ export default () => {
     }
 
     
-    
+    const getAddress = (address: string) => {
+        if (!address)
+            return "N/A"
+        let address_object = JSON.parse(address)
+        if (address_object.length === 0)
+            return "N/A"
+        return (
+            <div>
+                <iframe style={{ width: "100%", minHeight: 300, border: 'none' }} src={`https://maps.google.com/maps?q=${address_object[0].coordinates.lat},${address_object[0].coordinates.lng}&t=&z=15&ie=UTF8&iwloc=&output=embed`} />
+            </div>
+        )
+    }
+
+
     const getActiveUser = (): { [key: string]: any } => {
         let activeUser = state.users[state.users.findIndex(user => user.id === state.activeUser)]
         
@@ -181,7 +194,7 @@ export default () => {
             phone: activeUser.phone,
             birth: activeUser.birth,
             gender: activeUser.gender,
-            address: activeUser.address
+            address: getAddress(activeUser.address)
         }
         return user
     }

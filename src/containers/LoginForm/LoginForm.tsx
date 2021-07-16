@@ -38,6 +38,7 @@ export default function () {
     const [passwordError, setPasswordError] = useState<string>("");
     const [rememberMe, setRememberMe] = useState<boolean>(false);
     const [showSucessMark, setShowSuccessMark] = useState<boolean>(false)
+    const [errorMessage, setErrorMessage] = useState<string>("Error!")
 
     // Cookies hooks
     const [_, setCookie] = useCookies();
@@ -76,6 +77,7 @@ export default function () {
 
             } else {
                 dispatch( loginSlice.actions.error(true) )
+                setErrorMessage(response.data?.errors[0]?.message)
             }
 
         })
@@ -91,7 +93,10 @@ export default function () {
             <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => e.preventDefault()}>
                 
                 {
-                    loginState.isError ? <StaticAlert show={true} type={"error"}>{t("login_error")}</StaticAlert> : ""
+                    loginState.isError ? <StaticAlert show={true} type={"error"}>
+                        {/* {t("login_error")} */}
+                        {errorMessage}
+                    </StaticAlert> : ""
                 }
 
                 <InputField
