@@ -123,13 +123,14 @@ export default () => {
         state.users.map( (item) => {
             item.offers.map((watch, index) => {
                 data[x] = {
-                    id: watch.id,
+                    no: x + 1,
                     username: item.username,
                     email: item.email,
                     phone: item.phone,
                     model: watch.model,
                     price: watch.price,
                     proposed_price: <strong>{watch.proposed_price}</strong>,
+                    id: watch.id,
                     actions: <div className="show-on-hover">
                                 <i className="icon-checkmark" onClick={(e: React.MouseEvent<HTMLLIElement>) => approveOffer(e, true, watch.id, item.id) }  />
                                 <i className="icon-close" onClick={(e: React.MouseEvent<HTMLLIElement>) => approveOffer(e, false, watch.id, item.id) } />
@@ -272,7 +273,7 @@ export default () => {
                     />
                 
                 <DashboardTable
-                    header={[ "#", t("username"), t("email"), t("phone"), t("model"), t("price"), t("proposed_price"), "" ]}
+                    header={[ "#", t("username"), t("email"), t("phone"), t("model"), t("price"), t("proposed_price"), "Watch ID", "" ]}
                     body={generateData()}
                     onSelect={toggleSelectedId}
                     />
