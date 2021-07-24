@@ -18,6 +18,10 @@ import { EllipsisLoader, WhiteboxLoader } from '../../components/Loader/Loader'
 import { SelectField } from '../../components/FormElements/FormElements'
 import DetailsModal from '../../components/DetailsModal/DetailsModal'
 
+// Toastify
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default () => {
 
     // Translation
@@ -161,6 +165,10 @@ export default () => {
         ENDPOINTS.offers().approve(approved, watchId, userId)
         .then(() => {
             dispatch( offersSlice.actions.setIsLoading(false) )
+            toast(`Offer #${watchId} has been ${ approved ? "approved" : "denied" }`, {
+                position: "bottom-center",
+                type: approved ? "success" : "error"
+            });
         });
     }
     
@@ -272,6 +280,8 @@ export default () => {
                 <DetailsModal isOpen={state.userDetailsIsOpen} toggle={() => dispatch( offersSlice.actions.setUserDetailsIsOpen(false) )} data={getActiveUser()} title={t("user_details")} />
                 
                 <DetailsModal isOpen={state.watchDetailsIsOpen} toggle={() => dispatch( offersSlice.actions.setWatchDetailsIsOpen(false) )} data={getActiveWatch()} title={t("watch_details")} />
+
+                <ToastContainer />
             </> : <div className="center"><EllipsisLoader /></div> }
         </>
     )
